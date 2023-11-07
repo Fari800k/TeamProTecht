@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Customer Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url(images/phone.jpg);
+        background-size: cover;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    input {
+        padding: 8px;
+        border: 1px solid black;
+        border-radius: 2px;
+        width: 100%;
+    }
+
+    .container {
+        background-color: rgb(148, 202, 219);
+        color: black;
+        padding: 20px 20px;
+        margin: auto;
+    }
+
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .loginbtn {
+        background-color: blueviolet;
+        border: none;
+        padding: 8px 12px;
+        font-size: 16px;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="center">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Customer Login</h3>
+                    <p class="card-text">Use your personal email and your password to login</p>
+                    <form>
+                        <label for="emailAddress">Email Address</label>
+                        <input type="email" name="emailAddress" required />
+                        <br><br>
+                        <label for="userPassword">Password</label>
+                        <input type="password" name="userPassword" required />
+                        <br><br>
+                        <button class="loginbtn" onclick="document.location='stock.page.html'">Login</button>
+                        <p>If you haven't created an account, click on the underlined link.<br><a
+                                href="register-as-customer.html">Create a customer account</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

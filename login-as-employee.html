@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Employee Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url(images/phone.jpg);
+        background-size: cover;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    input {
+        padding: 8px;
+        border: 1px solid black;
+        border-radius: 2px;
+        width: 100%;
+    }
+
+    .container {
+        background-color: rgb(148, 202, 219);
+        color: black;
+        padding: 20px 20px;
+        margin: auto;
+    }
+
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .loginbtn {
+        background-color: blueviolet;
+        border: none;
+        padding: 8px 12px;
+        font-size: 16px;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="center">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <h3>Login using your organisation email and your password</h3>
+                        <p>If you have already registered as an employee, you can press the login button to get started.
+                        </p>
+                        <label for="employeeEmail">Employee Email</label>
+                        <input id="employeeEmail" type="email" name="employeeEmail" required />
+                        <br><br>
+                        <label for="employeePassword">Employee Password</label>
+                        <input id="employeePassword" type="password" name="employeePassword"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
+                        <br><br>
+                        <button class="loginbtn" onclick="formValidation()">Login</button>
+                        <p>If you haven't created an account, click on the underlined link.<br><a
+                                href="register-as-employee.html">Create an employee account</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function formValidation() {
+            const employeeEmail = document.getElementById("employeeEmail");
+            const employeePassword = document.getElementById("employeePassword");
+            if (!employeeEmail.checkValidity() && !employeePassword.checkValidity() || !employeeEmail.checkValidity || !employeePassword.checkValidity()) {
+                document.getElementById("employeeEmail").innerHTML = employeeEmail.validationMessage;
+                document.getElementById("employeePassword").innerHTML = employeePassword.validationMessage;
+            } else {
+                location.replace("stock-page.html");
+            }
+        }
+    </script>
+</body>
+
+</html>
