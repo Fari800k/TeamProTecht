@@ -3,7 +3,7 @@
  
 
 <nav>
-    <ul class="nav_list> 
+    <ul class="nav_list"> 
         <li><img src="CSS/images/logo.png" width="90px" height="65px"></li>
         <li><a href="homepage.php">Home</a></li>
         <li><a href="aboutus.php">About Us</a></li>
