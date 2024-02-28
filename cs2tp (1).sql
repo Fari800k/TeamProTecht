@@ -145,4 +145,13 @@ CREATE TABLE ContactUs (
     Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (ContactUs_ID)
 );
+CREATE TABLE `orders` (
+  `Order_ID` int(11) NOT NULL,
+  `Basket_ID` int(11) DEFAULT NULL,
+  `User_ID` int(11) DEFAULT NULL,
+  `Address_Order` varchar(255) DEFAULT NULL,
+  `Order_Status` varchar(255) DEFAULT NULL,
+  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 COMMIT;
