@@ -34,4 +34,40 @@ h1{
 .carousel{
     padding-top: 35px;
 }
+/* CSS for the view more buttons */
+
+.view-more-btn {
+    display: block;
+    margin-top: 10px; /* Adjust as needed */
+}
+.best-sellers {
+    text-align: center;
+}
+
+/* Adjustments to make images appear next to each other */
+.featured-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+/* Ensure each item takes up equal space */
+.featured-item {
+    width: calc(25% - 10px); /* Adjust width to fit 4 items in a row with spacing */
+    margin-bottom: 20px; /* Adjust margin between items */
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Arrange image and button vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.featured-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px; /* Adjust margin between image and button */
+}
+
+.view-more-btn {
+    margin-top: 10px; /* Adjust as needed */
+}
 
