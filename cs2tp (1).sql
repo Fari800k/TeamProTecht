@@ -88,4 +88,49 @@ INSERT INTO `basketitem` (`BasketItem_ID`, `Basket_ID`, `Item_ID`, `Quantity`, `
 
 CREATE TABLE `brand` (
   `Brand_ID` int(11) NOT NULL,
-  `
+  `Brand_Name` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`Brand_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
+(1, 'Samsung'),
+(2, 'Apple'),
+(3, 'Google');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
+--
+
+CREATE TABLE `item` (
+  `Item_ID` int(11) NOT NULL,
+  `Item_Name` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
+  `Brand_ID` int(11) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
+  `Color` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
+  `Storage` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Item_ID`),
+  KEY `Brand_ID` (`Brand_ID`),
+  CONSTRAINT `item_ibfk_1` FOREIGN KEY (`Brand_ID`) REFERENCES `brand` (`Brand_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`Item_ID`, `Item_Name`, `Brand_ID`, `Price`, `Color`, `Storage`) VALUES
+(1, 'iPhone 13 Pro', 2, '999.99', 'Silver', 128),
+(2, 'Galaxy S21 Ultra', 1, '1199.99', 'Phantom Black', 256),
+(3, 'Pixel 6 Pro', 3, '899.99', 'Stormy Black', 128),
+(4, 'iPhone SE', 2, '399.99', 'Product Red', 64),
+(5, 'Galaxy A52', 1, '349.99', 'Awesome Blue', 128);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+COMMIT;
