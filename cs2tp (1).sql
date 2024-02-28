@@ -107,6 +107,7 @@ INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
 -- Table structure for table `item`
 --
 
+-- Table structure for table `item`
 CREATE TABLE `item` (
   `Item_ID` int(11) NOT NULL,
   `Item_Name` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
@@ -114,23 +115,34 @@ CREATE TABLE `item` (
   `Price` decimal(10,2) DEFAULT NULL,
   `Color` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
   `Storage` int(11) DEFAULT NULL,
+  `Description` text COLLATE utf8_general_ci,
+  `Availability` tinyint(1) DEFAULT '1',
+  `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`Item_ID`),
   KEY `Brand_ID` (`Brand_ID`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`Brand_ID`) REFERENCES `brand` (`Brand_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
 -- Dumping data for table `item`
---
+INSERT INTO `item` (`Item_ID`, `Item_Name`, `Brand_ID`, `Price`, `Color`, `Storage`, `Description`, `Availability`, `Created_at`, `Updated_at`) VALUES
+(1, 'iPhone 13 Pro', 2, '999.99', 'Silver', 128, 'The iPhone 13 Pro is a flagship smartphone from Apple.', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
+(2, 'Galaxy S21 Ultra', 1, '1199.99', 'Phantom Black', 256, 'The Galaxy S21 Ultra is a high-end smartphone from Samsung.', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
+(3, 'Pixel 6 Pro', 3, '899.99', 'Stormy Black', 128, 'The Pixel 6 Pro is a flagship smartphone from Google.', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
+(4, 'iPhone SE', 2, '399.99', 'Product Red', 64, 'The iPhone SE is a compact smartphone from Apple.', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
+(5, 'Galaxy A52', 1, '349.99', 'Awesome Blue', 128, 'The Galaxy A52 is a mid-range smartphone from Samsung.', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58');
 
-INSERT INTO `item` (`Item_ID`, `Item_Name`, `Brand_ID`, `Price`, `Color`, `Storage`) VALUES
-(1, 'iPhone 13 Pro', 2, '999.99', 'Silver', 128),
-(2, 'Galaxy S21 Ultra', 1, '1199.99', 'Phantom Black', 256),
-(3, 'Pixel 6 Pro', 3, '899.99', 'Stormy Black', 128),
-(4, 'iPhone SE', 2, '399.99', 'Product Red', 64),
-(5, 'Galaxy A52', 1, '349.99', 'Awesome Blue', 128);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE ContactUs (
+    ContactUs_ID INT AUTO_INCREMENT,
+    Name VARCHAR(255),
+    Email VARCHAR(255),
+    Message TEXT,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ContactUs_ID)
+);
 COMMIT;
