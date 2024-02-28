@@ -57,43 +57,40 @@ include "navbar.php";
       </section>
     </div>
 
+<div class="best-sellers">
+    <h2>Best Sellers</h2>
+</div>
 
-    <div class="Featured Products">
-      <h1>Best Sellers</h1>
+<div class="featured-items">
 <?php
 // Include the file that establishes the database connection
 include 'connectdb.php';
 
 // Check if $pdo is set and not null
-if ($pdo) {
-    // SQL query to retrieve 4 items with the lowest quantity (greater than or equal to 1)
-    $query = "SELECT * FROM item WHERE Quantity >= 1 ORDER BY Quantity ASC LIMIT 4";
-    $result = $pdo->query($query);
+ if ($pdo) {
+        // SQL query to retrieve 4 items with the lowest quantity (greater than or equal to 1)
+        $query = "SELECT * FROM item WHERE Quantity >= 1 ORDER BY Quantity ASC LIMIT 4";
+        $result = $pdo->query($query);
 
-    // Check if there are results
-    if ($result->rowCount() > 0) {
-        // Container for displaying items
-        echo '<div style="display: flex; flex-wrap: wrap;">';
-        // Output each row
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            // Display each item
-            echo '<div style="border: 1px solid #000; padding: 10px; margin: 5px;">';
-            echo "<img src='CSS/images/" . $row['Img'] . "'>";
-
-            echo '</div><br>';   
-            echo '<button onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>';
+        // Check if there are results
+        if ($result->rowCount() > 0) {
+            // Output each row
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                // Display each item
+                echo '<div class="featured-item">';
+                echo "<img src='CSS/images/" . $row['Img'] ."' class='featured-image'>";
+                echo '<button onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>';
+                echo '</div>';
+            }
+        } else {
+            echo "Featured Products to be announced";
         }
-        // Close the container
-        echo '</div>';
     } else {
-        echo "Featured Products to be announced";
+        echo "Database connection failed";
     }
-} else {
-    echo "Database connection failed";
-}
-?>
-                        
-    </div>      
+    ?>
+</div>
+     
     </main>
 <!-- Add footer -->
 <?php include "footer.php";?>
