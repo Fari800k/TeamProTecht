@@ -49,21 +49,6 @@ include "navbar.php";
                 }
                 echo "</select>";
 
-                // Fetch warranties from the database
-                $warrantyQuery = "SELECT DISTINCT WarrantyDetails FROM Warranty";
-                $warrantyStatement = $pdo->query($warrantyQuery);
-                $warranties = $warrantyStatement->fetchAll(PDO::FETCH_ASSOC);
-
-            // Populate warranties dynamically
-                echo "<h3>Warranty</h3>";
-                echo "<select name='selected_warranty'>";
-                echo "<option value=''>Select Warranty</option>";
-                foreach ($warranties as $warranty) {
-                    $selected = (isset($_POST['selected_warranty']) && $_POST['selected_warranty'] == $warranty['WarrantyDetails']) ? ' selected' : '';
-                    echo "<option value='" . $warranty['WarrantyDetails'] . "'$selected>" . $warranty['WarrantyDetails'] . " Months</option>";
-                }
-                echo "</select>";
-
                 // Fetch operating systems from the database
                 $osQuery = "SELECT DISTINCT OperatingSystem FROM Item";
                 $osStatement = $pdo->query($osQuery);
@@ -105,7 +90,7 @@ include "navbar.php";
                 echo "</select>";
 
                 // Fetch colors from the database
-                $colorQuery = "SELECT DISTINCT Color FROM item_color";
+                $colorQuery = "SELECT DISTINCT colour FROM Item";
                 $colorStatement = $pdo->query($colorQuery);
                 $colors = $colorStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -114,13 +99,13 @@ include "navbar.php";
                 echo "<select name='color'>";
                 echo "<option value=''>Select Color</option>";
                 foreach ($colors as $color) {
-                    $selected = (isset($_POST['color']) && $_POST['color'] == $color['Color']) ? ' selected' : '';
-                    echo "<option value='" . $color['Color'] . "'$selected>" . $color['Color'] . "</option>";
+                    $selected = (isset($_POST['color']) && $_POST['color'] == $color['colour']) ? ' selected' : '';
+                    echo "<option value='" . $color['colour'] . "'$selected>" . $color['colour'] . "</option>";
                 }
                 echo "</select>";
 
                 // Fetch storage sizes from the database
-                $storageQuery = "SELECT DISTINCT Storage FROM item_storage";
+                $storageQuery = "SELECT DISTINCT Storage FROM Item";
                 $storageStatement = $pdo->query($storageQuery);
                 $storageSizes = $storageStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -185,23 +170,8 @@ include "navbar.php";
             }
 
             // Construct the base query
-            $query = "SELECT
-                Location.Shelf,
-                Location.Row,
-                Item.ItemName,
-                Item.Item_ID,
-                Brand.BrandName,
-                Item.Quantity,
-                Item.Price, 
-                Item.Img
-            FROM
-                Item
-            JOIN
-                Location ON Item.Location_ID = Location.Location_ID
-            LEFT JOIN
-                Brand ON Item.Item_ID = Brand.Item_ID
-            LEFT JOIN
-                Warranty ON Item.Item_ID = Warranty.Item_ID";
+            $query = "SELECT * FROM Item
+                    LEFT JOIN Brand ON Item.Item_ID = Brand.Item_ID";
 
             // Initialize an array to hold conditions
             $conditions = [];
@@ -282,7 +252,7 @@ if(isset($_POST['biometrics']) && !empty($_POST['biometrics'])) {
 if(isset($_POST['color']) && !empty($_POST['color'])) {
     $color = $_POST['color'];
     // Add condition to the array
-    $conditions[] = "Item.Item_ID IN (SELECT Item_ID FROM item_color WHERE Color = ?)";
+    $conditions[] = "Item.Item_ID IN (SELECT Item_ID FROM item WHERE colour = ?)";
     // Add color to the parameters array
     $parameters[] = $color;
     // Store color in session
@@ -296,7 +266,7 @@ if(isset($_POST['color']) && !empty($_POST['color'])) {
 if(isset($_POST['storage_size']) && !empty($_POST['storage_size'])) {
     $storageSize = $_POST['storage_size'];
     // Add condition to the array
-    $conditions[] = "Item.Item_ID IN (SELECT Item_ID FROM item_storage WHERE Storage = ?)";
+    $conditions[] = "Item.Item_ID IN (SELECT Item_ID FROM item WHERE storage = ?)";
     // Add storage size to the parameters array
     $parameters[] = $storageSize;
     // Store storage size in session
@@ -375,6 +345,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
 
                     echo "<div class='product-item'>";
                     echo "<a href = 'productdescription.php/".$row['Item_ID']."/".$row['BrandName']."_".$row['ItemName']."'<strong>" . $row['BrandName'] . " " . $row['ItemName'] . "</strong></a><br>";
+                    echo "<strong>" . $row['DisplaySize'] . " " . $row['DisplayResolution'] . " " . $row['CameraMegapixels'] . ", " . $row['colour'] . ", " . $row['storage'] . "</strong><br>";
                     echo "<strong>£" . $row['Price'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
                     echo "<form method='post'>";
@@ -425,4 +396,3 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
 <?php include "footer.php";?>
 </body>
 </html>
- 
