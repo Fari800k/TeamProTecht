@@ -94,9 +94,15 @@
         <label for="biometrics">Biometrics:</label><br>
         <input type="text" name="biometrics" required><br><br>
 
+        <label for="color">Color:</label><br>
+        <input type="text" name="color" required><br><br>
+
+        <label for="storage">Storage:</label><br>
+        <input type="text" name="storage" required><br><br>
 
         <label for="shelf">Shelf:</label><br>
         <input type="text" name="shelf" required><br><br>
+
 
 
         <label for="row">Row:</label><br>
@@ -120,14 +126,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $quantity = $_POST["quantity"];
     $itemdescription = $_POST["itemdescription"];
     $price = $_POST["price"]; 
-    $operatingsystem= $_POST["operatingsystem"];
+    $operatingsystem = $_POST["operatingsystem"];
     $disres = $_POST["disres"];
     $screensize = $_POST["screensize"];
     $batterylife = $_POST["batterylife"];
-    $camera= $_POST["camera"];
-    $biometrics=  $_POST["biometrics"];
+    $camera = $_POST["camera"];
+    $biometrics =  $_POST["biometrics"];
     $shelf = $_POST["shelf"];
     $itemrow = $_POST["row"];
+    $color = $_POST["color"]; // New field for color
+    $storage = $_POST["storage"]; // New field for storage
 
     try {
         $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
@@ -135,14 +143,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepare the statements
         $stmt_location = $pdo->prepare("INSERT INTO location (Shelf, Row) VALUES (?, ?)");
         $stmt_brand = $pdo->prepare("INSERT INTO Brand (BrandName) VALUES (?)");
-        $stmt_item = $pdo->prepare("INSERT INTO Item (ItemName, Quantity, ItemDesc, Price, Img, Location_ID, OperatingSystem, DisplaySize, DisplayResolution, BatteryLife, CameraMegapixels, BiometricAuthentication) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt_item = $pdo->prepare("INSERT INTO Item (ItemName, Quantity, ItemDesc, Price, Img, Location_ID, OperatingSystem, DisplaySize, DisplayResolution, BatteryLife, CameraMegapixels, BiometricAuthentication, Colour, Storage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         // Bind parameters and execute
         $stmt_location->execute([$shelf, $itemrow]);
         $stmt_brand->execute([$brandname]);
         $location_id = $pdo->lastInsertId();
         
-        $stmt_item->execute([$itemname, $quantity, $itemdescription, $price, $file_name, $location_id, $operatingsystem, $screensize, $disres, $batterylife, $camera, $biometrics]);
+        $stmt_item->execute([$itemname, $quantity, $itemdescription, $price, $file_name, $location_id, $operatingsystem, $screensize, $disres, $batterylife, $camera, $biometrics, $color, $storage]);
         
         if(move_uploaded_file($tempname, $folder)){
             echo "<alert>Product Uploaded Successfully</alert>";
