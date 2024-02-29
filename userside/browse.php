@@ -266,7 +266,7 @@ if(isset($_POST['color']) && !empty($_POST['color'])) {
 if(isset($_POST['storage_size']) && !empty($_POST['storage_size'])) {
     $storageSize = $_POST['storage_size'];
     // Add condition to the array
-    $conditions[] = "Item.Item_ID IN (SELECT Item_ID FROM item WHERE storage = ?)";
+    $conditions[] = "item.Item_ID IN (SELECT Item_ID FROM item WHERE storage = ?)";
     // Add storage size to the parameters array
     $parameters[] = $storageSize;
     // Store storage size in session
@@ -348,7 +348,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                     echo "<strong>" . $row['DisplaySize'] . " " . $row['DisplayResolution'] . " " . $row['CameraMegapixels'] . ", " . $row['colour'] . ", " . $row['storage'] . "</strong><br>";
                     echo "<strong>£" . $row['Price'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
-                    echo "<form method='post'>";
+                    echo "<form method='post' action='browse.php'>";
                     echo "<input type='hidden' name='product_id".$row['Item_ID']."' value='" . $row['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket'>Add to basket</button>";
                     echo "</form>";
@@ -384,6 +384,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                         $addBasketItem->execute();
 
                         unset($_POST['product'.$row['Item_ID']]);
+                        unset($itemID);
 
                     }
                     array_push($rowset, $row);
@@ -393,6 +394,8 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
         </div>
     </div>
 <!-- Add footer -->
-<?php include "footer.php";?>
+<?php include "footer.php";
+session_abort();
+?>
 </body>
 </html>
