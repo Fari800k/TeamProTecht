@@ -79,7 +79,8 @@ include 'connectdb.php';
                 // Display each item
                 echo '<div class="featured-item">';
                 echo "<img src='CSS/images/" . $row['Img'] ."' class='featured-image'>";
-                echo '<button onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>';
+                echo '<button class="view-more-btn" onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>';
+
                 echo '</div>';
             }
         } else {
