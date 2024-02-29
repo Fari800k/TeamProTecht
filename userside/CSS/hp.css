@@ -42,6 +42,9 @@ h1{
 }
 .best-sellers {
     text-align: center;
+    color: rgb(152, 82, 150);
+    
+animation: pulsate 1.5s ease-in-out infinite;;
 }
 
 /* Adjustments to make images appear next to each other */
@@ -66,5 +69,46 @@ h1{
     height: 100px;
     margin-bottom: 10px; /* Adjust margin between image and button */
 }
+/* CSS for the view more buttons */
 
+.view-more-btn {
+    display: block;
+    margin-top: 10px; /* Adjust as needed */
+    background-color: rgb(152, 82, 150); /* Set button background color */
+    color: white; /* Set text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    animation: pulse 1.5s infinite; /* Add pulse animation */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.view-more-btn:hover {
+    background-color: darkviolet; /* Change button background color on hover */
+}
+
+
+@keyframes pulsate {
+    0% {
+        text-shadow: 0 0 10px rgb(152, 82, 150); /* Start with a small glow */
+    }
+    50% {
+        text-shadow: 0 0 40px rgb(152, 82, 150); /* Peak glow size */
+    }
+    100% {
+        text-shadow: 0 0 10px rgb(152, 82, 150); /* Return to the small glow */
+    }
+}
 
