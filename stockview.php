@@ -74,11 +74,13 @@
             print "<td>" . $rows['ItemName'] . "</td>";
             print "<td>" . $rows['ItemDesc'] . "</td>";
             print "<td>" . $rows['Price'] . "</td>";
-            print "<td>" . "<img src='images/'>" . "</td>";
+            print "<td>" . "<img src='CSS/images/'>" . "</td>";
             print "<td>" . $rows['Location_ID'] . "</td>";
             print "<td>" . $rows['Created_at'] . "</td>";
             print "<td>" . $rows['Updated_at'] . "</td></tr>";
-        }    
+        }
+        
 ?>
+    
 </body>
 </html>
