@@ -250,7 +250,6 @@ INSERT INTO `location` (`Location_ID`, `Shelf`, `Row`, `Updated_at`, `Created_at
 CREATE TABLE `orders` (
   `Order_ID` int(11) NOT NULL,
   `Basket_ID` int(11) DEFAULT NULL,
-  `User_ID` int(11) DEFAULT NULL,
   `Address_Order` varchar(255) DEFAULT NULL,
   `Order_Status` varchar(255) DEFAULT NULL,
   `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -261,10 +260,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`Order_ID`, `Basket_ID`, `User_ID`, `Address_Order`, `Order_Status`, `Updated_at`, `Created_at`) VALUES
-(1, 1, 1, '123 Main St', 'Shipped', '2023-12-08 18:08:09', '2023-12-08 17:46:58'),
-(2, 2, 1, '123 Main St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 3, 2, '456 Elm St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58');
+INSERT INTO `orders` (`Order_ID`, `Basket_ID`, `Address_Order`, `Order_Status`, `Updated_at`, `Created_at`) VALUES
+(1, 1, '123 Main St', 'Shipped', '2023-12-08 18:08:09', '2023-12-08 17:46:58'),
+(2, 2, '123 Main St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
+(3, 3, '456 Elm St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58');
 
 -- --------------------------------------------------------
 
@@ -347,7 +346,6 @@ ALTER TABLE `location`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`Order_ID`),
   ADD KEY `Basket_ID` (`Basket_ID`),
-  ADD KEY `User_ID` (`User_ID`);
 
 --
 -- Indexes for table `users`
@@ -437,7 +435,6 @@ ALTER TABLE `item`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Basket_ID`) REFERENCES `basket` (`Basket_ID`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`);
 
 CREATE TABLE ContactUs (
     ContactUs_ID INT AUTO_INCREMENT,
