@@ -345,7 +345,7 @@ ALTER TABLE `location`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`Order_ID`),
-  ADD KEY `Basket_ID` (`Basket_ID`),
+  ADD KEY `Basket_ID` (`Basket_ID`);
 
 --
 -- Indexes for table `users`
