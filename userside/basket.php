@@ -1,101 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Teamprotecht</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+    <script defer src="JavaScript/script.js"></script>
+</head>
+<body>
+    <?php include "navbar.php"; ?>
+    <main>
+        <h2>Your Basket</h2>
+        <section id="basket">
+            <?php
+            include "connectdb.php";
+            if(isset($_SESSION['User_ID'])) {
+                $userID = $_SESSION['User_ID'];
 
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Teamprotecht</title>
-        <link rel="stylesheet" href="CSS/style.css" />
-        <script defer src="JavaScript/script.js"></script>
-    </head>
-    <body>
-        <!--Creating the navigation bar-->
-<?php
-include "navbar.php";
-?>
-        <main>
-            <h2>Your Basket</h2>
-            <section id="basket">
-                <!-- Create a Basket with a button to checkout -->
-                <?php
-                try{
-                    include "connectdb.php";
-                    //if(isset($_POST["submitted"])){
-                        //$user = $_SESSION["username"];
+                $sql1 = "SELECT * FROM `basket` WHERE User_ID = :userID ORDER BY `Updated_at` DESC LIMIT 1";
+                $stmt = $pdo->prepare($sql1);
+                $stmt->execute([':userID' => $userID]);
+                $usersBasket = $stmt->fetch();
 
-                        $sql1 = "SELECT * FROM `basket` WHERE User_ID = '2'";
+                if($usersBasket) {
+                    $basketID = $usersBasket['Basket_ID'];
 
-                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    //join tables to fetch item details for the basket
+                    $sql2 = "SELECT basketitem.*, item.ItemName, item.Price FROM `basketitem` JOIN `item` ON basketitem.Item_ID = item.Item_ID WHERE Basket_ID = :basketID";
+                    $stmt = $pdo->prepare($sql2);
+                    $stmt->execute([':basketID' => $basketID]);
 
-                        $usersBaskets = $pdo->query($sql1);
-                        foreach($usersBaskets as $usersBasket){
-                            $basketID = $usersBasket['Basket_ID'];
-                            $basketUserID = $usersBasket['User_ID'];
-
-                            $sql2 = "SELECT * FROM `basketitem` WHERE Basket_ID = $basketID";
-                            
-                            $basketItems = $pdo->query($sql2);
-
-                            echo "<br><table><tr>";
-                            echo "<th>Basket number</th>";
-                            echo "<th>Item name</th>";
-                            echo "<th>Quantity</th>";
-                            echo "<th>Price</th>";
-                            echo "<th>Delete Item</th></tr>";
-                            foreach($basketItems as $basketItem){
-                                $basketItemID = $basketItem['Item_ID'];
-                                $basketItemQuantity = $basketItem['Quantity'];
-
-                                $sql3 = "SELECT * FROM `item` WHERE Item_ID = $basketItemID";
-
-                                $items = $pdo->query($sql3);
-
-                                foreach($items as $item){
-                                    $itemName = $item['ItemName'];
-                                    $itemTotalPrice = $item['Price']*$basketItemQuantity;
-                                    
-                                    
-                                    echo "<tr>";
-                                    echo "<td>".$basketItemID."</td>";
-                                    echo "<td>".$itemName."</td>";
-                                    echo "<td>".$basketItemQuantity."</td>";
-                                    echo "<td>".$itemTotalPrice."</td>";
-                                    echo "<td><button onclick='deleteItem()'>Delete</button><p id='delete".$basketItemID."'></td></tr>";
-    
-                                    echo "<script>function deleteItem(){";
-                                    echo   "var txt;";
-                                    echo    "if(confirm('Are you sure you want to delete item?')){";
-                                    echo        "txt = 'Successful deletion';";
-                                    echo    "} else{";
-                                    echo        "txt = 'Cancelled deletion';";
-                                    echo    "}";
-                                    echo    "document.getElementById('delete".$basketItemID."').innerHTML=txt;";
-                                    echo "}</script>";
-                                }
-                                
-                            }
-                            echo "</table>";
-
-                            //When button "checkout" is clicked, send basket and single user to order table
-                            echo "<button id='checkout' action='checkout.php' onclick='checkout()'>Checkout</button>";
-                            echo "<script>function checkout(){";
-                                    ?><?php $sendOrder = 'INSERT INTO orders (`Basket_ID`, `User_ID`);
-                                    VALUES (:basket, :basketuserID)';
-                                    $statement = $pdo->prepare($sendOrder);
-                                    $statement->bindParam(':basket', $basketID, PDO::PARAM_INT);
-                                    $statement->bindParam(':basketuserID', $basketUserID, PDO::PARAM_INT); 
-                                    $statement->execute(); ?><?php
-                            echo "}</script>";
-                        }
-                    //} //else{
-                        //echo "Not logged in";
-                        //header("Location: HomePage.html");
-                    //}
-                } catch(PDOException $er){
-                    echo "Display failed: " . $er->getMessage();
+                    echo "<table><tr><th>Item name</th><th>Quantity</th><th>Price</th><th>Action</th></tr>";
+                    while($basketItem = $stmt->fetch()) {
+                        echo "<tr><td>".$basketItem['ItemName']."</td><td>".$basketItem['Quantity']."</td><td>".($basketItem['Price'] * $basketItem['Quantity'])."</td>";
+                        //delete item form
+                        echo "<td><form action='deleteItem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketItem['BasketItem_ID']."'/><button type='submit' name='deleteItem'>Delete</button></form></td></tr>";
+                    }
+                    echo "</table>";
+                    //placeholder checkout form
+                    echo "<form action='checkout.php' method='post'><input type='hidden' name='Basket_ID' value='".$basketID."'/><button type='submit' name='checkout'>Checkout</button></form>";
+                } else {
+                    echo "No basket found.";
                 }
-                ?>
-        </main>
-    </body>
-                <!-- Add footer -->
-<?php include "footer.php";?>
+            } else {
+                echo "User not logged in.";
+            }
+            ?>
+        </section>
+    </main>
+    <?php include "footer.php"; ?>
+</body>
 </html>
