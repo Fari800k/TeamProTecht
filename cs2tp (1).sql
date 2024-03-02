@@ -434,7 +434,7 @@ ALTER TABLE `item`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Basket_ID`) REFERENCES `basket` (`Basket_ID`),
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Basket_ID`) REFERENCES `basket` (`Basket_ID`);
 
 CREATE TABLE ContactUs (
     ContactUs_ID INT AUTO_INCREMENT,
