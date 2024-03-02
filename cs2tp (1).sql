@@ -299,7 +299,14 @@ INSERT INTO `users` (`User_ID`, `Username`, `Password`, `Fore_name`, `Second_Nam
 (11, 'username@customer.com', '$2y$10$v.JRfZC3fcX0wH7nZ.RlyOUqMxuk7Cq70OvrPYQtl01ILa2WRpHEG', 'user', 'name', NULL, NULL);
 
 -- --------------------------------------------------------
-
+CREATE TABLE ContactUs (
+    ContactUs_ID INT AUTO_INCREMENT,
+    Name VARCHAR(255),
+    Email VARCHAR(255),
+    Message TEXT,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ContactUs_ID)
+);
 --
 
 -- Indexes for dumped tables
@@ -435,15 +442,6 @@ ALTER TABLE `item`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Basket_ID`) REFERENCES `basket` (`Basket_ID`);
-
-CREATE TABLE ContactUs (
-    ContactUs_ID INT AUTO_INCREMENT,
-    Name VARCHAR(255),
-    Email VARCHAR(255),
-    Message TEXT,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (ContactUs_ID)
-);
 
 COMMIT;
 
