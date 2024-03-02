@@ -9,10 +9,11 @@
         <li><a href="browse.php">Browse</a></li>
         <li><a href="contactus.php">Contact Us</a></li>
         <?php
-
-        include "connectdb.php";
+        // Set current page as prev_page
+        if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/login.php"){
+            $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+        }
         //if logged in, adds account.php and logout.php links
-        session_start();
         if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
             echo "<li><a href='account.php'>Welcome ".$_SESSION['username']."</a></li>";
             echo "<li><a href='logout.php'>Logout</a></li>";
@@ -22,12 +23,10 @@
         <div id="basketcontainer">
             <li class="basketbutton" id="buttonbasket"><a href="basket.php"><i class="fa fa-shopping-basket"></i></a></li>
             <div class="mybasket" id="mybasketdropdown">
+                
         <?php
             //if item/s added to a new basket, view basket in dropdown menu
-            echo $_SESSION['Basket_ID'];
             if(isset($_SESSION['Basket_ID'])){
-
-
                 $overviewsql = "SELECT * FROM basketitem 
                                     JOIN item ON item.Item_ID = basketitem.Item_ID
                                     WHERE Basket_ID = ".$_SESSION['Basket_ID']."";
@@ -35,12 +34,14 @@
                 $basketviewitems = $pdo->prepare($overviewsql);
                 $basketviewitems->execute();
 
+                echo "<strong>Your Basket</strong>";
                 foreach($basketviewitems as $basketviewitem){
                     echo "<div = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'><a href='". $basketviewitem['Item_ID'] ."'>". $basketviewitem['ItemName'] ."</a>";
-                    echo "<img src='CSS/images/". $basketviewitem['Img'] . "' width='10%' height='15%'></div>";    
+                    echo "<img src='CSS/images/". $basketviewitem['Img'] . "' width='10%' height='15%'>";
+                    echo "<p>Price per phone: ".$basketviewitem['Price']."</p>";
+                    echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</div>";
                 }
             }
-        session_abort();
         ?>
         </div>
         </div>

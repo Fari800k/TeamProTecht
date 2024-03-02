@@ -7,6 +7,8 @@
     <script defer src="JavaScript/script.js"></script>
 </head>
 <?php
+include('connectdb.php');
+session_start();
 include "navbar.php";
 ?>
 <body>
@@ -30,10 +32,6 @@ include "navbar.php";
                 <br>
 
                 <?php
-                // Database connection
-                include "connectdb.php";
-                session_start();
-
                 // Fetch brands from the database
                 $brandQuery = "SELECT DISTINCT BrandName FROM Brand";
                 $brandStatement = $pdo->query($brandQuery);
@@ -379,44 +377,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                         }
 
                             //Add item to itembasket
-                            $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) 
-               VALUES (".$_SESSION['Basket_ID'].", $itemID, 1);
-               SELECT 
-                   basket.Basket_ID,
-                   basket.User_ID,
-                   basket.Updated_at AS Basket_Updated_at,
-                   basket.Created_at AS Basket_Created_at,
-                   basketitem.BasketItem_ID,
-                   basketitem.Item_ID,
-                   basketitem.Quantity,
-                   basketitem.Updated_at AS BasketItem_Updated_at,
-                   basketitem.Created_at AS BasketItem_Created_at,
-                   item.ItemName,
-                   item.ItemDesc,
-                   item.Price,
-                   item.Img,
-                   item.Location_ID,
-                   item.OperatingSystem,
-                   item.DisplaySize,
-                   item.DisplayResolution,
-                   item.BatteryLife,
-                   item.CameraMegapixels,
-                   item.BiometricAuthentication,
-                   item.Colour,
-                   item.Storage,
-                   location.Shelf,
-                   location.Row
-               FROM 
-                   basket
-               JOIN 
-                   basketitem ON basket.Basket_ID = basketitem.Basket_ID
-               JOIN 
-                   item ON basketitem.Item_ID = item.Item_ID
-               LEFT JOIN 
-                   location ON item.Location_ID = location.Location_ID
-               WHERE 
-                   basket.Basket_ID = ".$_SESSION['Basket_ID'];
-
+                            $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) VALUES (".$_SESSION['Basket_ID'].", $itemID, 1);";
 
                             $addBasketItem = $pdo->prepare($addItemSQL);
                             $addBasketItem->execute();
