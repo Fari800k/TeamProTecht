@@ -87,19 +87,28 @@
         </tr>
         
         <?php
-           $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-           $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, Location_ID, Created_at, Updated_at  FROM item");
+        $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
+        $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, Location_ID, Created_at, Updated_at  FROM item");
            
-           foreach ($statement as $rows) {
-                echo "<td>" . $rows['Item_ID'] . "</td>";
-                echo "<td>" . $rows['ItemName'] . "</td>";
-                echo "<td>" . $rows['ItemDesc'] . "</td>";
-                echo "<td>" . "£". $rows['Price'] . "</td>";
-                echo "<td>" . "<div class='product-image'><img src='./img/'></div>". "</td>";
-                echo "<td>" . $rows['Location_ID'] . "</td>";
-                echo "<td>" . $rows['Created_at'] . "</td>";
-                echo "<td>" . $rows['Updated_at'] . "</td></tr>";
-            }
-            ?>
+        foreach ($statement as $row) {
+            $item_id = $row['Item_ID'];
+            $name = $row['ItemName'];
+            $description = $row['ItemDesc'];
+            $price = $row['Price'];
+            $phone_image = $row['Img'];
+            $loc_id = $row['Location_ID'];
+            $last_created = $row['Created_at'];
+            $last_updated = $row['Updated_at'];
+
+            echo "<td>"$item_id"</td>";
+            echo "<td>"$name"</td>";
+            echo "<td>"$description"</td>";
+            echo "<td>"$price"</td>";
+            echo "<td><img class=product-image src='CSS/images/$phone_image'></td>";
+            echo "<td>"$loc_id"</td>";
+            echo "<td>"$last_created"</td>";
+            echo "<td>"$last_updated"</td></tr>";
+        }
+        ?>
 </body>
 </html>
