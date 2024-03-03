@@ -90,14 +90,14 @@
             $last_created = $row['Created_at'];
             $last_updated = $row['Updated_at'];
 
-            echo "<td>"$item_id"</td>";
-            echo "<td>"$name"</td>";
-            echo "<td>"$description"</td>";
-            echo "<td>"$price"</td>";
+            echo "<td>".$item_id."</td>";
+            echo "<td>".$name."</td>";
+            echo "<td>".$description."</td>";
+            echo "<td>".$price."</td>";
             echo "<td><img class=product-image src='CSS/images/$phone_image'></td>";
-            echo "<td>"$loc_id"</td>";
-            echo "<td>"$last_created"</td>";
-            echo "<td>"$last_updated"</td></tr>";
+            echo "<td>".$loc_id."</td>";
+            echo "<td>".$last_created."</td>";
+            echo "<td>".$last_updated."</td></tr>";
         }
         ?>
 </body>
