@@ -344,7 +344,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                 if(!in_array($row, $rowset)){
 
                     echo "<div class='product-item'>";
-                    echo "<a href = 'productdescription.php/".$row['Item_ID']."/".$row['BrandName']."_".$row['ItemName']."'<strong>" . $row['BrandName'] . " " . $row['ItemName'] . "</strong></a><br>";
+                    echo "<a href='product_dt.php?Item_ID=" . $row['Item_ID'] . "'>";
                     echo "<strong>" . $row['DisplaySize'] . " " . $row['DisplayResolution'] . " " . $row['CameraMegapixels'] . ", " . $row['colour'] . ", " . $row['storage'] . "</strong><br>";
                     echo "<strong>£" . $row['Price'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
