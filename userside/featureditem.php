@@ -25,7 +25,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // SQL query to retrieve 4 items with the lowest quantity (greater than or equal to 1)
-    $query = "SELECT * FROM item WHERE Quantity >= 1 ORDER BY Quantity ASC LIMIT 4";
+    $query = "SELECT * FROM item WHERE Stock >= 1 ORDER BY Stock ASC LIMIT 4";
     
     // Prepare the statement
     $statement = $conn->prepare($query);
@@ -45,11 +45,10 @@ try {
         foreach ($rows as $row) {
             // Display each item as a card
             echo '<div class="card">
-                    <img src="#" alt="' . $row["ItemName"] . '">
+                    <img src="CSS/images/' . $row["Img"] . '" alt="' . $row["ItemName"] . '" class="featured-image">
                     <h4>' . $row["ItemName"] . '</h4>
                     <p>Price: $' . $row["Price"] . '</p>
-                    <button onclick="addToBasket(' . $row["Item_ID"] . ')">Add to Basket</button>
-                    <button onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>
+                    <button class="view-more-btn" onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>
                   </div>';
         }
         echo '</div>';

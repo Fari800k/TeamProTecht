@@ -1,23 +1,24 @@
 .card-container {
     display: flex;
     flex-wrap: wrap;
+    margin: 10px;
     background-color: white;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-radius: 10px;
 }
 
 .card {
     border: 1px solid #ddd;
     padding: 15px;
-    margin: 10px;
     height: auto;
-    width: 250px;
+    width: calc(25% - 10px);
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     background-color: #B2A9AE;
     transition: transform 0.3s;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
+    align-items: center;
 }
 
 .card img {
@@ -28,5 +29,46 @@
 
 .card h4 {
     margin-top: 10px;
+}
+
+.view-more-btn {
+    display: block;
+    margin-top: 10px;
+    background-color: rgb(152, 82, 150);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.view-more-btn:hover {
+    background-color: darkviolet;
+}
+
+
+@keyframes pulsate {
+    0% {
+        text-shadow: 0 0 10px rgb(152, 82, 150);
+    }
+    50% {
+        text-shadow: 0 0 40px rgb(152, 82, 150);
+    }
+    100% {
+        text-shadow: 0 0 10px rgb(152, 82, 150);
+    }
 }
 

@@ -7,6 +7,8 @@
     <script defer src="JavaScript/script.js"></script>
 </head>
 <?php
+include('connectdb.php');
+session_start();
 include "navbar.php";
 ?>
 <body>
@@ -30,10 +32,6 @@ include "navbar.php";
                 <br>
 
                 <?php
-                // Database connection
-                include "connectdb.php";
-                session_start();
-
                 // Fetch brands from the database
                 $brandQuery = "SELECT DISTINCT BrandName FROM Brand";
                 $brandStatement = $pdo->query($brandQuery);
@@ -394,8 +392,6 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
         </div>
     </div>
 <!-- Add footer -->
-<?php include "footer.php";
-session_abort();
-?>
+<?php include "footer.php";?>
 </body>
 </html>
