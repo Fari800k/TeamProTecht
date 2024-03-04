@@ -63,32 +63,8 @@ include "navbar.php";
 
 <div class="featured-items">
 <?php
-// Include the file that establishes the database connection
-include 'connectdb.php';
-
-// Check if $pdo is set and not null
- if ($pdo) {
-        // SQL query to retrieve 4 items with the lowest quantity (greater than or equal to 1)
-        $query = "SELECT * FROM item WHERE Quantity >= 1 ORDER BY Quantity ASC LIMIT 4";
-        $result = $pdo->query($query);
-
-        // Check if there are results
-        if ($result->rowCount() > 0) {
-            // Output each row
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                // Display each item
-                echo '<div class="featured-item">';
-                echo "<img src='CSS/images/" . $row['Img'] ."' class='featured-image'>";
-                echo '<button class="view-more-btn" onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>';
-
-                echo '</div>';
-            }
-        } else {
-            echo "Featured Products to be announced";
-        }
-    } else {
-        echo "Database connection failed";
-    }
+include 'featureditem.php';
+//featured items display
     ?>
 </div>
      
