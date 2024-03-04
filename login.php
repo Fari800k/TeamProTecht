@@ -42,6 +42,7 @@ if(isset($_POST['loginbtn'])) {
         // Username not found
         $error = "User not found. Please check your username.";
     }
+
 }
 
 if(isset($_POST['createbtn'])) {
@@ -51,7 +52,10 @@ if(isset($_POST['createbtn'])) {
     $new_username = $_POST['new_username'];
     $new_password = $_POST['new_password'];
     $lastname = $_POST['lastname'];
-
+    $new_password = $_POST['new_password'];
+    if(!preg_match("/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/", $new_password)) {
+    $error = "Password must be at least 8 characters long and contain at least one number and one special character.";
+} else {
     // Hash the password before storing it in the database
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
@@ -63,14 +67,14 @@ if(isset($_POST['createbtn'])) {
     $existing_user = $check_stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$existing_user) {
-$create_query = "INSERT INTO `users` (Fore_name, Second_Name, Last_Name, Address_User, Username, Password) VALUES (:forename, :secondname, :lastname, :address, :username, :password)";
-$create_stmt = $pdo->prepare($create_query);
-$create_stmt->bindParam(':forename', $forename);
-$create_stmt->bindParam(':secondname', $secondname);
-$create_stmt->bindParam(':lastname', $lastname);
-$create_stmt->bindParam(':address', $address);
-$create_stmt->bindParam(':username', $new_username);
-$create_stmt->bindParam(':password', $hashed_password);
+        $create_query = "INSERT INTO `users` (Fore_name, Second_Name, Last_Name, Address_User, Username, Password) VALUES (:forename, :secondname, :lastname, :address, :username, :password)";
+        $create_stmt = $pdo->prepare($create_query);
+        $create_stmt->bindParam(':forename', $forename);
+        $create_stmt->bindParam(':secondname', $secondname);
+        $create_stmt->bindParam(':lastname', $lastname);
+        $create_stmt->bindParam(':address', $address);
+        $create_stmt->bindParam(':username', $new_username);
+        $create_stmt->bindParam(':password', $hashed_password);
 
         if($create_stmt->execute()) {
             // User creation successful
@@ -83,6 +87,8 @@ $create_stmt->bindParam(':password', $hashed_password);
         // Username already exists
         $error = "Username already exists. Please choose a different username.";
     }
+}
+
 }
 ?>
 <!DOCTYPE html>
