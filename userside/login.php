@@ -1,100 +1,159 @@
-<?php include('connectdb.php');
+<?php 
+include('connectdb.php');
 session_start();
-//if user already logged in and made username and User_ID variables, head to account.php
+
 if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     header("Location: account.php");
-}else{
-    session_abort();
-    //if user not logged in, continue to login.php
-?>
+    exit();
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Login</title>
-    <!-- Add your CSS link here -->
-    <link rel="stylesheet" type="text/css" href="loginstyle.css">
-</head>
+if(isset($_POST['loginbtn'])) {
+    $usernameSubmit = $_POST['username'];
+    $passwordSubmit = $_POST['password'];
 
-<body>
-        <!-- Menu Bar -->
-<?php
-include "navbar.php";
-?>
-    <div class="main-content">
-        <h1>User Login</h1>
-        <form action = "login.php" method="post">
-            <p>Login to get account specific benefits</p>
-            <label for="username">Username</label>
-            <input id="username" type="text" name="username" placeholder="Enter here" required />
-            <br><br>
-            <label for="password">Password</label>
-            <input id="password" type="password" name="password" placeholder="Enter here" required />
-            <br><br>
-            <button class="loginbtn" name="loginbtn">Login</button>
-            <p>If you haven't created an account, click on the underlined link below.<br>
-                <a href="registration.php">Create a customer account</a></p>
-        </form>
-    </div>
+    $login_query = "SELECT * FROM `users` WHERE Username = :username";
+    $stmt = $pdo->prepare($login_query);
+    $stmt->bindParam(':username', $usernameSubmit);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    <?php
-    session_start();
-    if (isset($_POST['loginbtn'])) {
-        $usernameSubmit = $_POST['username'];
-        $passwordSubmit = $_POST['password'];
-        echo $usernameSubmit;
-        echo $passwordSubmit;
-
-        //check if username and password exist in user database table
-        $login_query = "SELECT * FROM `users` WHERE Username = :username AND Password = :password";
-
-        //sql injection prevention
-        $stmt = $pdo->prepare($login_query);
-        $stmt->bindParam(':username', $usernameSubmit, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $passwordSubmit, PDO::PARAM_STR);
-        $stmt->execute();
-        $results = $stmt->fetchAll();
-
-        //if a match exists
-        if(count($results)>0){
-            foreach($results as $result){
-                $usernameattempt = $result['Username'];
-                $passwordattempt = $result['Password'];
-                echo "$usernameattempt";
-                //if username = login username
-                if($usernameSubmit == $usernameattempt){
-                    //if password = password unhashed
-                    //task: registration.php adds hashed password
-                    if ($passwordSubmit == $passwordattempt /* password_verify($passwordattempt, $passwordSubmit) */) {
-                        //starts user session and goes to previous page or homepage
-                        $_SESSION['username'] = $usernameSubmit;
-                        $_SESSION['User_ID'] = $result['User_ID'];
-                        
-                        //task: set all other pages to have a $_SESSION['prev_page'] variable
-                        if(isset($_SESSION['prev_page'])){
-                            $prev_page = $_SESSION['prev_page'];
-                            unset($_SESSION['prev_page']);
-                            header("Location: $prev_page");
-                        } else{
-                            header("Location: homepage.php");
-                        }
-                    } else {
-                        echo "<script>alert('Invalid password')</script>";
-                        session_abort();
-                    }
-                } else{
-                    echo "<script>alert('Invalid username')</script>";
-                    session_abort();
-                }
+    if($user) {
+        // First, check if the submitted password matches the hashed password
+        if(password_verify($passwordSubmit, $user['Password'])) {
+            // Password is correct, set session variables and redirect
+            $_SESSION['username'] = $user['Username'];
+            $_SESSION['User_ID'] = $user['User_ID']; // Assuming this is the column name for user ID
+            header("Location: account.php");
+            exit();
+        } else {
+            // If password_verify fails, check if the submitted password matches the plaintext password
+            if($passwordSubmit === $user['Password']) { // Assuming the column name is 'Password'
+                // Password is correct, set session variables and redirect
+                $_SESSION['username'] = $user['Username'];
+                $_SESSION['User_ID'] = $user['User_ID']; // Assuming this is the column name for user ID
+                header("Location: account.php");
+                exit();
+            } else {
+                // Incorrect password
+                $error = "Incorrect password. Please try again.";
             }
-        } else{
-            echo "No account found";
-            session_abort();
         }
+    } else {
+        // Username not found
+        $error = "User not found. Please check your username.";
+    }
+
+}
+
+if(isset($_POST['createbtn'])) {
+    $forename = $_POST['forename'];
+    $secondname = $_POST['secondname'];
+    $address = $_POST['address'];
+    $new_username = $_POST['new_username'];
+    $new_password = $_POST['new_password'];
+    $lastname = $_POST['lastname'];
+    $new_password = $_POST['new_password'];
+    if(!preg_match("/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/", $new_password)) {
+    $error = "Password must be at least 8 characters long and contain at least one number and one special character.";
+} else {
+    // Hash the password before storing it in the database
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+    // Check if the username already exists
+    $check_query = "SELECT * FROM `users` WHERE Username = :username";
+    $check_stmt = $pdo->prepare($check_query);
+    $check_stmt->bindParam(':username', $new_username);
+    $check_stmt->execute();
+    $existing_user = $check_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!$existing_user) {
+        $create_query = "INSERT INTO `users` (Fore_name, Second_Name, Last_Name, Address_User, Username, Password) VALUES (:forename, :secondname, :lastname, :address, :username, :password)";
+        $create_stmt = $pdo->prepare($create_query);
+        $create_stmt->bindParam(':forename', $forename);
+        $create_stmt->bindParam(':secondname', $secondname);
+        $create_stmt->bindParam(':lastname', $lastname);
+        $create_stmt->bindParam(':address', $address);
+        $create_stmt->bindParam(':username', $new_username);
+        $create_stmt->bindParam(':password', $hashed_password);
+
+        if($create_stmt->execute()) {
+            // User creation successful
+            $success_message = "User created successfully!";
+        } else {
+            // Error in user creation
+            $error = "Error creating user. Please try again.";
+        }
+    } else {
+        // Username already exists
+        $error = "Username already exists. Please choose a different username.";
     }
 }
-    ?>
+
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="CSS/login.css">
+    <style>
+        /* Style for popup */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <?php include "navbar.php"; ?>
+
+    <h1>Login</h1>
+    <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <?php if(isset($success_message)) echo "<p style='color:green;'>$success_message</p>"; ?>
+    <form class="example" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <input type="text" placeholder="Username" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit" name="loginbtn">Login</button>
+    </form>
+    
+    <!-- Button to trigger the popup -->
+    <button onclick="document.getElementById('createUserPopup').style.display='block'">Create User</button>
+    
+<!-- Popup for creating a new user -->
+<div id="createUserPopup" class="popup">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <h2>Create User</h2>
+        <input type="text" placeholder="First Name" name="forename" required>
+        <input type="text" placeholder="Second Name" name="secondname" required>
+        <input type="text" placeholder="Last Name" name="lastname" required>
+        <input type="text" placeholder="Address" name="address" required>
+        <input type="text" placeholder="Username" name="new_username" required>
+        <input type="password" placeholder="Password" name="new_password" required>
+        <button type="submit" name="createbtn">Create</button>
+        <button type="button" onclick="document.getElementById('createUserPopup').style.display='none'">Cancel</button>
+    </form>
+</div>
+
+
+
+    <script>
+        // Close the popup when clicking outside of it
+        window.onclick = function(event) {
+            var popup = document.getElementById('createUserPopup');
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
+        }
+    </script>
 </body>
-<!-- Add footer -->
-<?php include "footer.php";?>
 </html>
