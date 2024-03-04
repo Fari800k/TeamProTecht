@@ -1,26 +1,32 @@
-
-
-.container{
-    display: flex; 
+.card-container {
+    display: flex;
     flex-wrap: wrap;
-    background-color: #fff;
+    background-color: white;
     justify-content: space-evenly;
     border-radius: 10px;
 }
 
-.item{
+.card {
     border: 1px solid #ddd;
     padding: 15px;
     margin: 10px;
+    height: auto;
     width: 250px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4) ;
-    background-color: #b2a9ae;
-    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: #B2A9AE;
+    transition: transform 0.3s;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
 }
 
-.button{
-    color: #fff;
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
+
+.card h4 {
+    margin-top: 10px;
+}
+
