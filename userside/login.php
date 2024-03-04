@@ -133,12 +133,12 @@ if(isset($_POST['createbtn'])) {
 <div id="createUserPopup" class="popup">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <h2>Create User</h2>
-        <input type="text" placeholder="First Name" name="forename" required>
-        <input type="text" placeholder="Second Name" name="secondname" required>
-        <input type="text" placeholder="Last Name" name="lastname" required>
+        <input type="text" placeholder="First Name" name="forename" required><br<><br>
+        <input type="text" placeholder="Second Name" name="secondname" required><br<><br>
+        <input type="text" placeholder="Last Name" name="lastname" required><br<><br>
         <input type="text" placeholder="Address" name="address" required>
-        <input type="text" placeholder="Username" name="new_username" required>
-        <input type="password" placeholder="Password" name="new_password" required>
+        <input type="text" placeholder="Username" name="new_username" required><br<><br>
+        <input type="password" placeholder="Password" name="new_password" required><br<><br>
         <button type="submit" name="createbtn">Create</button>
         <button type="button" onclick="document.getElementById('createUserPopup').style.display='none'">Cancel</button>
     </form>
