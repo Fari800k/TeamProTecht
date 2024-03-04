@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 05:05 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 04, 2024 at 01:09 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -104,6 +104,20 @@ INSERT INTO `brand` (`Brand_ID`, `BrandName`, `Item_ID`, `Updated_at`, `Created_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contactus`
+--
+
+CREATE TABLE `contactus` (
+  `ContactUs_ID` int(11) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Message` text DEFAULT NULL,
+  `Created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employees`
 --
 
@@ -146,7 +160,7 @@ CREATE TABLE `item` (
   `Location_ID` int(11) DEFAULT NULL,
   `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-   `OperatingSystem` varchar(50) NOT NULL,
+  `OperatingSystem` varchar(50) NOT NULL,
   `DisplaySize` varchar(50) NOT NULL,
   `DisplayResolution` varchar(50) NOT NULL,
   `BatteryLife` varchar(50) NOT NULL,
@@ -154,23 +168,18 @@ CREATE TABLE `item` (
   `BiometricAuthentication` varchar(50) NOT NULL,
   `colour` varchar(50) NOT NULL,
   `storage` varchar(50) NOT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`Item_ID`, `ItemName`, `Quantity`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `Updated_at`, `Created_at`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `Colour`, `Storage`) 
-VALUES 
-(1, 'iPhone 15', 146, 'The new iPhone 15 from Apple', 999.99, 'iPhone15.jpg', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Full HD', '12', '12 MP', 'Face ID', 'Space Gray', '128GB'),
-(2, 'iPhone 15+', 146, 'The new iPhone 15+ from Apple', 1199.99, 'iPhone15+.jpg', 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Silver', '256GB'),
+INSERT INTO `item` (`Item_ID`, `ItemName`, `Quantity`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `Updated_at`, `Created_at`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `colour`, `storage`) VALUES
+(1, 'iPhone 15', 146, 'The new iPhone 15 from Apple', 999.99, 'Apple iphone 15.jpg', 1, '2024-03-03 23:32:39', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Full HD', '12', '12 MP', 'Face ID', 'Space Gray', '128GB'),
+(2, 'iPhone 15+', 146, 'The new iPhone 15+ from Apple', 1199.99, 'iPhone15+.jpg', 2, '2024-03-03 23:33:57', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Silver', '256GB'),
 (3, 'iPhone 15 Pro', 146, 'The new iPhone 15 Pro from Apple', 1199.99, 'iPhone15Pro.jpg', 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.1 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Gold', '512GB'),
 (4, 'iPhone 15 Pro Max', 146, 'The new iPhone 15 Pro Max from Apple', 1299.99, 'iPhone15ProMax.jpg', 4, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '16', '12 MP', 'Face ID', 'Midnight Green', '1TB'),
-(5, 'Pixel 8', 146, 'The new Pixel 8 by Google', 699.99, 'Pixel8.jpg', 5, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'Android', '6.0 inches', 'Full HD', '12', '16 MP', 'Fingerprint', 'Black', '128GB'),
-(6, 'Honor Pro 5', 12, 'This is a Honor Pro 5', 12.00, 'pro5.png', 25, '2024-02-12 21:37:02', '2024-02-12 21:37:02', 'Android', '5.5 inches', 'HD', '10', '8 MP', 'Fingerprint', 'Blue', '64GB'),
-(7, 'Pixel 7', 100, 'This is the new Google Pixel', 100.00, 'pixel7.png', 16, '2024-02-15 16:04:24', '2024-02-15 16:04:24', 'Android', '5.8 inches', 'Full HD', '14', '12 MP', 'Fingerprint', 'White', '256GB');
-
+(5, 'Pixel 8', 146, 'The new Pixel 8 by Google', 699.99, 'Pixel8.jpg', 5, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'Android', '6.0 inches', 'Full HD', '12', '16 MP', 'Fingerprint', 'Black', '128GB');
 
 -- --------------------------------------------------------
 
@@ -298,17 +307,7 @@ INSERT INTO `users` (`User_ID`, `Username`, `Password`, `Fore_name`, `Second_Nam
 (10, 'laura_martin', 'password107', 'Laura', 'Michelle', 'Martin', '107 Cherry St'),
 (11, 'username@customer.com', '$2y$10$v.JRfZC3fcX0wH7nZ.RlyOUqMxuk7Cq70OvrPYQtl01ILa2WRpHEG', 'user', 'name', NULL, NULL);
 
--- --------------------------------------------------------
-CREATE TABLE ContactUs (
-    ContactUs_ID INT AUTO_INCREMENT,
-    Name VARCHAR(255),
-    Email VARCHAR(255),
-    Message TEXT,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (ContactUs_ID)
-);
 --
-
 -- Indexes for dumped tables
 --
 
@@ -333,6 +332,12 @@ ALTER TABLE `basketitem`
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`Brand_ID`),
   ADD KEY `Item_ID` (`Item_ID`);
+
+--
+-- Indexes for table `contactus`
+--
+ALTER TABLE `contactus`
+  ADD PRIMARY KEY (`ContactUs_ID`);
 
 --
 -- Indexes for table `item`
@@ -361,7 +366,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`User_ID`);
 
 --
-
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -382,6 +386,12 @@ ALTER TABLE `basketitem`
 --
 ALTER TABLE `brand`
   MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `contactus`
+--
+ALTER TABLE `contactus`
+  MODIFY `ContactUs_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -408,7 +418,6 @@ ALTER TABLE `users`
   MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
-
 -- Constraints for dumped tables
 --
 
@@ -442,7 +451,6 @@ ALTER TABLE `item`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Basket_ID`) REFERENCES `basket` (`Basket_ID`);
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
