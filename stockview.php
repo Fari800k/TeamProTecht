@@ -78,7 +78,7 @@
         
         <?php
         $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-        $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, Location_ID, Created_at, Updated_at  FROM item");
+        $statement = $pdo->query("SELECT * FROM item");
            
         foreach ($statement as $row) {
             $item_id = $row['Item_ID'];
@@ -94,7 +94,7 @@
             echo "<td>".$name."</td>";
             echo "<td>".$description."</td>";
             echo "<td>".$price."</td>";
-            echo "<td><img class=product-image src='CSS/images/$phone_image'></td>";
+            echo "<td><img class='product-image' src='img/$phone_image'></td>";
             echo "<td>".$loc_id."</td>";
             echo "<td>".$last_created."</td>";
             echo "<td>".$last_updated."</td></tr>";
