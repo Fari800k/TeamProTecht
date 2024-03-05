@@ -1,56 +1,3 @@
-<?php
-// Start the session to access session variables
-session_start();
-
-// Set the login credentials
-$login_username = "john_doe";
-$login_password = "password123";
-
-// Simulate login
-$_SESSION['user_id'] = 1; // Assuming user ID 1 corresponds to "john_doe"
-
-// Establish database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "stockpage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch user details based on user ID from the session
-$user_id = $_SESSION['user_id'] ?? null;
-if ($user_id !== null) {
-    $sql = "SELECT * FROM Users WHERE User_ID = '$user_id'";
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-        // Fetch user details
-        $row = $result->fetch_assoc();
-    } else {
-        echo "No user found with this ID.";
-    }
-} else {
-    echo "User ID not found in session.";
-}
-
-// Fetch previous orders by the user
-$order_sql = "SELECT Orders.Order_ID, Item.ItemName, BasketItem.Quantity, (Item.Price * BasketItem.Quantity) AS Total_Price
-              FROM Orders
-              INNER JOIN BasketItem ON Orders.Basket_ID = BasketItem.Basket_ID
-              INNER JOIN Item ON BasketItem.Item_ID = Item.Item_ID
-              WHERE Orders.User_ID = '$user_id'";
-$order_result = $conn->query($order_sql);
-
-// Close database connection
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,18 +5,25 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User Details</title>
-    <link rel="stylesheet" type="text/css" href="CSS\styleforeditacctount.css">
+    <link rel="stylesheet" type="text/css" href="CSS/account.css">
+    <script defer src="JavaScript/script.js"></script>
 
 </head>
 <body>
 <?php
+include('connectdb.php');
+session_start();
 include "navbar.php";
+
+if(!isset($_SESSION['User_ID'])){
+    header("Location: login.php");
+} else{
 ?>
 
     <h2>Edit User Details</h2>
     <!-- Button to open the full popup menu -->
-    <div class="buttonoders">
-    <button onclick="openPopupMenu()">Previous Oders</button>
+    <div class="buttonorders">
+    <button onclick="openPopupMenu()">Previous Orders</button>
     </div>
 
     <!-- Full popup menu -->
@@ -77,58 +31,63 @@ include "navbar.php";
     <div class="popup-menu">
         <h3>Previous Orders</h3>
          <?php
-        $combined_orders = array();
-        $current_order_id = null;
-        $total_price = 0;
+        try {
+            $order_sql = "SELECT orderbaskets.Order_ID, orderbaskets.Basket_ID, brand.BrandName, item.ItemName, item.Img, basketitem.Quantity, (basketitem.Quantity * item.Price) AS Total_Price FROM basketitem
+                        JOIN ((SELECT orders.Order_ID, basket.Basket_ID, basket.User_ID FROM orders
+                                JOIN basket ON basket.Basket_ID = orders.Basket_ID
+                                WHERE basket.User_ID = :user_id) AS orderbaskets)
+                        ON orderbaskets.Basket_ID = basketitem.Basket_ID
+                        JOIN item ON item.Item_ID = basketitem.Item_ID
+                        JOIN brand ON brand.Item_ID = basketitem.Item_ID";
+            $order_stmt = $pdo->prepare($order_sql);
+            $order_stmt->bindParam(':user_id', $_SESSION['User_ID'], PDO::PARAM_INT);
+            $order_stmt->execute();
 
-        if ($order_result && $order_result->num_rows > 0) {
-            while ($order_row = $order_result->fetch_assoc()) {
-                $order_id = $order_row['Order_ID'];
-                if ($current_order_id !== $order_id) {
-                    // New order ID, display the previous order if available
-                    if ($current_order_id !== null) {
-                        echo "<p>Order ID: $current_order_id</p>";
-                        echo "<ul>";
-                        foreach ($combined_orders[$current_order_id] as $item_name => $item_details) {
-                            echo "<li>$item_name - Quantity: $item_details[Quantity], Total Price: $item_details[Total_Price]</li>";
+            $currentorderbasket = null;
+            $totalbasketprice = 0;
+
+                echo "<table border='1'>";
+                echo "<tr><th>Order ID</th><th>Basket ID</th><th>Brand Name</th><th>Item Name</th><th>Quantity</th><th>Total Price</th></tr>";
+                foreach($order_stmt as $order){
+                    $orderid = $order['Order_ID'];
+                    $basketid = $order['Basket_ID'];
+                    $brandname = $order['BrandName'];
+                    $itemname = $order['ItemName'];
+                    $itemimg = $order['Img'];
+                    $itemquantity = $order['Quantity'];
+                    $totalitemprice = $order['Total_Price'];
+
+                    //if current sub list is not current basket
+                    if($currentorderbasket !== $basketid){
+                        //if current order basket id is not first basket
+                        if($currentorderbasket !== null){
+                            echo "<tr><td colspan='5'>Subtotal:</td><td>$totalbasketprice</td></tr>";
+                            echo "</table><br>";
+                            $totalbasketprice = 0;
                         }
-                        echo "</ul>";
-                        echo "<p>Total Price: $total_price</p>";
-                        $total_price = 0;
+                        // Start a new subtable
+                        echo "<table border='1'>";
+                        echo "<tr><th>Order ID</th><th>Basket ID</th><th>Brand Name</th><th>Item Name</th><th>Quantity</th><th>Total Price</th></tr>";
+                        $currentBasketID = $basketid;
                     }
-                    $current_order_id = $order_id;
-                    $combined_orders[$order_id] = array();
+                    echo "<tr>";
+                    echo "<td>".$orderid."</td>";
+                    echo "<td>".$basketid."</td>";
+                    echo "<td>".$brandname."</td>";
+                    echo "<td>".$itemname."</td>";
+                    echo "<td>".$itemquantity."</td>";
+                    echo "<td>".$totalitemprice."</td>";
+                    echo "</tr>";   
+                    
+                    $totalbasketprice += $totalitemprice;
                 }
-
-                $item_name = $order_row['ItemName'];
-                if (!isset($combined_orders[$order_id][$item_name])) {
-                    // Initialize item details if not present
-                    $combined_orders[$order_id][$item_name] = array(
-                        'Quantity' => $order_row['Quantity'],
-                        'Total_Price' => $order_row['Total_Price']
-                    );
-                } else {
-                    // Update quantities and total prices for items with the same name
-                    $combined_orders[$order_id][$item_name]['Quantity'] += $order_row['Quantity'];
-                    $combined_orders[$order_id][$item_name]['Total_Price'] += $order_row['Total_Price'];
+                //display current basket total for last basket
+                if ($currentBasketID !== null) {
+                    echo "<tr><td colspan='5'>Basket total:</td><td>$totalbasketprice</td></tr>";
+                    echo "</table>";
                 }
-
-                // Calculate total price for the order
-                $total_price += $order_row['Total_Price'];
-            }
-
-            // Display the last order
-            if ($current_order_id !== null) {
-                echo "<p>Order ID: $current_order_id</p>";
-                echo "<ul>";
-                foreach ($combined_orders[$current_order_id] as $item_name => $item_details) {
-                    echo "<li>$item_name - Quantity: $item_details[Quantity], Total Price: $item_details[Total_Price]</li>";
-                }
-                echo "</ul>";
-                echo "<p>Total Price: $total_price</p>";
-            }
-        } else {
-            echo "<p>No previous orders found.</p>";
+        }catch(Exception $e) {
+            echo 'Message: ' .$e->getMessage();
         }
         ?>
     </div>
@@ -143,21 +102,10 @@ include "navbar.php";
         <input type="submit" value="Update">
     </form>
 
-    <script>
-        // Function to open the full popup menu
-        function openPopupMenu() {
-            document.querySelector('.popup-menu-overlay').style.display = 'block';
-            document.querySelector('.popup-menu').style.display = 'block';
-        }
-
-        // Function to close the full popup menu
-        function closePopupMenu() {
-            document.querySelector('.popup-menu-overlay').style.display = 'none';
-            document.querySelector('.popup-menu').style.display = 'none';
-        }
-    </script>
+<?php
+}
+include "footer.php";
+?>
 </body>
-    <!-- Add footer -->
-<?php include "footer.php";?>
 </html>
 
