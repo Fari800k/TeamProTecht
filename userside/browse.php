@@ -346,45 +346,12 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                     echo "<strong>" . $row['DisplaySize'] . " " . $row['DisplayResolution'] . " " . $row['CameraMegapixels'] . ", " . $row['colour'] . ", " . $row['storage'] . "</strong><br>";
                     echo "<strong>£" . $row['Price'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
-                    echo "<form method='post' action='browse.php'>";
+                    echo "<form method='post' action='addtobasket.php'>";
                     echo "<input type='hidden' name='product_id".$row['Item_ID']."' value='" . $row['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket'>Add to basket</button>";
                     echo "</form>";
                     echo "</div>";
 
-                    //Prepare add item to basket for logged in user
-
-                    if(isset($_POST['product_id'.$row['Item_ID']]) && isset($_SESSION['User_ID']) && isset($_SESSION['username'])){
-                        $itemID = $row['Item_ID'];
-                        $userID = $_SESSION['User_ID'];
-                        //if no basket exists in session, make a new one
-                        if(!isset($_SESSION['Basket_ID'])){
-                            //Add new basket
-                            $newBasketSQL = "INSERT INTO `basket` (User_ID) VALUES($userID)";
-                            $prepBasket = $pdo->prepare($newBasketSQL);
-                            $prepBasket->execute();
-
-                            //Get the most recent basket
-                            $getNewBasket = "SELECT * FROM `basket` WHERE Basket_ID = (SELECT MAX(Basket_ID) FROM `basket` WHERE User_ID = $userID)";
-                            $getUserBasket = $pdo->prepare($getNewBasket);
-                            $getUserBasket->execute();
-                            foreach($getUserBasket as $userbasketID){
-                                //Set the most recent basketID as the basketid in the current session
-                                //Will need to unset once basket turns into order
-                                $_SESSION['Basket_ID'] = $userbasketID['Basket_ID'];
-                            }
-                        }
-
-                        //Add item to itembasket
-                        $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) VALUES (".$_SESSION['Basket_ID'].", $itemID, 1)";
-
-                        $addBasketItem = $pdo->prepare($addItemSQL);
-                        $addBasketItem->execute();
-
-                        unset($_POST['product'.$row['Item_ID']]);
-                        unset($itemID);
-
-                    }
                     array_push($rowset, $row);
                 }
             }
