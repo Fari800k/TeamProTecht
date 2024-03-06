@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include "connectdb.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,17 +16,17 @@
         <h2>Your Basket</h2>
         <section id="basket">
             <?php
-            include "connectdb.php";
-            if(isset($_SESSION['User_ID'])) {
+            
+            if(isset($_SESSION['User_ID']) && isset($_SESSION['Basket_ID'])) {
                 $userID = $_SESSION['User_ID'];
 
-                $sql1 = "SELECT * FROM `basket` WHERE User_ID = :userID ORDER BY `Updated_at` DESC LIMIT 1";
-                $stmt = $pdo->prepare($sql1);
-                $stmt->execute([':userID' => $userID]);
-                $usersBasket = $stmt->fetch();
-
-                if($usersBasket) {
-                    $basketID = $usersBasket['Basket_ID'];
+                //$sql1 = "SELECT * FROM `basket` WHERE User_ID = :userID ORDER BY `Updated_at` DESC LIMIT 1";
+                //$stmt = $pdo->prepare($sql1);
+                //$stmt->execute([':userID' => $userID]);
+                //$usersBasket = $stmt->fetch();
+{
+                    //$basketID = $usersBasket['Basket_ID'];
+                    $basketID = $_SESSION['Basket_ID'];
 
                     //join tables to fetch item details for the basket
                     $sql2 = "SELECT basketitem.*, item.ItemName, item.Price FROM `basketitem` JOIN `item` ON basketitem.Item_ID = item.Item_ID WHERE Basket_ID = :basketID";
@@ -38,14 +42,13 @@
                     echo "</table>";
                     //placeholder checkout form
                     echo "<form action='checkout.php' method='post'><input type='hidden' name='Basket_ID' value='".$basketID."'/><button type='submit' name='checkout'>Checkout</button></form>";
-                } else {
-                    echo "No basket found.";
                 }
             } else {
-                echo "User not logged in.";
+                header("Location: login.php");
             }
             ?>
         </section>
+        <button>Return to shopping</button>
     </main>
     <?php include "footer.php"; ?>
 </body>
