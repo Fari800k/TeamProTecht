@@ -9,6 +9,8 @@
 </head>
 <body>
 <?php
+include('connectdb.php');
+session_start();
 include "navbar.php";
 ?>
     <h1>Contact Us</h1>
