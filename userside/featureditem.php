@@ -30,7 +30,7 @@ try {
     // Prepare the statement
     $statement = $conn->prepare($query);
     
-    // Execute the statement
+    // Execute the statement.
     $statement->execute();
     
     // Fetch all rows 
