@@ -44,11 +44,11 @@ include "connectdb.php";
                     echo "<form action='checkout.php' method='post'><input type='hidden' name='Basket_ID' value='".$basketID."'/><button type='submit' name='checkout'>Checkout</button></form>";
                 }
             } else {
-                header("Location: login.php");
+                echo "<strong> No new basket, added an item to view here </strong>";
             }
             ?>
         </section>
-        <button>Return to shopping</button>
+        <button><a href="browse.php">Return to shopping</a></button>
     </main>
     <?php include "footer.php"; ?>
 </body>
