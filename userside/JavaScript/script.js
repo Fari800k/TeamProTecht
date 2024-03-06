@@ -50,3 +50,18 @@ function closePopupMenu() {
     document.querySelector('.popup-menu-overlay').style.display = 'none';
     document.querySelector('.popup-menu').style.display = 'none';
 }
+
+function registerPopup(){
+    document.getElementById('createUserPopup').style.display='block';
+}
+
+function cancelRegisterPopup(){
+    document.getElementById('createUserPopup').style.display='none';
+}
+
+function registerButton() {
+    var popup = document.getElementById('createUserPopup');
+    if(popup !== "block"){
+        popup.style.display = "block";
+    }
+}
