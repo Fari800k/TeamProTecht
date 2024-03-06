@@ -7,7 +7,7 @@
     <script defer src="JavaScript/script.js"></script>
   </head>
 <?php
-include "connectdb.php";
+include('connectdb.php');
 session_start();
 include "navbar.php";
 ?>
@@ -58,19 +58,17 @@ include "navbar.php";
 
       </section>
     </div>
+    
+    <!-- Featured Products Section -->
+    <div class="best-sellers">
+      <h1>Best Sellers</h1>          
+    </div>
+<?php include "featureditem.php"; ?>
 
-<div class="best-sellers">
-    <h2>Best Sellers</h2>
-</div>
-
-<?php
-include 'featureditem.php';
-//featured items display
-    ?>
-     
-    </main>
 <!-- Add footer -->
 <?php include "footer.php";?>
+
+    </main>
 
   </body>
 </html>

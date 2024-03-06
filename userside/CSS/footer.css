@@ -1,10 +1,12 @@
 .footer_content {
     display: flex;
+    margin: 0;
     justify-content: space-around;
     background-color:  rgb(152, 82, 150);
     color: white;
     padding: 20px;
 }
+
 .social_icons {
     list-style-type: none;
     padding: 0;
@@ -19,7 +21,6 @@
 .social_icons li {
     margin: 15px;
 }
-
 
 .copyright {
     color: black;
