@@ -16,7 +16,7 @@ include "navbar.php";
     <h1>Search Products</h1>
     <form class="searchbox" method="post" action="browse.php">
         <input type="text" placeholder="Search" name="searchitem" value="<?php echo isset($_POST['searchitem']) ? $_POST['searchitem'] : ''; ?>">
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <button type="submit"><i class="fa fa-search"></i>GO</button>
     </form>
     <br>
     <div id="searchresult">
@@ -343,9 +343,10 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
 
                     echo "<div class='product-item'>";
                     echo "<a href='product_dt.php?Item_ID=" . $row['Item_ID'] . "'>";
-                    echo "<strong>" . $row['DisplaySize'] . " " . $row['DisplayResolution'] . " " . $row['CameraMegapixels'] . ", " . $row['colour'] . ", " . $row['storage'] . "</strong><br>";
-                    echo "<strong>£" . $row['Price'] . "</strong><br>";
+                    echo "<strong>" . $row['ItemName'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
+                    echo "<strong>£" . $row['Price'] . "</strong><br>";
+		    echo "<strong>Click To View More" . "</strong><br>";
                     echo "<form method='post' action='addtobasket.php'>";
                     echo "<input type='hidden' name='product_id".$row['Item_ID']."' value='" . $row['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket'>Add to basket</button>";
