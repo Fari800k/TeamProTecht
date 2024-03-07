@@ -28,19 +28,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Description</title>
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/product_dt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
 
-<div class="row">
-<div class= "col-md-5">
-<h1><?php echo $row["ItemName"]; ?></h1>
-<img src="CSS/images/<?php echo $row["Img"]; ?>" style="width: 25%; padding-bottom: 20px;" />
-<p><?php echo $row["ItemDesc"]; ?></p>
-</div>
-<div class="col-md-3">
-<button>Add To Basket</Button>
-</div>
-</div>
+<body>
+    <div class="row">
+        <div class= "col-md-5">
+            <h1><?php echo $row["ItemName"]; ?></h1>
+            <img src="CSS/images/<?php echo $row["Img"]; ?>" style="width: 25%; padding-bottom: 20px;" />
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <p><?php echo "Details: " . $row["ItemDesc"]; ?></p>
+        <p>Additional Information</p>
+        <p><?php echo "Price: £" . $row["Price"]?></p>
+        <p><?php echo "Operating System: " . $row["OperatingSystem"] ?></p>
+        <p><?php echo "Display size: " . $row["DisplaySize"] ?></p>
+        <p><?php echo "Camera: " . $row["CameraMegapixels"] ?></p>
+        <p><?php echo "Biometric authentication: " . $row["BiometricAuthentication"] ?></p>
+        <p><?php echo "Available colours: " . $row["colour"] ?></p>
+        <p><?php echo "Storage space: " . $row["storage"] ?></p>
+        <p><?php echo "Theoretical battery life: " . $row["BatteryLife"] . " hours" ?></p>
+        <p>
+            <?php
+            /* Get Availability status*/
+            echo "Availability: ";
+            
+            $stock = $row["Stock"]; // get number of items in stock from database
+            
+            /* 
+            * Validate availability status of specific item, i.e. if items are in stock,
+            * otherwise out of stock
+            */
+            if ($stock > 0) {
+                echo "In stock";
+            } else {
+                if ($stock < 0) {
+                    $stock = 0; // set stock to 0 - CANNOT be negative
+                    echo "Out of stock";
+                }
+            }
+            ?>
+            </p>
+            <button class="add-to-basket" >Add To Basket</button>
+        </div>
 </body>
 </html>
