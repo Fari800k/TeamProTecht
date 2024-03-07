@@ -10,8 +10,14 @@
         <li><a href="contactus.php">Contact Us</a></li>
         <?php
         // Set current page as prev_page
-        if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/login.php"){
-            $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+        if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/login.php") {
+            if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/addtobasket.php"){
+                if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/deleteitem.php"){
+                    if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/connectdb.php"){
+                        $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+                    }
+                }
+            }
         }
         //if logged in, adds account.php and logout.php links
         if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
@@ -36,10 +42,12 @@
 
                 echo "<strong>Your Basket</strong>";
                 foreach($basketviewitems as $basketviewitem){
-                    echo "<div = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'><a href='". $basketviewitem['Item_ID'] ."'>". $basketviewitem['ItemName'] ."</a>";
-                    echo "<img src='CSS/images/". $basketviewitem['Img'] . "' width='10%' height='15%'>";
-                    echo "<p>Price per phone: ".$basketviewitem['Price']."</p>";
-                    echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</div>";
+                    echo "<div class = 'basketitemcontainer' id = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'><a href='". $basketviewitem['Item_ID'] ."'>". $basketviewitem['ItemName'] ."</a>";
+                    echo "<div class = 'basketiteminfo'><img src='CSS/images/". $basketviewitem['Img'] . "' width='10%' height='15%'>";
+                    echo "<div class = 'basketitemnumbers'><p>£".$basketviewitem['Price']." per item</p>";
+                    echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</p>";
+                    echo "<form action='deleteitem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketviewitem['BasketItem_ID']."'/>";
+                    echo "<button type='submit' name='deleteItem'>Delete</button></form></div></div></div>";
                 }
             }
         ?>
@@ -48,3 +56,4 @@
         <li><a href="login.php"><i class="fa fa-user"></i></a></li>
     </ul>
 </nav>
+
