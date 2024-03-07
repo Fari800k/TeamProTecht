@@ -1,161 +1,204 @@
-h1{
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar styles */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: rgb(152, 82, 150);
+  text-align: center;
+  padding: 22px 18px;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+li a:hover {
+  background-color: rgb(227, 224, 227);
+}
+
+/* Headings styles */
+h1, h2, h3 {
   color: rgb(152, 82, 150);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
   padding: 22px 18px;
   font-size: 35px;
 }
 
-.column {
-  float: left;
-  width: 24%;
-  padding: 5px;
-  }
-  
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+h2 {
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
 }
 
-/* Style the search field */
-
-form.searchbox{
+/* Search box styles */
+form.searchbox {
   display: flex;
-  flex-flow: row wrap;
   justify-content: center;
+  margin: 20px 0;
 }
 
 form.searchbox input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
-  width: 60%;
+  width: 80%;
   background: #f1f1f1;
 }
-  
-  /* Style the submit button */
+
+/* Search button styles */
 form.searchbox button {
-  width: 10%;
-  padding: 10px;
-  background:  rgb(152, 82, 150);
+  padding: 10px 20px;
+  background: rgb(152, 82, 150);
   color: white;
   font-size: 17px;
   border: 1px solid grey;
   border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   cursor: pointer;
 }
-  
+
 form.searchbox button:hover {
-  background: rgb(152, 82, 150);
-}
-  
-  /* Clear floats */
-form.searchbox::after {
-  content: "";
-  clear: both;
-  display: table;
+  background: rgb(132, 72, 130);
 }
 
-label{
-  font: 12;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-}
 
-div#searchresult{
-  display: flex;
-}
-
-/* Filter */
-div#filter{
-  width: 20%;
-  height: 50%;
-  float: left;
+/* Filter section styles */
+div#filter {
+  width: 250px;
   margin: 5px;
-  margin-right: 10px;
-  background-color: rgb(232, 232, 232)
+  padding: 10px;
+  background-color: rgb(232, 232, 232);
+  border-radius: 5px;
 }
 
-div#filter>h3{
-  margin-left: 20px;
-}
-
-div#filter>div{
-  margin: 5px;
-}
-
-#myPrices input, #myPrices button {
+div#filter h2 {
+  font-size: 20px;
+  text-align: center;
   margin-bottom: 10px;
 }
 
-#myBrandDropdown label {
-  display: block;
+div#filter form {
+  margin-bottom: 10px;
 }
 
-/* Search results*/
-div#productlist{
-  display: flex;
-  width: 75%;
-  margin: 10px;
-  font-size: large;
-  flex-flow: row wrap;
+div#filter form h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+div#filter form select,
+div#filter form input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+div#filter form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(152, 82, 150);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+div#filter form button[type="submit"]:hover {
+  background-color: rgb(132, 72, 130);
+}
+
+/* Filter section styles */
+div#filter {
+  width: 250px;
+  margin: 5px;
+  padding: 10px;
+  background-color: rgb(232, 232, 232);
+  border-radius: 5px;
+  float: left; /* Add float left to align filters to the left */
+}
+
+/* Product list styles */
+div#productlist {
+  margin-left: 270px; /* Adjust margin to create space for filters */
+  display: flex; /* Use flexbox to align items horizontally */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+  justify-content: flex-start; /* Align items to the start of the flex container */
 }
 
 .product-item {
+  width: calc(25% - 20px); /* Adjust width for four items per row */
   margin: 10px;
-  width: 30%;
-  height: 20%;
+  padding: 10px;
+border: 2px solid #ccc;
+  border-radius: 10px; /* Add border-radius for rounded corners */
+  text-align: center;
+  background-color: #fff; /* Add a white background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
 }
 
-.product-item img{
-  max-width: 75%;
+.product-item:hover {
+  transform: translateY(-5px); /* Add a slight lift effect on hover */
 }
 
-button{
-  font: 14;
+.product-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Product item name styles */
+.product-item strong {
+  color: rgb(152, 82, 150); /* Keep the color */
+  font-weight: bold;
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  display: block; /* Ensure item names appear on separate lines */
+  margin-bottom: 10px; /* Add some spacing between item names and other elements */
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  background-color: rgb(152, 82, 150);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background-color:  rgb(152, 82, 150);;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-h2{
-  font:16;
-  text-align: center;
-  color: rgb(152, 82, 150);
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+button:hover {
+  background-color: rgb(132, 72, 130);
 }
-
-h3{
-  font:14;
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(152, 82, 150);
-}
-
-table{
-  border-collapse: collapse;
-  width: 79%;
-}
-
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #a5a5a5;
-}
-
-th{
-  font: 14;
-  color: rgb(152, 82, 150);
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-td{
-  font: 12;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-}
-  
-tr:hover {
-  background-color:rgb(244, 226, 244);
+.product-item a {
+  text-decoration: none; /* Remove underline from hyperlinks within product items */
 }
