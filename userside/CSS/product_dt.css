@@ -1,7 +1,6 @@
+/* Styling all UI components*/
 * {
     box-sizing: border-box;
-    padding: 0;
-    margin: 0;
 }
 
 body {
@@ -9,8 +8,128 @@ body {
     padding: 5px;
 }
 
-.add-to-basket {
+h1 {
+    padding: 16px;
+    text-align: center;
+}
+
+/* Float four columns side-by-side */
+.column {
+    float: left;
+    width: 33%;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px}
+
+/* Clear floats after the columns*/
+.row:after {
+    content: "";
+    clear: both;
+}
+
+/* Style the counter cards */
+.card {
+    padding: 16px;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+img.phone_image {
+    width: 75%;
+    translate: 20%;
+}
+
+p.price {
+    color: blue;
+     font-size: 36px;
+}
+
+p {
+    font-size: 16px;
+}
+
+button.add-to-basket {
     background: rgb(152, 82, 150);
-    border: none;    
-    padding: 8px;
+    color: white;
+    border: none;  
+    padding: 8px 60px;  
+    font-size: 18px;
+    border-radius: 8px;
+    transform: translate(145%, -200%);
+}
+
+button.add-to-basket:hover {
+    background: blueviolet;
+}
+
+#tickbox, #cross, #exclamation {
+    margin-right: 5px;
+}
+
+#tickbox {
+    color: rgb(2, 161, 2);
+}
+
+#cross {
+    color: red;
+}
+
+#exclamation {
+    color: orangered;
+}
+
+hr {
+    transform: translate(0%, -5000%);
+}
+
+p.stock, p.product-details {
+    transform: translateY(-250%);
+}
+
+.collapsible {
+    background-color: rgb(152, 82, 150);
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+}
+
+.active, .collapsible:hover {
+    background-color: blueviolet;
+}
+
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.content {
+    padding: 5px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    transform: translateY(-45px);
+}
+
+.collapsible {
+    transform: translateY(-100%);
 }
