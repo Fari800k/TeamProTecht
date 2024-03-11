@@ -43,8 +43,8 @@ h1 {
   }
 
 img.phone_image {
-    width: 75%;
-    translate: 20%;
+    width: 80%;
+    transform: translate(15%, -5%);
 }
 
 p.price {
@@ -90,7 +90,7 @@ hr {
     transform: translate(0%, -5000%);
 }
 
-p.stock, p.product-details {
+p.stock {
     transform: translateY(-250%);
 }
 
@@ -104,6 +104,10 @@ p.stock, p.product-details {
     text-align: left;
     outline: none;
     font-size: 16px;
+}
+
+.collapsible {
+    transform: translateY(-160%);
 }
 
 .active, .collapsible:hover {
@@ -123,13 +127,8 @@ p.stock, p.product-details {
 }
 
 .content {
-    padding: 5px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
-    transform: translateY(-45px);
-}
-
-.collapsible {
-    transform: translateY(-100%);
+    transform: translateY(-75px);
 }
