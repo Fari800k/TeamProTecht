@@ -35,8 +35,37 @@ if(isset($_POST['add_to_basket']) && isset($_SESSION['User_ID']) && isset($_SESS
         }
     }
 
-    //Add item to itembasket
-    $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) VALUES (".$_SESSION['Basket_ID'].", $itemID, 1);";
+    
+    $checkItemExist = "SELECT COUNT(*) FROM `basketitem` WHERE Basket_ID= '".$_SESSION['Basket_ID']."' AND Item_ID = $itemID";
+    $itemExist = $pdo->prepare($checkItemExist);
+    $itemExist->execute();
+    $basketitemcount = $itemExist->fetchColumn();
+
+    $addItemSQL = "";
+    //if item exists in basket
+    if($basketitemcount>0){
+        //if quantity > 1 when adding (i.e. added from product_dt.php), add quantity on top of current item basket
+        if(isset($_POST['quantity'])){
+            $addquantity = $_POST['quantity'];
+            $addItemSQL = "UPDATE `basketitem` SET `Quantity` = `Quantity`+$addquantity WHERE `Basket_ID` = '".$_SESSION['Basket_ID']."' AND `Item_ID` = $itemID";
+            echo "item exists update with quantity";
+        } else{
+            //quantity not mentioned (i.e. added from browse.php), update add 1 to quantity in currently used basket
+            $addItemSQL = "UPDATE `basketitem` SET `Quantity` = `Quantity`+1 WHERE `Basket_ID` = '".$_SESSION['Basket_ID']."' AND `Item_ID` = $itemID";
+            echo "item exists update with 1";
+        }
+    }  else {
+        //if quantity > 1 when adding (i.e. added from product_dt.php), add to current item basket with quantity
+        if(isset($_POST['quantity'])){
+            $addquantity = $_POST['quantity'];
+            $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) VALUES (".$_SESSION['Basket_ID'].", $itemID, $addquantity);";
+            echo "item doesn't exist add with quantity";
+        } else{
+            //quantity not mentioned (i.e. added from browse.php), add 1 to quantity in currently used basket
+            $addItemSQL = "INSERT INTO `basketitem` (Basket_ID, Item_ID, Quantity) VALUES (".$_SESSION['Basket_ID'].", $itemID, 1);";
+            echo "item doesn't exist add 1";
+        }
+    }
 
     $addBasketItem = $pdo->prepare($addItemSQL);
     $addBasketItem->execute();
@@ -47,6 +76,7 @@ if(isset($_POST['add_to_basket']) && isset($_SESSION['User_ID']) && isset($_SESS
     header("Location: basket.php");
     exit();
 } else{
-    echo "values not found";
+    echo "<script>alert('Adding an item requires you to login')</script>";
+    header("Location: login.php");
 }
 ?>
