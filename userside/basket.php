@@ -7,7 +7,7 @@ include "connectdb.php";
 <head>
     <meta charset="UTF-8"/>
     <title>Teamprotecht</title>
-    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/basket.css" />
     <script defer src="JavaScript/script.js"></script>
 </head>
 <body>
