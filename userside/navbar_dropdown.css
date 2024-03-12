@@ -1,0 +1,387 @@
+User
+nav{
+  margin: 0px;
+}
+
+.nav_list{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  list-style-type: none;
+  padding:0;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+  top: 0%;
+  margin-top: 0px;
+  height: 65px;
+  width: 100%;
+}
+
+.nav_list li{
+  height: 65px;
+  max-height: 100%;
+}
+
+.nav_list li a, .myaccount a, .accountbutton a{
+  display: block;
+  color: rgb(152, 82, 150);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.nav_list>li a:hover, .dropdownaccount:hover .myaccount{
+  background-color: rgb(227, 224, 227);
+}
+
+.dropdownaccount {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+.myaccount {
+  display: none;
+  width: 20%;
+  height: 40%;
+  position: absolute;
+  
+  
+  border-width: 2px;
+  
+  z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+/*border-style: solid;
+background-color: #f1f1f1;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+*/
+
+.myaccount a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  
+  
+}
+
+/*.myaccount li {
+  float: none;
+  color: black;
+  display: block ;
+  text-decoration: none;
+  padding: 2px 6px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+*/
+
+#accountcontainer:hover .myaccount {
+  display: block;
+}
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0%;
+    width: 100%;
+  }  
+
+li{
+    float: left;
+  }
+
+li a{
+    display: block;
+    color: rgb(152, 82, 150);
+    text-align: center;
+    padding: 22px 18px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+li a:hover{
+    background-color: rgb(227, 224, 227);
+}
+
+h1{
+    color: rgb(152, 82, 150);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2px 18px;
+    font-size: 35px;
+}
+
+.column {
+    float: left;
+    width: 24%;
+    padding: 5px;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Style the search field */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  
+  /* Style the submit button */
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background:  rgb(152, 82, 150);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: rgb(152, 82, 150);
+  }
+  
+
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  label{
+    font: 12;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  filterbox{
+    width: 20%;
+    float: left;
+    margin-left: 20 px;
+    margin-top: 10px;
+    background-color: rgb(232, 232, 232)
+  }
+
+  button{
+    font: 14;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:  rgb(152, 82, 150);;
+  }
+
+  button2{
+    font-size: larger;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:  rgb(152, 82, 150);
+    border-radius: 10px;
+    width: 50%;
+    padding: 15px 32px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  h2{
+    font:16;
+    text-align: center;
+    color: rgb(152, 82, 150);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+
+  h3{
+    font:14;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(152, 82, 150);
+  }
+
+  table{
+    border-collapse: collapse;
+    width: 79%;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #a5a5a5;
+  }
+
+  th{
+    font: 14;
+    color: rgb(152, 82, 150);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  td{
+    font: 12;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  tr:hover {background-color:rgb(244, 226, 244);}
+
+  p{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-align: left;
+    font-weight: lighter;
+    padding: 0px 18px;
+  }
+
+  h5 {
+    font-size: 27px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(152, 82, 150);
+    text-align: left;
+    font-weight: bold;
+    padding: 0px 18px;
+    margin-bottom: 5px; /* Adjust the margin-bottom as needed */
+  }
+
+ li{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-align: left;
+    font-weight: bold;
+    padding: 0px 18px;
+ }
+
+ .container {
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+
+  .image {
+    flex-basis: 40%
+  }
+  
+  .text {
+    font-size: 20px;
+    padding-left: 20px;
+  }
+
+  vision{
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background-color: rgb(224, 224, 224);
+    
+  }
+
+values{
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+  background-color: rgb(224, 224, 224);
+  line-height: 1.5;
+  margin-bottom: 30px;
+  
+}
+
+button_container{
+  width: 70%;
+  margin-top: 10px;
+  background-color: rgb(224, 224, 224);
+  line-height: 1.5;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  margin: auto;
+  
+}
+
+
+
+values p {
+  margin-top: 0;
+  margin-bottom: 1px; 
+  font-size: 16px;
+  padding: 0px 18px;
+  margin-bottom: 5px; 
+}
+
+.image img {
+ width: auto;
+  
+  max-height: 350px; 
+}
+
+values .container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+values .text {
+  margin-right: auto;
+}
+
+values p.environment strong,
+values p.community strong,
+values p.positivity strong {
+    font-weight: bold; 
+}
+
+reviews{
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  background-color: rgb(224, 224, 224);
+  
+}
