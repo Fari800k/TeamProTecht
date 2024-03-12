@@ -29,6 +29,7 @@
     <title><?php echo $row["ItemName"]?></title>
     <link rel="stylesheet" href="CSS/product_dt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="JavaScript/script.js"></script>
 </head>
 
 <body>
@@ -102,22 +103,5 @@
                     }
                     ?>
     </div>
-
-    <script>
-        /* DO NOT REMOVE - controls collapsible elements. If moved to js file, it won't work */
-        /* Iterate through collapsible elements */
-        var coll = document.getElementsByClassName("collapsible");
-        for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight){
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
-    </script>
 </body>
 </html>
