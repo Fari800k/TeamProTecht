@@ -63,7 +63,7 @@
                         echo "<i id='cross' class='fa fa-times'></i>" . "<strong>Out of stock</strong>";
                     } else if ($stock == 1) {
                         echo "<i id='warning' class='fa fa-exclamation'></i>" . "<strong>We have very few left! Hurry before it runs out!</strong>";
-                    } else if ($stock >= 2 and $stock <= 15) {
+                    } else if ($stock >= 2 and $stock <= 10) {
                         echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>This is our last product, if you want it! Hurry before someone else buys it!</strong<";
                     } else {
                         echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>In stock</strong>";
