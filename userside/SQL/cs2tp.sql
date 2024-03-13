@@ -329,6 +329,21 @@ CREATE TABLE `reviews` (
   CONSTRAINT `chk_rating_range` CHECK (`Rating` >= 0 AND `Rating` <= 5)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`Review_ID`, `User_ID`, `Item_ID`, `Rating`, `Description`)
+VALUES
+(1, 1, 1, 1, 'I give this product 1 star'),
+(2, 2, 3, 3, 'I give this product 3 star'),
+(3, 3, 2, 2, 'I give this product 2 star'),
+(4, 4, 4, 2, 'I give this product 2 star'),
+(5, 5, 5, 4, 'I give this product 4 star'),
+(6, 6, 6, 5, 'I give this product 5 star'),
+(7, 7, 7, 5, 'I give this product 5 star'),
+(8, 8, 1, 5, 'I give this product 5 star');
+
 -- --------------------------------------------------------
 
 --
