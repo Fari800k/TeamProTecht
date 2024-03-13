@@ -117,3 +117,26 @@ input[type="submit"]:hover {
 .buttonorders button:hover {
     background-color: #005f6b;
 }
+
+a{
+    font-weight: bold;
+    color: purple;
+}
+
+.column{
+    display: flex;
+}
+
+.prev img{
+    width: 150px;
+    height: 150px;
+    padding-bottom: 30px;
+}
+
+.phone{
+    display: flex;
+}
+
+.phone_name{
+    padding-left: 30px;
+}
