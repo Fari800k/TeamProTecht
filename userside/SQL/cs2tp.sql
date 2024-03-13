@@ -100,7 +100,7 @@ INSERT INTO `location` (`Location_ID`, `Shelf`, `Row`, `Updated_at`, `Created_at
 CREATE TABLE `item` (
   `Item_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemName` varchar(255) NOT NULL,
-  `Quantity` int(11) DEFAULT NULL,
+  `Stock` int(11) DEFAULT NULL,
   `ItemDesc` text NOT NULL,
   `Price` decimal(7,2) NOT NULL,
   `Img` text NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`Item_ID`, `ItemName`, `Quantity`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `Updated_at`, `Created_at`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `Colour`, `Storage`) 
+INSERT INTO `item` (`Item_ID`, `ItemName`, `Stock`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `Updated_at`, `Created_at`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `Colour`, `Storage`) 
 VALUES 
 (1, 'iPhone 15', 146, 'The new iPhone 15 from Apple', 999.99, 'iPhone15.jpg', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Full HD', '12', '12 MP', 'Face ID', 'Space Gray', '128GB'),
 (2, 'iPhone 15+', 146, 'The new iPhone 15+ from Apple', 1199.99, 'iPhone15+.jpg', 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Silver', '256GB'),
