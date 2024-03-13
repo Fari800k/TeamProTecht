@@ -43,18 +43,19 @@ h1 {
 
 img.phone_image {
     width: 75%;
+    transform: translateX(15%);
 }
 
 p.price {
     color: blue;
-     font-size: 36px;
+    font-size: 36px;
 }
 
 p {
     font-size: 16px;
 }
 
-#tickbox, #cross, #exclamation {
+#tickbox, #cross, #warning, #warning1 {
     margin-right: 5px;
 }
 
@@ -66,8 +67,12 @@ p {
     color: red;
 }
 
-#exclamation {
+#warning {
     color: orangered;
+}
+
+#warning1 {
+    color: rgba(255, 0, 0, 0.644);
 }
 
 .collapsible {
@@ -102,7 +107,7 @@ p {
     padding: 5px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.1s ease-out;
 }
 
 /* Add to basket container specific features*/

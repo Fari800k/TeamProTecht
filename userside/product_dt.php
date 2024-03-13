@@ -26,6 +26,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the item -->
     <title><?php echo $row["ItemName"]?></title>
     <link rel="stylesheet" href="CSS/product_dt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -50,44 +51,49 @@
                 <p class="price"><b><?php echo "£" . $row["Price"]?></b></p>
                 <hr>
                 <!-- TASK FOR DANIEL: MAKE FORM FOR ADD TO BASKET -->
-                <p class="stock">
+                <p>
                     <?php
-                    /* Get Availability status*/
+                    /* Get Availability status */
                     $stock = $row["Stock"]; // get number of items in stock from database
                     
                     /* 
-                    * Validate availability status for specific item,
-                    * i.e. in stock (plenty available), limited (very few left) 
-                    * or out of stock
-                    */
+                     * Validate availability status for specific item
+                     */
                     if ($stock == 0) {
                         echo "<i id='cross' class='fa fa-times'></i>" . "<strong>Out of stock</strong>";
+                    } else if ($stock == 1) {
+                        echo "<i id='warning' class='fa fa-exclamation'></i>" . "<strong>We have very few left! Hurry before it runs out!</strong>";
+                    } else if ($stock >= 2 and $stock <= 15) {
+                        echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>This is our last product, if you want it! Hurry before someone else buys it!</strong<";
                     } else {
-                        if ($stock >= 1 and $stock <= 15) {
-                            echo "<i id='exclamation' class='fa fa-exclamation'></i>" . "<strong>Hurry before it is sold out!</strong>";
-                        } else {
-                            echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>In stock</strong>";
-                        }
+                        echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>In stock</strong>";
+                    }
                     ?>
                 </p>
                 <hr>
-                <p class="product-details"><?php echo "Product details: " . $row["ItemDesc"]?></p>
+                
+                <button class="collapsible"><b>Description</b></button>
+                <div class="content">
+                    <p><?php echo $row["ItemDesc"]?></p>
+                </div>
+
                 <button class="collapsible"><b>Why buy this phone?</b></button>
                 <div class="content">
                     <p><?php echo "High quality " . $row["CameraMegapixels"] . " camera"?></p>
                     <p><?php echo "Long lasting battery life up to " . $row["BatteryLife"] . " hours"?></p>
                     <p><?php echo "Extremely spacious " .$row["DisplaySize"] . " display for real-screen estate with high screen-to-body ratio"?></p>
+
                 </div>
                 
-                <button class="collapsible"><b>Information about the phone</b></button>
+                <button class="collapsible"><b>Phone Specs</b></button>
                 <div class="content">
-                    <p><?php echo "Operating System: " . $row["OperatingSystem"]?></p>
-                    <p><?php echo "Display size: " . $row["DisplaySize"]?></p>
-                    <p><?php echo "Camera: " . $row["CameraMegapixels"]?></p>
-                    <p><?php echo "Biometric authentication: " . $row["BiometricAuthentication"]?></p>
-                    <p><?php echo "Available colours: " . $row["colour"]?></p>
-                    <p><?php echo "Storage space: " . $row["storage"]?></p>
-                    <p><?php echo "Theoretical battery life: " . $row["BatteryLife"] . " hours"?></p>
+                    <p><?php echo "<b>Operating System:</b> " . $row["OperatingSystem"]?></p>
+                    <p><?php echo "<b>Display size:</b> " . $row["DisplaySize"]?></p>
+                    <p><?php echo "<b>Camera:</b> " . $row["CameraMegapixels"]?></p>
+                    <p><?php echo "<b>Biometric authentication</b>: " . $row["BiometricAuthentication"]?></p>
+                    <p><?php echo "<b>Available colours:</b> " . $row["colour"]?></p>
+                    <p><?php echo "<b>Storage space:</b> " . $row["storage"]?></p>
+                    <p><?php echo "<b>Theoretical battery life:</b> " . $row["BatteryLife"] . " hours"?></p>
                 </div>
             </div>
         </div>
@@ -100,7 +106,6 @@
                     echo "<input type='hidden' name = 'product_id".$_GET['Item_ID']."' value='" . $_GET['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket' class='add-to-basket'><b>Add to Basket</b></button>";
                     echo "</form></div>";
-                    }
                     ?>
     </div>
 </body>
