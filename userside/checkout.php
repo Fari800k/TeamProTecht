@@ -1,69 +1,156 @@
 <?php
-session_start();
+include "navbar.php";
 
-try {
-    $db = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $basketID = $_POST['basketID'];
-        $address = trim($_POST['address']);
-        $cardNumber = $_POST['cardNumber'];
-        $expiryDate = $_POST['expiryDate'];
-        $cvv = $_POST['cvv'];
-
-        // Check for user session
-        if (!isset($_SESSION['userID'])) {
-            throw new Exception("User is not logged in.");
-        }
-        $userID = $_SESSION['userID'];
-
-        // Validate address
-        if (empty($address)) {
-            throw new Exception("Address field is empty. Please enter a delivery address.");
-        }
-
-        // Validate credit card number
-        if (!preg_match('/^\d{16}$/', $cardNumber)) {
-            throw new Exception("Invalid credit card number. Please enter a 16-digit number.");
-        }
-
-        // Validate expiry date
-        if (!preg_match('/^(0[1-9]|1[0-2])\/[0-9]{2}$/', $expiryDate)) {
-            throw new Exception("Invalid expiry date. Please enter a date in MM/YY format.");
-        }
-
-        // Validate CVV
-        if (!preg_match('/^\d{3}$/', $cvv)) {
-            throw new Exception("Invalid CVV. Please enter a 3-digit number.");
-        }
-
-        // Check if the basket is not empty
-        $checkBasket = "SELECT COUNT(*) FROM BasketItem WHERE Basket_ID = :basketID";
-        $stmt = $db->prepare($checkBasket);
-        $stmt->bindParam(':basketID', $basketID, PDO::PARAM_INT);
-        $stmt->execute();
-
-        if ($stmt->fetchColumn() == 0) {
-            throw new Exception("The basket is empty. Please add items to your basket before checking out.");
-        }
-
-        // Insert the order
-        $insertOrder = 'INSERT INTO Orders (Basket_ID, User_ID, Address_Order, Order_Status) VALUES (:basket, :user, :address, "Pending")';
-        $statement = $db->prepare($insertOrder);
-        //Basket and userid need to be fetched from session
-        $statement->bindParam(':basket', $basketID, PDO::PARAM_INT);
-        $statement->bindParam(':user', $userID, PDO::PARAM_INT);
-
-        $statement->bindParam(':address', $address, PDO::PARAM_STR);
-        $statement->execute();
-
-        // Redirect to home.php
-        header('Location: homepage.php');
-        exit();
-    }
-} catch (PDOException $e) {
-    echo "Database error: " . $e->getMessage();
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+if (!isset($_SESSION['User_ID'])) {
+    header("Location: login.php");
+    exit();
 }
+
+include "connectdb.php";
+
+//retrieve basket
+$userID = $_SESSION['User_ID'];
+$sql1 = "SELECT * FROM `basket` WHERE User_ID = :userID ORDER BY `Updated_at` DESC LIMIT 1";
+$stmt = $pdo->prepare($sql1);
+$stmt->execute([':userID' => $userID]);
+$usersBasket = $stmt->fetch();
+
+if ($usersBasket) {
+    $basketID = $usersBasket['Basket_ID'];
+} else {
+    //no basket
+    header("Location: basket.php");
+    exit();
+}
+
+//user details
+$sql2 = "SELECT * FROM `users` WHERE User_ID = :userID";
+$stmt = $pdo->prepare($sql2);
+$stmt->execute([':userID' => $userID]);
+$user = $stmt->fetch();
+
+//place order submission
+if (isset($_POST['placeOrder'])) {
+    $address = $_POST['address'];
+
+    //create order
+    $orderStatus = "Pending";
+    $sql3 = "INSERT INTO `orders` (`Basket_ID`, `Address_Order`, `Order_Status`) VALUES (:basketID, :address, :orderStatus)";
+    $stmt = $pdo->prepare($sql3);
+    $stmt->execute([
+        ':basketID' => $basketID,
+        ':address' => $address,
+        ':orderStatus' => $orderStatus
+    ]);
+
+    $sql = "INSERT INTO `basket` (User_ID) VALUES (:userID)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':userID' => $userID]);
+    //generate new basket in session
+    $newBasketID = $pdo->lastInsertId();
+    $_SESSION['Basket_ID'] = $newBasketID;
+    header("Location: homepage.php?ordersuccess=true");
+    exit();
+}
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="CSS/checkout.css">
+    <script>
+        function validateCardNumber(input) {
+            input.value = input.value.replace(/\D/g, '');
+            let formattedValue = input.value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            input.value = formattedValue;
+        }
+
+        function validateExpiryDate(input) {
+            input.value = input.value.replace(/\D/g, '');
+            if (input.value.length > 2) {
+                let formattedValue = input.value.substring(0, 2) + '/' + input.value.substring(2);
+                input.value = formattedValue;
+            }
+        }
+
+        function validateCVV(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+
+        function validateForm() {
+            let cardNumber = document.getElementById("cardNumber").value;
+            let expiryDate = document.getElementById("expiryDate").value;
+            let cvv = document.getElementById("cvv").value;
+            let isValid = true;
+
+            if (cardNumber.length !== 19) {
+                alert("Invalid card number format. Please enter a valid 16-digit card number.");
+                isValid = false;
+            }
+
+            if (expiryDate.length !== 5 || isNaN(expiryDate.replace('/', ''))) {
+                alert("Invalid expiry date format. Please enter the expiry date in MM/YY format.");
+                isValid = false;
+            }
+
+            if (cvv.length !== 3 || isNaN(cvv)) {
+                alert("Invalid CVV format. Please enter a valid 3-digit CVV.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <h2>Checkout</h2>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validateForm()">
+            
+        <div class="address-section">
+            <h3>Delivery Address</h3>
+            <div>
+                <input type="radio" id="savedAddress" name="address" value="<?php echo $user['Address_User']; ?>" checked>
+                <label for="savedAddress">Use saved address</label>
+                <p><?php echo $user['Address_User']; ?></p>
+            </div>
+            <div>
+                <input type="radio" id="newAddress" name="address" value="">
+                <label for="newAddress">Enter a new address</label>
+                <input type="text" name="newAddress" placeholder="New Address" class="address-field">
+            </div>
+
+            <h3>Billing Address</h3>
+            <div>
+                <input type="radio" id="sameAddress" name="billingAddress" value="<?php echo $user['Address_User']; ?>" checked>
+                <label for="sameAddress">Same as delivery address</label>
+            </div>
+            <div>
+                <input type="radio" id="differentAddress" name="billingAddress" value="">
+                <label for="differentAddress">Enter a different address</label>
+                <input type="text" name="billingAddress" placeholder="Billing Address" class="address-field">
+            </div>
+    </div>
+
+            <h3 class="card-details" >Payment</h3>
+            <div>
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" oninput="validateCardNumber(this)" required>
+            </div>
+            <div>
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" oninput="validateExpiryDate(this)" required>
+            </div>
+            <div>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="CVV" oninput="validateCVV(this)" required>
+            </div>
+
+            <button type="submit" name="placeOrder">Place Order</button>
+        </form>
+    </main>
+    <?php include "footer.php"; ?>
+</body>
+</html>

@@ -4,8 +4,10 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 5px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
 }
 
 h1 {
@@ -16,11 +18,8 @@ h1 {
 /* Float four columns side-by-side */
 .column {
     float: left;
-    width: 33%;
+    width: 30%;
 }
-
-/* Remove extra left and right margins, due to padding */
-.row {margin: 0 -5px}
 
 /* Clear floats after the columns*/
 .row:after {
@@ -44,33 +43,19 @@ h1 {
 
 img.phone_image {
     width: 75%;
-    translate: 20%;
+    transform: translate(15%, 8%);
 }
 
 p.price {
     color: blue;
-     font-size: 36px;
+    font-size: 36px;
 }
 
 p {
     font-size: 16px;
 }
 
-button.add-to-basket {
-    background: rgb(152, 82, 150);
-    color: white;
-    border: none;  
-    padding: 8px 60px;  
-    font-size: 18px;
-    border-radius: 8px;
-    transform: translate(145%, -200%);
-}
-
-button.add-to-basket:hover {
-    background: blueviolet;
-}
-
-#tickbox, #cross, #exclamation {
+#tickbox, #cross, #warning, #warning1 {
     margin-right: 5px;
 }
 
@@ -82,16 +67,12 @@ button.add-to-basket:hover {
     color: red;
 }
 
-#exclamation {
+#warning {
     color: orangered;
 }
 
-hr {
-    transform: translate(0%, -5000%);
-}
-
-p.stock, p.product-details {
-    transform: translateY(-250%);
+#warning1 {
+    color: rgba(255, 0, 0, 0.644);
 }
 
 .collapsible {
@@ -126,10 +107,51 @@ p.stock, p.product-details {
     padding: 5px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    transform: translateY(-45px);
+    transition: max-height 0.1s ease-out;
 }
 
-.collapsible {
-    transform: translateY(-100%);
+/* Add to basket container specific features*/
+#addtobasketdiv{
+    background-color: rgb(232, 232, 232);
+    padding: 10px;
+    margin-left: 5%;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1px;
+    transform: translateY(15%);
+}
+
+#addtobasketdiv form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+}
+
+#addtobasketdiv #quantityform{
+    width: 20%;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#addtobasketdiv #quantity{
+    display: block;
+    padding: 20px;
+}
+
+button.add-to-basket {
+    background: rgb(152, 82, 150);
+    color: white;
+    border: none;   
+    font-size: 18px;
+    border-radius: 8px;
+    width: 40%;
+    padding: 20px 4px;
+}
+
+button.add-to-basket:hover {
+    background: blueviolet;
 }

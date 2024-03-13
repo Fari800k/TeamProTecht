@@ -68,7 +68,20 @@ include "navbar.php";
 <!-- Add footer -->
 <?php include "footer.php";?>
 
-    </main>
+</main>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        function getQueryParam(param) {
+          var queryString = window.location.search;
+          var urlParams = new URLSearchParams(queryString);
+          return urlParams.get(param);
+        }
 
+        //check order success
+        if (getQueryParam('ordersuccess') === 'true') {
+          alert("Order Placed Successfully");
+        }
+      });
+    </script>
   </body>
 </html>

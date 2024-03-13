@@ -14,7 +14,9 @@
             if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/addtobasket.php"){
                 if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/deleteitem.php"){
                     if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/connectdb.php"){
-                        $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+                        if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/changeaccinfo.php"){
+                            $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+                        }
                     }
                 }
             }
@@ -42,8 +44,8 @@
 
                 echo "<strong>Your Basket</strong>";
                 foreach($basketviewitems as $basketviewitem){
-                    echo "<div class = 'basketitemcontainer' id = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'><a href='". $basketviewitem['Item_ID'] ."'>". $basketviewitem['ItemName'] ."</a>";
-                    echo "<div class = 'basketiteminfo'><img src='CSS/images/". $basketviewitem['Img'] . "' width='10%' height='15%'>";
+                    echo "<div class = 'basketitemcontainer' id = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'>";
+                    echo "<div class = 'basketiteminfo'><a href='product_dt.php?Item_ID=" . $basketviewitem['Item_ID'] . "'><img src='CSS/images/". $basketviewitem['Img'] . "'></a>";
                     echo "<div class = 'basketitemnumbers'><p>£".$basketviewitem['Price']." per item</p>";
                     echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</p>";
                     echo "<form action='deleteitem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketviewitem['BasketItem_ID']."'/>";
@@ -53,7 +55,13 @@
         ?>
         </div>
         </div>
-        <li><a href="login.php"><i class="fa fa-user"></i></a></li>
+        <div id="accountcontainer">
+            <li class="accountbutton" id="buttonaccount"><a href=""><i class="fa fa-user"></i></a></li>
+            <div class="myaccount" id="myaccountdropdown">
+                <li class="accountcustomer" id="customer"><a href="#">Customer</a></li>
+                <li class="accountemployee" id="employee"><a href="#">Employee</a></li>
+            </div>
+        </div>              
     </ul>
 </nav>
 

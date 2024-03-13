@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: rgb(152, 82, 150);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 22px 18px;
+    font-size: 35px;
+}
+
+h2 {
+    font-size: 16px;
+    text-align: center;
+    color: rgb(152, 82, 150);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(152, 82, 150);
+}
+
+label {
+    font-size: 12px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    font-size: 14px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(152, 82, 150);
+}
+
+input[type="text"],
+input[type="radio"] + label {
+    font-size: 12px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.address-field {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 4.5rem;
+    white-space: pre-wrap;
+}
+
+.card-details input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="radio"] + label {
+    margin-left: 0.5rem;
+}
+
+.address-section {
+    display: flex;
+    gap: 1rem;
+}
+
+.address-section > div {
+    flex: 1;
+}
+
+@media screen and (max-width: 400px) {
+    .address-section {
+        flex-direction: column;
+    }
+
+    .address-field {
+        min-height: 3rem;
+    }
+}

@@ -7,7 +7,7 @@ include "connectdb.php";
 <head>
     <meta charset="UTF-8"/>
     <title>Teamprotecht</title>
-    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/basket.css" />
     <script defer src="JavaScript/script.js"></script>
 </head>
 <body>
@@ -35,7 +35,7 @@ include "connectdb.php";
 
                     echo "<table><tr><th>Item name</th><th>Quantity</th><th>Price</th><th>Action</th></tr>";
                     while($basketItem = $stmt->fetch()) {
-                        echo "<tr><td>".$basketItem['ItemName']."</td><td>".$basketItem['Quantity']."</td><td>".($basketItem['Price'] * $basketItem['Quantity'])."</td>";
+                        echo "<tr><td><a href='product_dt.php?Item_ID=" . $basketItem['Item_ID'] . "'>".$basketItem['ItemName']."</a></td><td>".$basketItem['Quantity']."</td><td>".($basketItem['Price'] * $basketItem['Quantity'])."</td>";
                         //delete item form
                         echo "<td><form action='deleteItem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketItem['BasketItem_ID']."'/><button type='submit' name='deleteItem'>Delete</button></form></td></tr>";
                     }
