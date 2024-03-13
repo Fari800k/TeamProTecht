@@ -23,7 +23,7 @@
         }
         //if logged in, adds account.php and logout.php links
         if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
-            echo "<li><a href='account.php'>Welcome ".$_SESSION['username']."</a></li>";
+            echo "<li><a href='accountpage.php'>Welcome ".$_SESSION['username']."</a></li>";
             echo "<li><a href='logout.php'>Logout</a></li>";
         } 
         

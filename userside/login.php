@@ -2,7 +2,7 @@
 include('connectdb.php');
 session_start();
 if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
-    header("Location: account.php");
+    header("Location: accountpage.php");
 } else{
 ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
                     $prevpage = $_SESSION['prev_page'];
                     header("Location: $prevpage");
                 } else{
-                    header("Location: account.php");
+                    header("Location: accountpage.php");
                 }
             } else {
                 if($passwordSubmit === $user['Password']) {
@@ -59,7 +59,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
                         $prevpage = $_SESSION['prev_page'];
                         header("Location: $prevpage");
                     } else{
-                        header("Location: account.php");
+                        header("Location: accountpage.php");
                     }
                 } else {
                     $error = "Incorrect password. Please try again.";
