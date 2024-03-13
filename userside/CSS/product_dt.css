@@ -43,7 +43,7 @@ h1 {
 
 img.phone_image {
     width: 75%;
-    transform: translateX(15%);
+    transform: translate(15%, 8%);
 }
 
 p.price {
@@ -118,6 +118,7 @@ p {
     border-style: solid;
     border-radius: 8px;
     border-width: 1px;
+    transform: translateY(15%);
 }
 
 #addtobasketdiv form{
