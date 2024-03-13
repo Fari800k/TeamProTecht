@@ -25,7 +25,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     if(isset($success_message)){
         echo "<p style='color:green;'>$success_message</p>";
     }?>
-    <form class="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form class="login" method="post" action="login.php">
         <input type="text" placeholder="Username" name="username" required>
         <input type="password" placeholder="Password" name="password" required>
         <button type="submit" name="loginbtn">Login</button>
@@ -73,61 +73,17 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     <button id="signupbtn" onclick="registerButton()">Sign up</button>
 
     <div id="createUserPopup" class="popup">
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form method="post" action="registeruser.php">
             <h2>Create User</h2>
+            <input type="text" placeholder="Username" name="new_username" required><br<><br>
+            <input type="password" placeholder="Password" name="new_password" required><br<><br>
             <input type="text" placeholder="First Name" name="forename" required><br<><br>
             <input type="text" placeholder="Second Name" name="secondname" required><br<><br>
             <input type="text" placeholder="Last Name" name="lastname" required><br<><br>
             <input type="text" placeholder="Address" name="address" required>
-            <input type="text" placeholder="Username" name="new_username" required><br<><br>
-            <input type="password" placeholder="Password" name="new_password" required><br<><br>
             <button type="submit" name="registerbtn">Create</button>
             <button type="button" onclick="cancelRegisterPopup()">Cancel</button>
         </form>
-
-        <?php
-        if(isset($_POST['registerbtn'])) {
-            $forename = $_POST['forename'];
-            $secondname = $_POST['secondname'];
-            $address = $_POST['address'];
-            $new_username = $_POST['new_username'];
-            $new_password = $_POST['new_password'];
-            $lastname = $_POST['lastname'];
-            $new_password = $_POST['new_password'];
-    
-            if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $new_password)) {
-                $error = "Password must be at least 8 characters long and contain at least one number and one special character.";
-            } else {
-                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-
-                $check_query = "SELECT * FROM `users` WHERE Username = :username";
-                $check_stmt = $pdo->prepare($check_query);
-                $check_stmt->bindParam(':username', $new_username);
-                $check_stmt->execute();
-                $existing_user = $check_stmt->fetch(PDO::FETCH_ASSOC);
-
-                if(!$existing_user) {
-                    $create_query = "INSERT INTO `users` (Fore_name, Second_Name, Last_Name, Address_User, Username, Password) VALUES (:forename, :secondname, :lastname, :address, :username, :password)";
-                    $create_stmt = $pdo->prepare($create_query);
-                    $create_stmt->bindParam(':forename', $forename);
-                    $create_stmt->bindParam(':secondname', $secondname);
-                    $create_stmt->bindParam(':lastname', $lastname);
-                    $create_stmt->bindParam(':address', $address);
-                    $create_stmt->bindParam(':username', $new_username);
-                    $create_stmt->bindParam(':password', $hashed_password);
-
-                    if($create_stmt->execute()) {
-                        $success_message = "User created successfully!";
-                    } else {
-                        $error = "Error creating user. Please try again.";
-                    }
-                } else {
-                    $error = "Username already exists. Please choose a different username.";
-                }
-            }
-        }
-        ?>
-
     </div>
 </body>
 <?php 

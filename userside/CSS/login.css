@@ -112,6 +112,7 @@ form input[type="submit"]:hover {
     position: fixed;
     left: 50%;
     top: 50%;
+    height: 60%;
     transform: translate(-50%, -50%);
     background-color: #f9f9f9;
     padding: 20px;
