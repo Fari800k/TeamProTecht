@@ -1,4 +1,6 @@
 <?php
+include "connectdb.php";
+session_start();
 include "navbar.php";
 
 if (!isset($_SESSION['User_ID'])) {
@@ -6,7 +8,7 @@ if (!isset($_SESSION['User_ID'])) {
     exit();
 }
 
-include "connectdb.php";
+
 
 //retrieve basket
 $userID = $_SESSION['User_ID'];
