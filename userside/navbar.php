@@ -14,7 +14,9 @@
             if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/addtobasket.php"){
                 if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/deleteitem.php"){
                     if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/connectdb.php"){
-                        $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+                        if($_SERVER['REQUEST_URI'] !== "/TeamProTecht/userside/changeaccinfo.php"){
+                            $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+                        }
                     }
                 }
             }
@@ -53,7 +55,13 @@
         ?>
         </div>
         </div>
-        <li><a href="login.php"><i class="fa fa-user"></i></a></li>
+        <div id="accountcontainer">
+            <li class="accountbutton" id="buttonaccount"><a href=""><i class="fa fa-user"></i></a></li>
+            <div class="myaccount" id="myaccountdropdown">
+                <li class="accountcustomer" id="customer"><a href="#">Customer</a></li>
+                <li class="accountemployee" id="employee"><a href="#">Employee</a></li>
+            </div>
+        </div>              
     </ul>
 </nav>
 
