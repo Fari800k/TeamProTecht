@@ -183,6 +183,15 @@ include "navbar.php";
                 $conditions[] = "(Item.ItemName LIKE '%$search%' OR Brand.BrandName LIKE '%$search%')";
             }
 
+if(isset($_POST['minprice']) && isset($_POST['maxprice'])) {
+    $minprice = $_POST['minprice'];
+    $maxprice = $_POST['maxprice'];
+    // Add condition to the array
+    $conditions[] = "Item.Price BETWEEN ? AND ?";
+    // Add minimum and maximum prices to the parameters array
+    $parameters[] = $minprice;
+    $parameters[] = $maxprice;
+}
             // Check if brand has been selected
             if(isset($_POST['selected_brand']) && !empty($_POST['selected_brand'])) {
                 $brand = $_POST['selected_brand'];
@@ -228,7 +237,7 @@ if(isset($_POST['battery_size']) && !empty($_POST['battery_size'])) {
     $_POST['battery_size'] = $_SESSION['battery_size'];
 }
 
-// Repeat similar steps for other filters (biometrics, color, storage_size, and display_size_range)
+
 
 // Check if biometrics filter has been applied
 if(isset($_POST['biometrics']) && !empty($_POST['biometrics'])) {
@@ -244,7 +253,7 @@ if(isset($_POST['biometrics']) && !empty($_POST['biometrics'])) {
     $_POST['biometrics'] = $_SESSION['biometrics'];
 }
 
-// Repeat similar steps for other filters (color, storage_size, and display_size_range)
+
 
 // Check if color filter has been applied
 if(isset($_POST['color']) && !empty($_POST['color'])) {
