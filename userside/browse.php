@@ -25,10 +25,10 @@ include "navbar.php";
             <h2>Filters</h2>
             <form method="post" action="browse.php">
                 <h3>Prices</h3>
-                <div id="myPrices">
-                    <input type="number" placeholder="Minimum" name="minprice" min="0" max="9999" value="<?php echo isset($_POST['minprice']) ? $_POST['minprice'] : '1'; ?>">
-                    <input type="number" placeholder="Maximum" name="maxprice" min="1" max="10000" value="<?php echo isset($_POST['maxprice']) ? $_POST['maxprice'] : '10000'; ?>">
-                </div>
+<div id="myPrices">
+    <input type="number" placeholder="Minimum" name="minprice" min="0" max="9999" value="<?php echo isset($_POST['minprice']) ? $_POST['minprice'] : '1'; ?>">
+    <input type="number" placeholder="Maximum" name="maxprice" min="1" max="10000" value="<?php echo isset($_POST['maxprice']) ? $_POST['maxprice'] : '10000'; ?>">
+</div>
                 <br>
 
                 <?php
@@ -183,15 +183,31 @@ include "navbar.php";
                 $conditions[] = "(Item.ItemName LIKE '%$search%' OR Brand.BrandName LIKE '%$search%')";
             }
 
+
+
 if(isset($_POST['minprice']) && isset($_POST['maxprice'])) {
     $minprice = $_POST['minprice'];
     $maxprice = $_POST['maxprice'];
-    // Add condition to the array
+
+    // Swap if minimum price is greater than maximum price
+if ($minprice > $maxprice) {
+    $temp = $minprice;
+    $minprice = $maxprice;
+    $maxprice = $temp;
+    
+    // Update the values in $_POST to reflect the swapped values
+    $_POST['minprice'] = $minprice;
+    $_POST['maxprice'] = $maxprice;
+    
+
+    
+    }
     $conditions[] = "Item.Price BETWEEN ? AND ?";
     // Add minimum and maximum prices to the parameters array
     $parameters[] = $minprice;
     $parameters[] = $maxprice;
 }
+
             // Check if brand has been selected
             if(isset($_POST['selected_brand']) && !empty($_POST['selected_brand'])) {
                 $brand = $_POST['selected_brand'];
