@@ -371,7 +371,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                     echo "<strong>" . $row['ItemName'] . "</strong><br>";
                     echo "<img src='CSS/images/" . $row['Img'] . "'><br>";
                     echo "<strong>£" . $row['Price'] . "</strong><br>";
-		    echo "<strong>Click To View More" . "</strong><br>";
+		            echo "<strong>Click To View More</strong><br>";
                     echo "<form method='post' action='addtobasket.php'>";
                     echo "<input type='hidden' name='product_id".$row['Item_ID']."' value='" . $row['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket'>Add to basket</button>";
