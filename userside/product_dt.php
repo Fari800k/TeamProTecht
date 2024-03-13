@@ -1,6 +1,5 @@
 <?php
-    // Include navbar.php
-
+    // connect to database
     include "connectdb.php";
 
     $Item_ID = ""; 
@@ -36,6 +35,7 @@
 <body>
     <?php
     session_start();
+    // include navbar file
     include "navbar.php";
     ?>
     <div class="row">
@@ -58,21 +58,26 @@
                     
                     /* 
                      * Validate availability status for specific item
+                     * with their appropriate messages included
                      */
                     if ($stock == 0) {
-                        echo "<i id='cross' class='fa fa-times'></i>" . "<strong>Out of stock</strong>";
+                        $error_msg = "Out of stock";
+                        echo "<i id='cross' class='fa fa-times'></i>" . "<strong>" .$error_msg. "</strong>";
                     } else if ($stock == 1) {
-                        echo "<i id='warning' class='fa fa-exclamation'></i>" . "<strong>We have very few left! Hurry before it runs out!</strong>";
+                        $critical_msg = "This is our last product, if you want it! Hurry before someone else buys it!" ;
+                        echo "<i id='warning' class='fa fa-exclamation'></i>" . "<strong>" .$critical_msg. "</strong>";
                     } else if ($stock >= 2 and $stock <= 10) {
-                        echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>This is our last product, if you want it! Hurry before someone else buys it!</strong<";
+                        $warning_msg = "We have very few left! Hurry before it runs out!";
+                        echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>" .$warning_msg. "</strong<";
                     } else {
-                        echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>In stock</strong>";
+                        $normal_msg = "In stock";
+                        echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>" .$normal_msg. "</strong>";
                     }
                     ?>
                 </p>
                 <hr>
                 
-                <button class="collapsible"><b>Description</b></button>
+                <button class="collapsible"><b>Product Description</b></button>
                 <div class="content">
                     <p><?php echo $row["ItemDesc"]?></p>
                 </div>
@@ -82,7 +87,6 @@
                     <p><?php echo "High quality " . $row["CameraMegapixels"] . " camera"?></p>
                     <p><?php echo "Long lasting battery life up to " . $row["BatteryLife"] . " hours"?></p>
                     <p><?php echo "Extremely spacious " .$row["DisplaySize"] . " display for real-screen estate with high screen-to-body ratio"?></p>
-
                 </div>
                 
                 <button class="collapsible"><b>Phone Specs</b></button>
@@ -90,23 +94,24 @@
                     <p><?php echo "<b>Operating System:</b> " . $row["OperatingSystem"]?></p>
                     <p><?php echo "<b>Display size:</b> " . $row["DisplaySize"]?></p>
                     <p><?php echo "<b>Camera:</b> " . $row["CameraMegapixels"]?></p>
-                    <p><?php echo "<b>Biometric authentication</b>: " . $row["BiometricAuthentication"]?></p>
-                    <p><?php echo "<b>Available colours:</b> " . $row["colour"]?></p>
+                    <p><?php echo "<b>Biometric authentication:</b> " . $row["BiometricAuthentication"]?></p>
+                    <p><?php echo "<b>Available colour(s):</b> " . $row["colour"]?></p>
                     <p><?php echo "<b>Storage space:</b> " . $row["storage"]?></p>
                     <p><?php echo "<b>Theoretical battery life:</b> " . $row["BatteryLife"] . " hours"?></p>
                 </div>
             </div>
         </div>
-                    <?php
-                    //if item stock != 0, enable add to basket feature
-                    echo "<div id='addtobasketdiv' class='column'>";
-                    echo "<h1>Add to basket</h1>";
-                    echo "<form method = 'post' action ='addtobasket.php'>";
-                    echo "<div id='quantity'><b>Amount to add: </b><input type='number' id='quantityform' name = 'quantity' min= '1' max= '$stock' value='1'></div>";
-                    echo "<input type='hidden' name = 'product_id".$_GET['Item_ID']."' value='" . $_GET['Item_ID'] . "'>";
-                    echo "<button type='submit' name='add_to_basket' class='add-to-basket'><b>Add to Basket</b></button>";
-                    echo "</form></div>";
-                    ?>
+
+        <?php
+        //if item stock != 0, enable add to basket feature
+        echo "<div id='addtobasketdiv' class='column'>";
+        echo "<h1>Add to basket</h1>";
+        echo "<form method = 'post' action ='addtobasket.php'>";
+        echo "<div id='quantity'><b>Amount to add: </b><input type='number' id='quantityform' name = 'quantity' min= '1' max= '$stock' value='1'></div>";
+        echo "<input type='hidden' name = 'product_id".$_GET['Item_ID']."' value='" . $_GET['Item_ID'] . "'>";
+        echo "<button type='submit' name='add_to_basket' class='add-to-basket'><b>Add to Basket</b></button>";
+        echo "</form></div>";
+        ?>
     </div>
 </body>
 </html>
