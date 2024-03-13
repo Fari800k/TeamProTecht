@@ -168,8 +168,8 @@ include "navbar.php";
             }
 
             // Construct the base query
-            $query = "SELECT * FROM Item
-                    LEFT JOIN Brand ON Item.Item_ID = Brand.Item_ID";
+            $query = "SELECT `Brand`.BrandName, `Item`.Item_ID, `Item`.ItemName, `Item`.Price, `Item`.Img  FROM `Item`
+                    LEFT JOIN `Brand` ON `Item`.Item_ID = `Brand`.Item_ID";
 
             // Initialize an array to hold conditions
             $conditions = [];
