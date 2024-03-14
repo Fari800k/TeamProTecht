@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "U";
-$password = "P";
-$dbname = "Stock";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('../userside/connectdb.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemName = $_POST["productName"];
@@ -35,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($updateStmt->affected_rows > 0) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $conn->error;
+            echo "Error updating record: ";
         }
         $updateStmt->close();
     } else {
@@ -48,11 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($insertStmt->affected_rows > 0) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $insertSql . "<br>" . $conn->error;
+            echo "Error: " . $insertSql . "<br>" ;
         }
         $insertStmt->close();
     }
 }
 
-$conn->close();
 ?>
