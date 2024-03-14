@@ -6,17 +6,57 @@ User
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="employee.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Contact Messages</title>
 </head>
 <body>
-    <h1>Contact Messages</h1>
+<section id="sidebar">
+          <a href="" class="brand">
+            <span class="icon">
+                <img src="logo.png" alt="teamprotect logo">
+            </span>
+          </a>
+          <ul class="side-menu top">
+            <li>
+                <a href="stockview.php">
+                    <i class='bx bxl-dropbox' ></i>
+                    <span class="text">Stock View</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-mail-send' ></i>
+                    <span class="text">Confirm Orders</span>
+                </a>
+            </li>            <li>
+                <a href="pending_orders.php">
+                    <i class='bx bxs-hourglass' ></i>
+                    <span class="text">Pending Orders</span>
+                </a>
+            </li>            <li>
+                <a href="#">
+                    <i class='bx bxs-package' ></i>
+                    <span class="text">Fulfilled Orders</span>
+                </a>
+            </li>
+        </li>            <li>
+            <a href="#">
+                <i class='bx bx-log-out'></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+          </ul>
+    </section>
+
+    <section id= "table">
 
     <?php
     // Database connection (Replace these parameters with your actual database credentials)
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "stockpage";
+    $dbname = "cs2tp";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -66,6 +106,7 @@ User
 
     $conn->close();
     ?>
+    </section>
 
 </body>
 </html> 
