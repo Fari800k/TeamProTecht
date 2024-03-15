@@ -48,6 +48,7 @@
         if ($row_count > 0) {
             if (password_verify($employeePassword, $row_data['password'])) {
                 echo "<script>alert('Login successful')</script>";
+                $users_id= "SELECT employee_id FROM `employees` WHERE employee_email ='$emailAddress' "
                 header("Location: ../stockview.php");
 
            
