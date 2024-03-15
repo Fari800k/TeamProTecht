@@ -17,7 +17,7 @@ include "navbar.php";
 if (!isset($_SESSION['User_ID'])) {
     header("Location: login.php");
 }
-// Retrieve the orders for the current user
+//retrieve the orders for the current user
 $sql = "SELECT orders.Order_ID, orders.Order_Status, orders.Address_Order
         FROM orders
         INNER JOIN basket ON orders.Basket_ID = basket.Basket_ID
@@ -27,11 +27,11 @@ $stmt->bindParam(':userID', $_SESSION['User_ID'], PDO::PARAM_INT);
 $stmt->execute();
 $orders = $stmt->fetchAll();
 
-// Handle the form submission
+//form submission
 if (isset($_POST['start_return'])) {
     $orderID = $_POST['order_id'];
 
-    // Update the order status to "Return Started"
+    //update status
     $sql = 'UPDATE orders SET Order_Status = "Returning" WHERE Order_ID = :orderID';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
