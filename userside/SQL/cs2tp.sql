@@ -40,56 +40,56 @@ CREATE TABLE `location` (
 -- Dumping data for table `location`
 --
 
-INSERT INTO `location` (`Location_ID`, `Shelf`, `Row`, `Updated_at`, `Created_at`) VALUES
-(1, 1, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(2, 2, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 3, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(4, 4, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(5, 5, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(6, 6, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(7, 7, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(8, 8, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(9, 9, 'A', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(10, 1, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(11, 2, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(12, 3, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(13, 4, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(14, 5, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(15, 6, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(16, 7, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(17, 8, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(18, 9, 'B', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(19, 1, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(20, 2, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(21, 3, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(22, 4, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(23, 5, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(24, 6, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(25, 7, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(26, 8, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(27, 9, 'C', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(28, 1, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(29, 2, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(30, 3, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(31, 4, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(32, 5, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(33, 6, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(34, 7, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(35, 8, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(36, 9, 'D', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(37, 1, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(38, 2, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(39, 3, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(40, 4, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(41, 5, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(42, 6, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(43, 7, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(44, 8, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(45, 9, 'E', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(46, 3, 'A', '2024-02-12 21:34:31', '2024-02-12 21:34:31'),
-(47, 7, 'C', '2024-02-12 21:35:51', '2024-02-12 21:35:51'),
-(48, 7, 'C', '2024-02-12 21:37:02', '2024-02-12 21:37:02'),
-(49, 7, 'B', '2024-02-15 16:04:24', '2024-02-15 16:04:24');
+INSERT INTO `location` (`Location_ID`, `Shelf`, `Row`) VALUES
+(1, 1, 'A'),
+(2, 2, 'A'),
+(3, 3, 'A'),
+(4, 4, 'A'),
+(5, 5, 'A'),
+(6, 6, 'A'),
+(7, 7, 'A'),
+(8, 8, 'A'),
+(9, 9, 'A'),
+(10, 1, 'B'),
+(11, 2, 'B'),
+(12, 3, 'B'),
+(13, 4, 'B'),
+(14, 5, 'B'),
+(15, 6, 'B'),
+(16, 7, 'B'),
+(17, 8, 'B'),
+(18, 9, 'B'),
+(19, 1, 'C'),
+(20, 2, 'C'),
+(21, 3, 'C'),
+(22, 4, 'C'),
+(23, 5, 'C'),
+(24, 6, 'C'),
+(25, 7, 'C'),
+(26, 8, 'C'),
+(27, 9, 'C'),
+(28, 1, 'D'),
+(29, 2, 'D'),
+(30, 3, 'D'),
+(31, 4, 'D'),
+(32, 5, 'D'),
+(33, 6, 'D'),
+(34, 7, 'D'),
+(35, 8, 'D'),
+(36, 9, 'D'),
+(37, 1, 'E'),
+(38, 2, 'E'),
+(39, 3, 'E'),
+(40, 4, 'E'),
+(41, 5, 'E'),
+(42, 6, 'E'),
+(43, 7, 'E'),
+(44, 8, 'E'),
+(45, 9, 'E'),
+(46, 3, 'A'),
+(47, 7, 'C'),
+(48, 7, 'C'),
+(49, 7, 'B');
 
 -- --------------------------------------------------------
 
@@ -100,13 +100,11 @@ INSERT INTO `location` (`Location_ID`, `Shelf`, `Row`, `Updated_at`, `Created_at
 CREATE TABLE `item` (
   `Item_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ItemName` varchar(255) NOT NULL,
-  `Quantity` int(11) DEFAULT NULL,
+  `Stock` int(11) DEFAULT NULL,
   `ItemDesc` text NOT NULL,
   `Price` decimal(7,2) NOT NULL,
   `Img` text NOT NULL,
   `Location_ID` int(11) DEFAULT NULL,
-  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `OperatingSystem` varchar(50) NOT NULL,
   `DisplaySize` varchar(50) NOT NULL,
   `DisplayResolution` varchar(50) NOT NULL,
@@ -115,6 +113,8 @@ CREATE TABLE `item` (
   `BiometricAuthentication` varchar(50) NOT NULL,
   `colour` varchar(50) NOT NULL,
   `storage` varchar(50) NOT NULL,
+  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Item_ID`),
   FOREIGN KEY (`Location_ID`) REFERENCES `location`(`Location_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -123,16 +123,14 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`Item_ID`, `ItemName`, `Quantity`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `Updated_at`, `Created_at`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `Colour`, `Storage`) 
-VALUES 
-(1, 'iPhone 15', 146, 'The new iPhone 15 from Apple', 999.99, 'iPhone15.jpg', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Full HD', '12', '12 MP', 'Face ID', 'Space Gray', '128GB'),
-(2, 'iPhone 15+', 146, 'The new iPhone 15+ from Apple', 1199.99, 'iPhone15+.jpg', 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Silver', '256GB'),
-(3, 'iPhone 15 Pro', 146, 'The new iPhone 15 Pro from Apple', 1199.99, 'iPhone15Pro.jpg', 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.1 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Gold', '512GB'),
-(4, 'iPhone 15 Pro Max', 146, 'The new iPhone 15 Pro Max from Apple', 1299.99, 'iPhone15ProMax.jpg', 4, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'iOS', '6.7 inches', 'Quad HD', '16', '12 MP', 'Face ID', 'Midnight Green', '1TB'),
-(5, 'Pixel 8', 146, 'The new Pixel 8 by Google', 699.99, 'Pixel8.jpg', 5, '2023-12-08 17:46:58', '2023-12-08 17:46:58', 'Android', '6.0 inches', 'Full HD', '12', '16 MP', 'Fingerprint', 'Black', '128GB'),
-(6, 'Honor Pro 5', 12, 'This is a Honor Pro 5', 12.00, 'pro5.png', 25, '2024-02-12 21:37:02', '2024-02-12 21:37:02', 'Android', '5.5 inches', 'HD', '10', '8 MP', 'Fingerprint', 'Blue', '64GB'),
-(7, 'Pixel 7', 100, 'This is the new Google Pixel', 100.00, 'pixel7.png', 16, '2024-02-15 16:04:24', '2024-02-15 16:04:24', 'Android', '5.8 inches', 'Full HD', '14', '12 MP', 'Fingerprint', 'White', '256GB');
-
+INSERT INTO `item` (`Item_ID`, `ItemName`, `Stock`, `ItemDesc`, `Price`, `Img`, `Location_ID`, `OperatingSystem`, `DisplaySize`, `DisplayResolution`, `BatteryLife`, `CameraMegapixels`, `BiometricAuthentication`, `colour`, `storage`) VALUES
+(1, 'iPhone 15', 146, 'The new iPhone 15 from Apple', '999.99', 'iPhone15.jpg', 1, 'iOS', '6.7 inches', 'Full HD', '12', '12 MP', 'Face ID', 'Space Gray', '128GB'),
+(2, 'iPhone 15+', 146, 'The new iPhone 15+ from Apple', '1199.99', 'iPhone15+.jpg', 2, 'iOS', '6.7 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Silver', '256GB'),
+(3, 'iPhone 15 Pro', 146, 'The new iPhone 15 Pro from Apple', '1199.99', 'iPhone15Pro.jpg', 3, 'iOS', '6.1 inches', 'Quad HD', '14', '12 MP', 'Face ID', 'Gold', '512GB'),
+(4, 'iPhone 15 Pro Max', 146, 'The new iPhone 15 Pro Max from Apple', '1299.99', 'iPhone15ProMax.jpg', 4, 'iOS', '6.7 inches', 'Quad HD', '16', '12 MP', 'Face ID', 'Midnight Green', '1TB'),
+(5, 'Pixel 8', 146, 'The new Pixel 8 by Google', '699.99', 'Pixel8.jpg', 5, 'Android', '6.0 inches', 'Full HD', '12', '16 MP', 'Fingerprint', 'Black', '128GB'),
+(6, 'Honor Pro 5', 12, 'This is a Honor Pro 5', '12.00', 'huawei p40 pro 50s.jpeg', 25, 'Android', '5.5 inches', 'HD', '10', '8 MP', 'Fingerprint', 'Blue', '64GB'),
+(7, 'Pixel 7', 100, 'This is the new Google Pixel', '100.00', 'huwawei mate 60 pro 5.jpeg', 16, 'Android', '5.8 inches', 'Full HD', '14', '12 MP', 'Fingerprint', 'White', '256GB');
 
 -- --------------------------------------------------------
 
@@ -156,17 +154,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`User_ID`, `Username`, `Password`, `Fore_name`, `Second_Name`, `Last_Name`, `Address_User`) VALUES
-(1, 'john_doe', 'password123', 'John', 'Michael', 'Doe', '123 Main St'),
-(2, 'jane_smith', 'password456', 'Jane', 'Elizabeth', 'Smith', '456 Elm St'),
-(3, 'will_brown', 'password789', 'William', 'George', 'Brown', '789 Oak St'),
-(4, 'emily_white', 'password101', 'Emily', 'Anne', 'White', '101 Maple St'),
-(5, 'david_jones', 'password102', 'David', 'Lee', 'Jones', '102 Pine St'),
-(6, 'sarah_johnson', 'password103', 'Sarah', 'Marie', 'Johnson', '103 Birch St'),
-(7, 'michael_wilson', 'password104', 'Michael', 'Andrew', 'Wilson', '104 Cedar St'),
-(8, 'lisa_moore', 'password105', 'Lisa', 'Renee', 'Moore', '105 Spruce St'),
-(9, 'robert_taylor', 'password106', 'Robert', 'James', 'Taylor', '106 Ash St'),
-(10, 'laura_martin', 'password107', 'Laura', 'Michelle', 'Martin', '107 Cherry St'),
-(11, 'username@customer.com', '$2y$10$v.JRfZC3fcX0wH7nZ.RlyOUqMxuk7Cq70OvrPYQtl01ILa2WRpHEG', 'user', 'name', NULL, NULL);
+(1, 'john_doe', '$2y$10$OP/4IcTxsnm74SLuzZwkcumFeFd8X8.zDTyFt94Td06fl6nn914Se', 'John', 'Michael', 'Doe', '123 Main St'),
+-- Password: Password123!
+(2, 'jane_smith', '$2y$10$Ry5UeKbdjvE3fyxBM6gpWuNh4y7g2e3xzkc8nOIEX20sWd4foHsLS', 'Jane', 'Elizabeth', 'Smith', '456 Elm St'),
+-- Password: Password456!
+(3, 'will_brown', '$2y$10$7XxNg3FzTmlBOTEV2stAGu94tvJaP4FD0WVwLZRswwlOxS6BFWafm', 'William', 'George', 'Brown', '789 Oak St'),
+-- Password: Password789%
+(4, 'emily_white', '$2y$10$/V25hL8MsiL/tN5Nag00HeNEhBOx6xTudP/gHr2./pDDH5JxqtMA6', 'Emily', 'Anne', 'White', '101 Maple St'),
+-- Password: Password101$
+(5, 'david_jones', '$2y$10$eKTu0WEySS3NLRsSpbvsu.DmuqhICOy8sElKZo0hEp/EwEAsCok.u', 'David', 'Lee', 'Jones', '102 Pine St'),
+-- Password: Password102%
+(6, 'sarah_johnson', '$2y$10$BDe5JkDTdnx1VrVa33ehDumvBHSsklH2ds13ri6IFTAM.a8t9RvUS', 'Sarah', 'Marie', 'Johnson', '103 Birch St'),
+-- Password: Password103*
+(7, 'michael_wilson', '$2y$10$9e5TLvZqsFUfTaWtmnDjO.IymPUfMiqfG5eZqZM95LqnVNtfpey5G', 'Michael', 'Andrew', 'Wilson', '104 Cedar St'),
+-- Password: PassWord104!
+(8, 'lisa_moore', '$2y$10$2aRPy89idEkdBrdJgFssxOX.lZckHHIQkxw0F0BPvxfvHf4CSuIme', 'Lisa', 'Renee', 'Moore', '105 Spruce St'),
+-- Password: PassWord105!
+(9, 'robert_taylor', '$2y$10$bdjyH0F3oAGhUCz2s3WrxeleWYo6gcbRD5Z2VbyCE5faggBlomV5m', 'Robert', 'James', 'Taylor', '106 Ash St'),
+-- Password: PassWord106%
+(10, 'laura_martin', '$2y$10$gsLIi/qoLtsq1vlR9Selcunsk.xyF.EQhdJDeHmEDl8HYJjDWe5pa', 'Laura', 'Michelle', 'Martin', '107 Cherry St'),
+-- Password: PassWord106%
+(11, 'daniel_cox', '$2y$10$W8531hrY4FwlpvVIM.4v2Ortzh16wdP24kcbTYBEnL7gxx3IDPSxi', 'Daniel', 'Roberts', 'Cox', '56 Mayland Rd');
+-- Password: TeamProTecht2024!
 
 -- --------------------------------------------------------
 
@@ -187,11 +196,11 @@ CREATE TABLE `basket` (
 -- Dumping data for table `basket`
 --
 
-INSERT INTO `basket` (`Basket_ID`, `User_ID`, `Updated_at`, `Created_at`) VALUES
-(1, 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(2, 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(4, 4, '2023-12-08 17:46:58', '2023-12-08 17:46:58');
+INSERT INTO `basket` (`Basket_ID`, `User_ID`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -215,14 +224,14 @@ CREATE TABLE `basketitem` (
 -- Dumping data for table `basketitem`
 --
 
-INSERT INTO `basketitem` (`BasketItem_ID`, `Basket_ID`, `Item_ID`, `Quantity`, `Updated_at`, `Created_at`) VALUES
-(1, 1, 1, 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(2, 1, 2, 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 1, 5, 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(4, 2, 1, 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(5, 2, 3, 4, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(6, 2, 2, 5, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(7, 3, 1, 10, '2023-12-08 17:46:58', '2023-12-08 17:46:58');
+INSERT INTO `basketitem` (`BasketItem_ID`, `Basket_ID`, `Item_ID`, `Quantity`) VALUES
+(1, 1, 1, 3),
+(2, 1, 2, 3),
+(3, 1, 5, 2),
+(4, 2, 1, 3),
+(5, 2, 3, 4),
+(6, 2, 2, 5),
+(7, 3, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -244,16 +253,16 @@ CREATE TABLE `brand` (
 -- Dumping data for table `brand`
 --
 
-INSERT INTO `brand` (`Brand_ID`, `BrandName`, `Item_ID`, `Updated_at`, `Created_at`) VALUES
-(1, 'Apple', 1, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(2, 'Apple', 2, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 'Apple', 3, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(4, 'Apple', 4, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(5, 'Google', 5, '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(6, 'Huawei', NULL, '2024-02-12 21:34:31', '2024-02-12 21:34:31'),
-(7, 'Huawei', NULL, '2024-02-12 21:35:51', '2024-02-12 21:35:51'),
-(8, 'Huawei', NULL, '2024-02-12 21:37:02', '2024-02-12 21:37:02'),
-(9, 'google', NULL, '2024-02-15 16:04:24', '2024-02-15 16:04:24');
+INSERT INTO `brand` (`Brand_ID`, `BrandName`, `Item_ID`) VALUES
+(1, 'Apple', 1),
+(2, 'Apple', 2),
+(3, 'Apple', 3),
+(4, 'Apple', 4),
+(5, 'Google', 5),
+(6, 'Huawei', NULL),
+(7, 'Huawei', NULL),
+(8, 'Huawei', NULL),
+(9, 'google', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,8 +293,6 @@ INSERT INTO `employees` (`employee_id`, `LastName`, `FirstName`, `password`, `em
 
 -- --------------------------------------------------------
 
-
-
 --
 -- Table structure for table `orders`
 --
@@ -305,10 +312,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`Order_ID`, `Basket_ID`, `Address_Order`, `Order_Status`, `Updated_at`, `Created_at`) VALUES
-(1, 1, '123 Main St', 'Shipped', '2023-12-08 18:08:09', '2023-12-08 17:46:58'),
-(2, 2, '123 Main St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58'),
-(3, 3, '456 Elm St', 'Pending', '2023-12-08 17:46:58', '2023-12-08 17:46:58');
+INSERT INTO `orders` (`Order_ID`, `Basket_ID`, `Address_Order`, `Order_Status`) VALUES
+(1, 1, '123 Main St', 'Shipped'),
+(2, 2, '123 Main St', 'Pending'),
+(3, 3, '456 Elm St', 'Pending');
 
 -- --------------------------------------------------------
 
