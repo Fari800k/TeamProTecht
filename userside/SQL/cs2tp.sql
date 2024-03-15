@@ -105,8 +105,6 @@ CREATE TABLE `item` (
   `Price` decimal(7,2) NOT NULL,
   `Img` text NOT NULL,
   `Location_ID` int(11) DEFAULT NULL,
-  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `OperatingSystem` varchar(50) NOT NULL,
   `DisplaySize` varchar(50) NOT NULL,
   `DisplayResolution` varchar(50) NOT NULL,
@@ -115,6 +113,8 @@ CREATE TABLE `item` (
   `BiometricAuthentication` varchar(50) NOT NULL,
   `colour` varchar(50) NOT NULL,
   `storage` varchar(50) NOT NULL,
+  `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Item_ID`),
   FOREIGN KEY (`Location_ID`) REFERENCES `location`(`Location_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -131,7 +131,6 @@ INSERT INTO `item` (`Item_ID`, `ItemName`, `Stock`, `ItemDesc`, `Price`, `Img`, 
 (5, 'Pixel 8', 146, 'The new Pixel 8 by Google', '699.99', 'Pixel8.jpg', 5, 'Android', '6.0 inches', 'Full HD', '12', '16 MP', 'Fingerprint', 'Black', '128GB'),
 (6, 'Honor Pro 5', 12, 'This is a Honor Pro 5', '12.00', 'huawei p40 pro 50s.jpeg', 25, 'Android', '5.5 inches', 'HD', '10', '8 MP', 'Fingerprint', 'Blue', '64GB'),
 (7, 'Pixel 7', 100, 'This is the new Google Pixel', '100.00', 'huwawei mate 60 pro 5.jpeg', 16, 'Android', '5.8 inches', 'Full HD', '14', '12 MP', 'Fingerprint', 'White', '256GB');
-
 
 -- --------------------------------------------------------
 
@@ -151,7 +150,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `users`: MUST INCLUDE HASH PASSWORDS ONLY
 --
 
 INSERT INTO `users` (`User_ID`, `Username`, `Password`, `Fore_name`, `Second_Name`, `Last_Name`, `Address_User`) VALUES
@@ -294,8 +293,6 @@ INSERT INTO `employees` (`employee_id`, `LastName`, `FirstName`, `password`, `em
 
 -- --------------------------------------------------------
 
-
-
 --
 -- Table structure for table `orders`
 --
@@ -304,7 +301,7 @@ CREATE TABLE `orders` (
   `Order_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Basket_ID` int(11) DEFAULT NULL,
   `Address_Order` varchar(255) DEFAULT NULL,
-  `Order_Status` ENUM('Pending', 'Processing', 'Shipped', 'Delivered', 'Completed') NOT NULL DEFAULT 'Pending',
+  `Order_Status` ENUM('Pending', 'Processing', 'Shipped', 'Delivered', 'Completed' , 'Returning' , 'Returned') NOT NULL DEFAULT 'Pending',
   `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Order_ID`),
