@@ -1,14 +1,12 @@
 <?php
-include "connectdb.php";
 session_start();
+include "connectdb.php";
 include "navbar.php";
 
 if (!isset($_SESSION['User_ID'])) {
     header("Location: login.php");
     exit();
 }
-
-
 
 //retrieve basket
 $userID = $_SESSION['User_ID'];
@@ -44,6 +42,24 @@ if (isset($_POST['placeOrder'])) {
         ':address' => $address,
         ':orderStatus' => $orderStatus
     ]);
+
+    //update item quantities
+    $sql4 = "SELECT * FROM `basketitem` WHERE Basket_ID = :basketID";
+    $stmt = $pdo->prepare($sql4);
+    $stmt->execute([':basketID' => $basketID]);
+    $basketItems = $stmt->fetchAll();
+
+    foreach ($basketItems as $basketItem) {
+        $itemID = $basketItem['Item_ID'];
+        $orderedQuantity = $basketItem['Quantity'];
+
+        $sql5 = "UPDATE `item` SET Stock = Stock - :orderedQuantity WHERE Item_ID = :itemID";
+        $stmt = $pdo->prepare($sql5);
+        $stmt->execute([
+            ':orderedQuantity' => $orderedQuantity,
+            ':itemID' => $itemID
+        ]);
+    }
 
     $sql = "INSERT INTO `basket` (User_ID) VALUES (:userID)";
     $stmt = $pdo->prepare($sql);
