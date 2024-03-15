@@ -66,7 +66,7 @@
                     } else if ($stock == 1) {
                         $critical_msg = "This is our last product, if you want it! Hurry before someone else buys it!" ;
                         echo "<i id='warning' class='fa fa-exclamation'></i>" . "<strong>" .$critical_msg. "</strong>";
-                    } else if ($stock >= 2 and $stock <= 10) {
+                    } else if ($stock >= 2 and $stock <= 15) {
                         $warning_msg = "We have very few left! Hurry before it runs out!";
                         echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>" .$warning_msg. "</strong<";
                     } else {
