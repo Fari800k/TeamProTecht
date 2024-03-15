@@ -61,13 +61,13 @@
             <th>Description</th>
             <th>Price</th>
             <th>Image</th>
-            <th>Location ID</th>
+            <th>Quantity</th>
             <th>Created At</th>
             <th>Updated At</th>
         </tr>
         <?php
            $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-           $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, Location_ID, Created_at, Updated_at  FROM item");
+           $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, stock, Created_at, Updated_at  FROM item");
 
            foreach ($statement as $rows) {
             print "<td>" . $rows['Item_ID'] . "</td>";
@@ -77,7 +77,7 @@
             $image_url = "img/" . $rows['Img'];
             print "<td><div class=product-image'>
             <img src='$image_url' alt='Product Image' style></div></td>";
-            print "<td>" . $rows['Location_ID'] . "</td>";
+            print "<td>" . $rows['stock'] . "</td>";
             print "<td>" . $rows['Created_at'] . "</td>";
             print "<td>" . $rows['Updated_at'] . "</td></tr>";
         }
