@@ -294,7 +294,7 @@ CREATE TABLE `orders` (
   `Order_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Basket_ID` int(11) DEFAULT NULL,
   `Address_Order` varchar(255) DEFAULT NULL,
-  `Order_Status` ENUM('Pending', 'Processing', 'Shipped', 'Delivered', 'Completed') NOT NULL DEFAULT 'Pending',
+  `Order_Status` ENUM('Pending', 'Processing', 'Shipped', 'Delivered', 'Completed' , 'Returning' , 'Returned') NOT NULL DEFAULT 'Pending',
   `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Order_ID`),
