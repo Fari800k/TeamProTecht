@@ -26,7 +26,8 @@ if(!isset($_SESSION['User_ID'])){
                 <img class="user_image" src="CSS/images/userlogo.png" style="width: 150px; height: 150px;"/>
                 <h3><?php echo $_SESSION['username']; ?></h3>
                 <a href="" >Update Details</a><br>
-                <a href="" >Return an Order</a>
+                <a href="" >Return an Order</a><br>
+                <a href="" >Review a product</a>
             </div>
             <?php
         try {
