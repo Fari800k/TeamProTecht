@@ -30,13 +30,15 @@ if(!isset($_SESSION['User_ID'])){
             </div>
             <?php
         try {
-            $order_sql = "SELECT orderbaskets.Order_ID, orderbaskets.Basket_ID, brand.BrandName, item.ItemName, item.Img, basketitem.Quantity, (basketitem.Quantity * item.Price) AS Total_Price FROM basketitem
-                        JOIN ((SELECT orders.Order_ID, basket.Basket_ID, basket.User_ID FROM orders
-                                JOIN basket ON basket.Basket_ID = orders.Basket_ID
-                                WHERE basket.User_ID = :user_id) AS orderbaskets)
-                        ON orderbaskets.Basket_ID = basketitem.Basket_ID
-                        JOIN item ON item.Item_ID = basketitem.Item_ID
-                        JOIN brand ON brand.Item_ID = basketitem.Item_ID";
+            $order_sql = "SELECT orderbaskets.Order_ID, orderbaskets.Basket_ID, brand.BrandName, item.ItemName, item.Img, basketitem.Quantity, orderbaskets.Order_Status, (basketitem.Quantity * item.Price) AS Total_Price
+            FROM basketitem
+            JOIN ((SELECT orders.Order_ID, orders.Order_Status, basket.Basket_ID, basket.User_ID
+            FROM orders
+            JOIN basket ON basket.Basket_ID = orders.Basket_ID
+            WHERE basket.User_ID = :user_id) AS orderbaskets)
+            ON orderbaskets.Basket_ID = basketitem.Basket_ID
+            JOIN item ON item.Item_ID = basketitem.Item_ID
+            JOIN brand ON brand.Item_ID = basketitem.Item_ID";
             $order_stmt = $pdo->prepare($order_sql);
             $order_stmt->bindParam(':user_id', $_SESSION['User_ID'], PDO::PARAM_INT);
             $order_stmt->execute();
@@ -54,13 +56,16 @@ if(!isset($_SESSION['User_ID'])){
                     $itemimg = $order['Img'];
                     $itemquantity = $order['Quantity'];
                     $totalitemprice = $order['Total_Price'];
+                    $orderStatus = $order['Order_Status'];
 
                     echo '<div class="phone">';
+                    echo '<h3>' . 'Order #:' . $orderid . '</h3>';
                     echo '<img src="CSS/images/' . $itemimg . '" alt="asus" class="phone">';
                     echo '<div class="phone_name">';
                     echo "<h3>" . $brandname . " " . $itemname . "</h3>";
                     echo "<h3>" . 'Quantity: ' . $itemquantity . "</h3>";
                     echo "<h3>". 'Total Price £'. $totalitemprice ."</h3>";
+                    echo "<h3>". 'Order Status: '. $orderStatus ."</h3>";
                     echo "</div>";
                     echo "</div>";
 
@@ -73,13 +78,3 @@ if(!isset($_SESSION['User_ID'])){
             echo 'Message: ' .$e->getMessage();
         }
         ?>
-            
-                
-                
-                    
-                    
-                        
-                   
-
-
-
