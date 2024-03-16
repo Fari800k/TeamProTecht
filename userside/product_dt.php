@@ -13,14 +13,16 @@
     }
 
     $item_query = "SELECT * FROM item WHERE Item_ID = ?";
-    $ex_query= $pdo->prepare($item_query);
-    $ex_query->execute([$item_id]); 
-    $row = $ex_query->fetch(PDO::FETCH_ASSOC);
+    $brand_query = "SELECT * FROM brand";
 
-    $brand_query = "SELECT BrandName FROM brand WHERE BrandName = ?";
-    $brand_prep = $pdo->prepare($brand_query);
-    $brand_prep->execute([$brand_name]);
-    $brand_col = $brand_prep->fetchColumn();
+    $ex_query= $pdo->prepare($item_query);
+    $exec = $pdo->prepare($brand_query);
+    
+    $ex_query->execute([$item_id]);
+    $exec->execute();
+
+    $row = $ex_query->fetch(PDO::FETCH_ASSOC);
+    $brand_row = $exec->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title of the item -->
-    <title><?php echo $row["ItemName"]?></title>
+    <title><?php echo $brand_row["BrandName"] . " " . $row["ItemName"]?></title>
     <link rel="stylesheet" href="CSS/product_dt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="JavaScript/script.js"></script>
@@ -42,7 +44,7 @@
     include "navbar.php";
     ?>
     <div class="row">
-        <h1 class="item-name"><?php echo $row["ItemName"]?></h1>
+        <h1 class="item-name"><?php echo $brand_row["BrandName"] . " " . $row["ItemName"]?></h1>
         <div id="phone_image_column" class="column">
             <img class="phone_image" src="CSS/images/<?php echo $row["Img"]?>"/>        
         </div>

@@ -166,6 +166,7 @@ button.add-to-basket {
     border-radius: 8px;
     width: 40%;
     padding: 20px 4px;
+    cursor: pointer;
 }
 
 button.add-to-basket:hover {

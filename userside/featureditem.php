@@ -20,7 +20,7 @@ include 'connectdb.php';
                 echo '<div class="card">
                     <img src="CSS/images/' . $row["Img"] . '" alt="' . $row["ItemName"] . '" class="featured-image">
                     <h4>' . $row["ItemName"] . '</h4>
-                    <p>Price: $' . $row["Price"] . '</p>
+                    <p>Price: £' . $row["Price"] . '</p>
                     <button class="view-more-btn" onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>
                   </div>';
             }

@@ -33,11 +33,12 @@
 
 .view-more-btn {
     display: block;
+    font-size: 16px;
     margin-top: 10px;
     background-color: rgb(152, 82, 150);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 5px;
     cursor: pointer;
 }
