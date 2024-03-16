@@ -21,7 +21,7 @@ include 'connectdb.php';
                     <img src="CSS/images/' . $row["Img"] . '" alt="' . $row["ItemName"] . '" class="featured-image">
                     <h4>' . $row["ItemName"] . '</h4>
                     <p>Price: $' . $row["Price"] . '</p>
-                    <button class="view-more-btn" onclick="viewMore(' . $row["Item_ID"] . ')">View More</button>
+                    <a href ="product_dt.php?Item_ID=' . $row['Item_ID'] . '"<button class="view-more-btn" >View More</button></a>
                   </div>';
             }
             echo '</div>';
