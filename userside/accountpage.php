@@ -10,42 +10,70 @@
     <script defer src="JavaScript/script.js"></script>
 
 </head>
-<?php
-include('connectdb.php');
-session_start();
-include "navbar.php";
-if (!isset($_SESSION['User_ID'])) {
-    header("Location: login.php");
-}
-//retrieve the orders for the current user
-$sql = "SELECT orders.Order_ID, orders.Order_Status, orders.Address_Order
-        FROM orders
-        INNER JOIN basket ON orders.Basket_ID = basket.Basket_ID
-        WHERE basket.User_ID = :userID";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':userID', $_SESSION['User_ID'], PDO::PARAM_INT);
-$stmt->execute();
-$orders = $stmt->fetchAll();
-
-//form submission
-if (isset($_POST['start_return'])) {
-    $orderID = $_POST['order_id'];
-
-    //update status
-    $sql = 'UPDATE orders SET Order_Status = "Returning" WHERE Order_ID = :orderID';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
-
-    if ($stmt->execute()) {
-        echo "Order status updated to 'Return Started' successfully.";
-    } else {
-        echo "Error updating order status.";
-    }
-}
-?>
-
 
 <body>
+    <?php
+    include('connectdb.php');
+    session_start();
+    include "navbar.php";
+    if (!isset($_SESSION['User_ID'])) {
+        header("Location: login.php");
+    }
+    //retrieve the orders for the current user
+    $sql = "SELECT orders.Order_ID, orders.Order_Status, orders.Address_Order
+            FROM orders
+            INNER JOIN basket ON orders.Basket_ID = basket.Basket_ID
+            WHERE basket.User_ID = :userID";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':userID', $_SESSION['User_ID'], PDO::PARAM_INT);
+    $stmt->execute();
+    $orders = $stmt->fetchAll();
+
+    //form submission
+    if (isset($_POST['start_return'])) {
+        $orderID = $_POST['order_id'];
+
+        //update status
+        $sql = 'UPDATE orders SET Order_Status = "Returning" WHERE Order_ID = :orderID';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            echo "Order status updated to 'Return Started' successfully.";
+        } else {
+            echo "Error updating order status.";
+        }
+    }
+if (isset($_SESSION['update_error'])) {
+    echo '<div class="error-message">' . $_SESSION['update_error'] . '</div>';
+    unset($_SESSION['update_error']); // Unset the session variable to clear the message
+}
+    ?>
+
+    <!-- Update Details Popup -->
+<!-- Update Details Popup -->
+<div id="updateDetailsPopup" class="popup-menu">
+    <h3>Update Details</h3>
+    <form id="updateForm" method="post" action="update_details.php">
+        <?php
+        // Fetch user details from the database
+        $user_sql = "SELECT * FROM users WHERE User_ID = :userID";
+        $user_stmt = $pdo->prepare($user_sql);
+        $user_stmt->bindParam(':userID', $_SESSION['User_ID'], PDO::PARAM_INT);
+        $user_stmt->execute();
+        $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
+        Username: <input type="text" name="username" value="<?php echo $user['Username'] ?? ''; ?>"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        Forename: <input type="text" name="forename" value="<?php echo $user['Fore_name'] ?? ''; ?>"><br><br>
+        Second Name: <input type="text" name="second_name" value="<?php echo $user['Second_Name'] ?? ''; ?>"><br><br>
+        Last Name: <input type="text" name="last_name" value="<?php echo $user['Last_Name'] ?? ''; ?>"><br><br>
+        Address: <textarea name="address"><?php echo $user['Address_User'] ?? ''; ?></textarea><br><br>
+        <input type="submit" value="Update">
+        <button type="button" onclick="cancelUpdatePopup()">Cancel</button>
+    </form>
+</div>
+
     <div class="row">
         <div class="column">
             <div class="card" style="padding-left: 50px; padding-top: 100px;">
@@ -53,7 +81,7 @@ if (isset($_POST['start_return'])) {
                 <h3>
                     <?php echo $_SESSION['username']; ?>
                 </h3>
-                <a href="">Update Details</a><br>
+                <a href="#" onclick="updateDetailsPopup()">Update Details</a><br>
                 <a href="#" onclick="returnPopup()">Return an Order</a>
                 <div id="returnOrderPopup" class="popup-menu">
                     <h3>Return Order</h3>
@@ -81,14 +109,14 @@ if (isset($_POST['start_return'])) {
             <?php
             try {
                 $order_sql = "SELECT orderbaskets.Order_ID, orderbaskets.Basket_ID, brand.BrandName, item.ItemName, item.Img, basketitem.Quantity, orderbaskets.Order_Status, (basketitem.Quantity * item.Price) AS Total_Price
-            FROM basketitem
-            JOIN ((SELECT orders.Order_ID, orders.Order_Status, basket.Basket_ID, basket.User_ID
-            FROM orders
-            JOIN basket ON basket.Basket_ID = orders.Basket_ID
-            WHERE basket.User_ID = :user_id) AS orderbaskets)
-            ON orderbaskets.Basket_ID = basketitem.Basket_ID
-            JOIN item ON item.Item_ID = basketitem.Item_ID
-            JOIN brand ON brand.Item_ID = basketitem.Item_ID";
+                FROM basketitem
+                JOIN ((SELECT orders.Order_ID, orders.Order_Status, basket.Basket_ID, basket.User_ID
+                FROM orders
+                JOIN basket ON basket.Basket_ID = orders.Basket_ID
+                WHERE basket.User_ID = :user_id) AS orderbaskets)
+                ON orderbaskets.Basket_ID = basketitem.Basket_ID
+                JOIN item ON item.Item_ID = basketitem.Item_ID
+                JOIN brand ON brand.Item_ID = basketitem.Item_ID";
                 $order_stmt = $pdo->prepare($order_sql);
                 $order_stmt->bindParam(':user_id', $_SESSION['User_ID'], PDO::PARAM_INT);
                 $order_stmt->execute();
@@ -119,7 +147,6 @@ if (isset($_POST['start_return'])) {
                     echo "</div>";
                     echo "</div>";
 
-
                     $totalbasketprice += $totalitemprice;
                 }
 
@@ -127,13 +154,26 @@ if (isset($_POST['start_return'])) {
                 echo 'Message: ' . $e->getMessage();
             }
             ?>
-            <script>
-                function returnPopup() {
-                    document.getElementById('returnOrderPopup').style.display = 'block';
-                }
+        </div>
+    </div>
 
-                function cancelReturnPopup() {
-                    document.getElementById('returnOrderPopup').style.display = 'none';
-                }
-            </script>
+    <script>
+        function updateDetailsPopup() {
+            document.getElementById('updateDetailsPopup').style.display = 'block';
+        }
+
+        function cancelUpdatePopup() {
+            document.getElementById('updateDetailsPopup').style.display = 'none';
+        }
+
+        function returnPopup() {
+            document.getElementById('returnOrderPopup').style.display = 'block';
+        }
+
+        function cancelReturnPopup() {
+            document.getElementById('returnOrderPopup').style.display = 'none';
+        }
+    </script>
 </body>
+
+</html>

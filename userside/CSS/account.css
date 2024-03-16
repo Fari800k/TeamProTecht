@@ -153,3 +153,63 @@ a{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1001;
 }
+
+#updateDetailsPopup {
+    display: none; /* Hide the popup by default */
+    position: fixed;
+    top: 50%; /* Position at the vertical center */
+    left: 50%; /* Position at the horizontal center */
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 80%; /* Limit max height to 80% of viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+}
+
+#updateDetailsPopup h3 {
+    margin-top: 0; /* Remove default margin */
+}
+
+#updateDetailsPopup form {
+    /* Add any additional styling here if needed */
+}
+
+#updateDetailsPopup form input[type="text"],
+#updateDetailsPopup form input[type="password"] {
+    width: calc(50% - 20px); /* Adjust input width to fit two inputs side by side */
+    margin-bottom: 10px; /* Add some spacing between inputs */
+}
+
+#updateDetailsPopup form textarea {
+    width: calc(100% - 20px); /* Set full width for textarea */
+    margin-bottom: 10px; /* Add some spacing between inputs */
+}
+#updateDetailsPopup form input[type="submit"],
+#updateDetailsPopup form button {
+    /* Add any additional styling here if needed */
+}
+#updateDetailsPopup form {
+    display: flex;
+    flex-direction: column;
+}
+
+#updateDetailsPopup form .name-inputs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#updateDetailsPopup form .name-inputs input[type="text"] {
+    width: calc(50% - 5px); /* Adjust input width to fit two inputs side by side with a small gap */
+    margin-right: 10px; /* Add some spacing between inputs */
+    margin-bottom: 10px; /* Add some spacing between rows */
+}
+
+#updateDetailsPopup form input[type="password"],
+#updateDetailsPopup form textarea {
+    width: calc(100% - 20px); /* Set full width for password and textarea */
+    margin-bottom: 10px; /* Add some spacing between inputs */
+}
+ 
