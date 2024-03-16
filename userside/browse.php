@@ -364,8 +364,8 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
             // Display all products fetched from the database
             foreach ($statement as $row) {
                 //Verify no dupes
+                
                 if(!in_array($row, $rowset)){
-
                     echo "<div class='product-item'>";
                     echo "<a href='product_dt.php?Item_ID=" . $row['Item_ID'] . "'>";
                     echo "<strong>" . $row['ItemName'] . "</strong><br>";
@@ -375,7 +375,7 @@ if(isset($_POST['display_size_range']) && !empty($_POST['display_size_range'])) 
                     echo "<form method='post' action='addtobasket.php'>";
                     echo "<input type='hidden' name='product_id".$row['Item_ID']."' value='" . $row['Item_ID'] . "'>";
                     echo "<button type='submit' name='add_to_basket'>Add to basket</button>";
-                    echo "</form>";
+                    echo "</form></a>";
                     echo "</div>";
 
                     array_push($rowset, $row);
