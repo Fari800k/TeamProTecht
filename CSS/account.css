@@ -1,0 +1,219 @@
+.popup-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(152, 82, 150, 0.5);
+    z-index: 1000;
+}
+
+.popup-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+body {
+    display: block;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+.accountbody{
+    display: flex;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.accountbody h3{
+    max-width: 30%;
+}
+
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background: rgb(152, 82, 150);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #005f6b;
+}
+
+.popup-menu h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.popup-menu th {
+    margin: 0;
+    color: #666;
+}
+
+.popup-menu tr {
+    list-style-type: none;
+    padding: 0;
+}
+
+.popup-menu tr td {
+    margin-bottom: 10px;
+}
+
+.popup-menu button {
+    width: 100%;
+    padding: 10px;
+    background: rgb(152, 82, 150);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-menu button:hover {
+    background-color: #005f6b;
+}
+
+.buttonorders button {
+    width: 100%;
+    padding: 10px;
+    background: rgb(152, 82, 150);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonorders button:hover {
+    background-color: #005f6b;
+}
+
+a{
+    font-weight: bold;
+    color: purple;
+}
+
+.accountbody .card{
+    padding: 100px 25px;
+    width: 20%;
+}
+
+.accountbody .card .user_image{
+    width: 80%;
+}
+
+
+.prev{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 75px;
+    padding-top: 75px;
+}
+
+.accountbody .prev{
+    width: 100%;
+}
+
+.prev .order{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px 0px;
+    margin: 0px;
+}
+
+.order .phone{
+    display: flex;
+    width: 65%;
+    .phone_name{
+        width:50%;
+    }
+    img{
+        width: 20%;
+        height: 60%;
+        padding-bottom: 30px;
+    }
+}
+
+.phone_name{
+    padding-left: 30px;
+}
+
+.order .review{
+    width: 30%;
+    .reviewform{
+        max-height: 90%;
+    }
+}
+
+.checked {
+    color: orange;
+}
+
+.reviewform {
+    margin: 0px;
+    .fa {
+        max-width: 15%;
+        font-size: 5vh;
+        cursor: pointer;
+    }
+}
+
+.one {
+color: rgb(255, 0, 0);
+}
+
+.two {
+color: rgb(255, 106, 0);
+}
+
+.three {
+color: rgb(251, 255, 120);
+}
+
+.four {
+color: rgb(255, 255, 0);
+}
+
+.five {
+color: rgb(24, 159, 14);
+}
