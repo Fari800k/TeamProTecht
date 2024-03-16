@@ -10,25 +10,37 @@ body {
     background-color: #f1f1f1;
 }
 
-h1 {
+h1.item-name, h1.best-sellers {
     padding: 16px;
+}
+
+h1.item-name {
     text-align: center;
 }
 
+h1.best-sellers {
+    text-align: left;
+    color: black;
+}
+
 /* Float three columns side-by-side */
-#phone_image_container {
+#phone_image_column, #phone_info_column, #addtobasketdiv {
     float: left;
     width: 30%;
 }
 
+#best_sellers_column {
+    float: left;
+}
+
 /* Clear floats after the columns*/
-.row:after {
+div.row:after {
     content: "";
     clear: both;
 }
 
 /* Style the counter cards */
-.card {
+div.card {
     padding: 16px;
 }
 
@@ -43,7 +55,11 @@ h1 {
 
 img.phone_image {
     width: 75%;
-    transform: translate(15%, 8%);
+    transform: translate(5%, 8%);
+}
+
+p {
+    font-size: 16px;
 }
 
 p.price {
@@ -51,11 +67,7 @@ p.price {
     font-size: 36px;
 }
 
-p {
-    font-size: 16px;
-}
-
-#tickbox, #cross, #warning, #warning1 {
+#tickbox, #cross, #warning, #warning1, #more_prompt {
     margin-right: 5px;
 }
 
@@ -75,6 +87,10 @@ p {
     color: rgba(255, 0, 0, 0.644);
 }
 
+#more_prompt {
+    color: crimson;
+}
+
 .collapsible {
     background-color: rgb(152, 82, 150);
     color: white;
@@ -87,11 +103,11 @@ p {
     font-size: 16px;
 }
 
-.active, .collapsible:hover {
+.active, button.collapsible:hover {
     background-color: blueviolet;
 }
 
-.collapsible:after {
+button.collapsible:after {
     content: '\002B';
     color: white;
     font-weight: bold;
@@ -103,7 +119,7 @@ p {
     content: "\2212";
 }
 
-.content {
+div.content {
     padding: 5px;
     max-height: 0;
     overflow: hidden;
@@ -118,7 +134,7 @@ p {
     border-style: solid;
     border-radius: 8px;
     border-width: 1px;
-    transform: translateY(15%);
+    transform: translateY(20%);
 }
 
 #addtobasketdiv form{
@@ -154,4 +170,10 @@ button.add-to-basket {
 
 button.add-to-basket:hover {
     background: blueviolet;
+}
+
+.best-sellers {
+    text-align: center;
+    color: rgb(152, 82, 150);
+    animation: pulsate 1.5s ease-in-out infinite;;
 }
