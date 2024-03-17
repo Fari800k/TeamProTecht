@@ -82,7 +82,7 @@
             </p>
             
             <hr>
-            <button class="collapsible"><b>Product Description</b></button>
+            <button class="collapsible"><b>Brief Product Description</b></button>
             <div class="content">
                 <p><?php echo $row["ItemDesc"] ?></p>
             </div>
@@ -103,7 +103,7 @@
                 <p><?php echo "<b>Available colour(s):</b> " . $row["colour"]?></p>
                 <p><?php echo "<b>Storage space:</b> " . $row["storage"]?></p>
                 <p><?php echo "<b>Theoretical battery life:</b> " . $row["BatteryLife"] . " hours"?></p>
-            </div>
+            </div>            
         </div>   
             
         <?php
@@ -116,12 +116,105 @@
         echo "<button type='submit' name='add_to_basket' class='add-to-basket'><b>Add to Basket</b></button>";
         echo "</form></div>";
         ?>
-            
-        
+
         <div id="best_sellers_column" class="column">
-            <br><br>
+            <br><br><br><br><br><hr>
             <h1 class="best-sellers">Best Sellers</h1>
             <?php include "featureditem.php"?>
+            
+            <div id="rate_review_column" class="column">
+            <br><br><hr>    
+            <h1 class="rate-review">Share your thoughts</h1>
+            <div id="rate-review-card" class="card">
+                <h1>Product Review</h1>
+
+                <?php 
+                $review_query = "SELECT ";
+                ?>
+
+                <div id="rating_bar">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <p>4.1 average based on 254 reviews</p>
+                    
+                    <div class="row">
+                        <div class="side">
+                            <div>5 star</div>
+                        </div>
+                    </div>
+
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-5"></div>
+                        </div>
+                    </div>
+
+                    <div class="side right">
+                        <div>150</div>
+                    </div>
+
+                    <div class="side">
+                        <div>4 star</div>
+                    </div>
+
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-4"></div>
+                        </div>
+                    </div>
+
+                    <div class="side right">
+                        <div>63</div>
+                    </div>
+
+                    <div class="side">
+                        <div>3 star</div>
+                    </div>
+
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="side right">
+                        <div>15</div>
+                    </div>
+
+                    <div class="side">
+                        <div>2 star</div>
+                    </div>
+
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="side right">
+                        <div>6</div>
+                    </div>
+
+                    <div class="side">
+                        <div>1 star</div>
+                    </div>
+
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="side right">
+                        <div>20</div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
+    </div>
 </body>
 </html>
