@@ -23,15 +23,24 @@
 }
 
 body {
+    display: block;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f1f1f1;
 }
 
+.accountbody{
+    display: flex;
+}
+
 h2 {
     text-align: center;
     color: #333;
+}
+
+.accountbody h3{
+    max-width: 30%;
 }
 
 form {
@@ -123,40 +132,96 @@ a{
     color: purple;
 }
 
-.column{
-    display: flex;
+.accountbody .card{
+    padding: 100px 25px;
+    width: 20%;
 }
 
-.prev img{
-    width: 150px;
-    height: 150px;
-    padding-bottom: 30px;
+.accountbody .card .user_image{
+    width: 80%;
 }
 
-.phone{
+
+.prev{
     display: flex;
+    flex-wrap: wrap;
+    padding-left: 75px;
+    padding-top: 75px;
+}
+
+.accountbody .prev{
+    width: 100%;
+}
+
+.prev .order{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px 0px;
+    margin: 0px;
+}
+
+.order .phone{
+    display: flex;
+    width: 65%;
+    .phone_name{
+        width:50%;
+    }
+    img{
+        width: 20%;
+        height: 60%;
+        padding-bottom: 30px;
+    }
 }
 
 .phone_name{
     padding-left: 30px;
 }
 
-.popup-menu {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
+.order .review{
+    width: 30%;
+    .reviewform{
+        max-height: 90%;
+    }
+}
+
+.checked {
+    color: orange;
+}
+
+.reviewform {
+    margin: 0px;
+    .fa {
+        max-width: 15%;
+        font-size: 5vh;
+        cursor: pointer;
+    }
+}
+
+.one {
+color: rgb(255, 0, 0);
+}
+
+.two {
+color: rgb(255, 106, 0);
+}
+
+.three {
+color: rgb(251, 255, 120);
+}
+
+.four {
+color: rgb(255, 255, 0);
+}
+
+.five {
+color: rgb(24, 159, 14);
 }
 
 #updateDetailsPopup {
     display: none; /* Hide the popup by default */
     position: fixed;
+    width: 25%;
     top: 50%; /* Position at the vertical center */
     left: 50%; /* Position at the horizontal center */
     transform: translate(-50%, -50%); /* Center the popup */
@@ -191,6 +256,7 @@ a{
 #updateDetailsPopup form button {
     /* Add any additional styling here if needed */
 }
+
 #updateDetailsPopup form {
     display: flex;
     flex-direction: column;
@@ -212,4 +278,3 @@ a{
     width: calc(100% - 20px); /* Set full width for password and textarea */
     margin-bottom: 10px; /* Add some spacing between inputs */
 }
- 
