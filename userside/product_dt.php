@@ -118,9 +118,28 @@
         ?>
 
         <div id="best_sellers_column" class="column">
-            <br><br><br><br><br><hr>
+            <br><br><br><br><br><hr class="best-sellers">
             <h1 class="best-sellers">Best Sellers</h1>
             <?php include "featureditem.php"?>
+            <div id="rev_col" class="column">
+                <div id="rev_card" class="card">
+                    <h1 class="rev">What people have said about this product?</h1>
+                    <p class="user_exp"></p>
+                    
+                    <ul class="list-inline rating-list">
+                        <li><i id="star" class="fa fa-star"></i></li>
+                        <li><i id="star" class="fa fa-star"></i></li>
+                        <li><i id="star" class="fa fa-star"></i></li>
+                        <li><i id="star" class="fa fa-star"></i></li>
+                    </ul>
+
+                    <?php
+                    
+                    ?>
+                </div>
+
+
+            </div>
         </div>
     </div>
 </body>
