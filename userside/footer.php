@@ -13,7 +13,7 @@
                 <h3>Social Media</h3>
                 <ul class="social-icons">
                     <li><a href="https://en-gb.facebook.com/" target="_blank"><img src="CSS/images/facebook.png" alt="Facebook"></a></li>
-                    <li><a href="https://twitter.com/i/flow/login" target="_blank"><img src="CSS/images/twitter.png" alt="Twitter"></a></li>
+                    <li><a href="https://twitter.com/i/flow/login" target="_blank"><img src="CSS/images/twitterx.png" alt="Twitter"></a></li>
                     <li><a href="https://www.instagram.com/accounts/login/" target="_blank"><img src="CSS/images/insta.png" alt="Instagram"></a></li>
                 </ul>
                 <p>Connect with us on social media for updates and news!</p>
