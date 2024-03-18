@@ -1,0 +1,27 @@
+
+                <div id="accountcontainer">
+                    <li class="accountbutton" id="buttonaccount"><a href=""><i class="fa fa-user"></i></a></li>
+                    <div class="myaccount" id="myaccountdropdown">
+                        <li class="accountcustomer" id="customer"><a href="#">Customer</a></li>
+                        <li class="accountemployee" id="employee"><a href="#">Employee</a></li>
+                    </div>
+                </div>  
+                
+                <script>
+                    document.addEventListener("DOMContentLoaded", function(){
+                        var accountNav = document.getElementById("buttonaccount");
+                        var accountNavView = document.getElementById("myaccountdropdown");
+
+                        accountNavView.addEventListener("mouseleave", function(){
+                            if(accountNavView.style.display === "block"){
+                                accountNavView.style.display = "none";
+                            }
+                        });
+
+                        accountNav.addEventListener("mouseover", function(){
+                            if(accountNavView.style.display !== "block"){
+                                accountNavView.style.display = "block";
+                            }
+                        });
+                    });
+                </script>
