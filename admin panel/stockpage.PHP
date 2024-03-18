@@ -21,6 +21,7 @@
             <li><a href="http://localhost/Year%202%20Team%20Project/pendingorders.html">View Inventory</a></li>
             <li><a href="http://localhost/Year%202%20Team%20Project/fulfilledorders.html">Fulfilled Orders</a></li>
             <li><a href="file:///C:/xampp/htdocs/Year%202%20Team%20Project/stocksystem.html">Stock Put Away</a></li>
+     <li><a href="http://localhost/Year%202%20Team%20Project/viewcontact.php">View contct forms</a></li>
             <li class="logout-link"><a href="http://localhost/Year%202%20Team%20Project/login.html" onclick="logout()">Logout</a></li>
         </ul>
     </div>
