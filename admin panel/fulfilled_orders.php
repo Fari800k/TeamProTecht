@@ -49,7 +49,13 @@
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>            
+        </li>   
+              <li>
+    <a href="viewcontact.php">
+        <i class='bx bx-envelope'></i>
+        <span class="text">Contact Form</span>
+    </a>
+</li>
         <li>
             <a href="#">
                 <i class='bx bx-log-out'></i>
