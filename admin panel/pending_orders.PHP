@@ -5,6 +5,7 @@
             <!---box icons css-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="employee.css">
+    <title>Pending Orders</title>
 </head>
     
 
