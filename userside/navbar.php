@@ -27,41 +27,46 @@
             echo "<li><a href='logout.php'>Logout</a></li>";
         } 
         
-        ?>
-        <div id="basketcontainer">
-            <li class="basketbutton" id="buttonbasket"><a href="basket.php"><i class="fa fa-shopping-basket"></i></a></li>
-            <div class="mybasket" id="mybasketdropdown">
-                
-        <?php
-            //if item/s added to a new basket, view basket in dropdown menu
-            if(isset($_SESSION['Basket_ID'])){
-                $overviewsql = "SELECT * FROM basketitem 
-                                    JOIN item ON item.Item_ID = basketitem.Item_ID
-                                    WHERE Basket_ID = ".$_SESSION['Basket_ID']."";
+        //if item/s added to a new basket, view basket in dropdown menu
+        if(isset($_SESSION['Basket_ID'])){
+            $overviewsql = "SELECT * FROM basketitem 
+                                JOIN item ON item.Item_ID = basketitem.Item_ID
+                                WHERE Basket_ID = ".$_SESSION['Basket_ID']."";
 
-                $basketviewitems = $pdo->prepare($overviewsql);
-                $basketviewitems->execute();
+            $basketviewitems = $pdo->prepare($overviewsql);
+            $basketviewitems->execute();
 
-                echo "<strong>Your Basket</strong>";
-                foreach($basketviewitems as $basketviewitem){
-                    echo "<div class = 'basketitemcontainer' id = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'>";
-                    echo "<div class = 'basketiteminfo'><a href='product_dt.php?Item_ID=" . $basketviewitem['Item_ID'] . "'><img src='CSS/images/". $basketviewitem['Img'] . "'></a>";
-                    echo "<div class = 'basketitemnumbers'><p>£".$basketviewitem['Price']." per item</p>";
-                    echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</p>";
-                    echo "<form action='deleteitem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketviewitem['BasketItem_ID']."'/>";
-                    echo "<button type='submit' name='deleteItem'>Delete</button></form></div></div></div>";
-                }
+            //only include basket nav if basket_id set
+            echo "<div id='basketcontainer'>";
+            echo "<li class='basketbutton' id='buttonbasket'><a href='basket.php'><i class='fa fa-shopping-basket'></i></a></li>";
+            echo "<div class='mybasket' id='mybasketdropdown'>";
+            echo "<strong>Your Basket</strong>";
+            foreach($basketviewitems as $basketviewitem){
+                echo "<div class = 'basketitemcontainer' id = 'basketitemID" . $basketviewitem['BasketItem_ID'] . "'>";
+                echo "<div class = 'basketiteminfo'><a href='product_dt.php?Item_ID=" . $basketviewitem['Item_ID'] . "'><img src='CSS/images/". $basketviewitem['Img'] . "'></a>";
+                echo "<div class = 'basketitemnumbers'><p>£".$basketviewitem['Price']." per item</p>";
+                echo "<p>Quantity: ". $basketviewitem['Quantity'] ."</p>";
+                echo "<form action='deleteitem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketviewitem['BasketItem_ID']."'/>";
+                echo "<button type='submit' name='deleteItem'>Delete</button></form></div></div></div>";
             }
+        }
         ?>
         </div>
         </div>
         <div id="accountcontainer">
-            <li class="accountbutton" id="buttonaccount"><a href=""><i class="fa fa-user"></i></a></li>
-            <div class="myaccount" id="myaccountdropdown">
-                <li class="accountcustomer" id="customer"><a href="#">Customer</a></li>
-                <li class="accountemployee" id="employee"><a href="#">Employee</a></li>
-            </div>
-        </div>              
+            <?php
+            if(isset($_SESSION['User_ID'])){
+                echo "<li class='accountbutton' id='buttonaccount'><a href='accountpage.php'><i class='fa fa-user'></i></a></li>";
+            } else {
+                echo "<li class='accountbutton' id='buttonaccount'><a href='#'><i class='fa fa-user'></i></a></li>
+                        <div class='myaccount' id='myaccountdropdown'>
+                            <li class='accountcustomer' id='customer'><a href='login.php'>Customer</a></li>
+                            <li class='accountemployee' id='employee'><a href='login_system/login.php'>Employee</a></li>
+                        </div>";
+            }
+            ?>
+        </div>             
     </ul>
 </nav>
+
 

@@ -30,14 +30,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     document.addEventListener("DOMContentLoaded", function(){
-        var page = document.querySelector("html");
         var accountNav = document.getElementById("buttonaccount");
         var accountNavView = document.getElementById("myaccountdropdown");
 
-        page.addEventListener("click", function(event){
+        accountNavView.addEventListener("mouseleave", function(){
             if(accountNavView.style.display === "block"){
                 accountNavView.style.display = "none";
-                event.stopPropagation();
             }
         });
 
@@ -97,3 +95,4 @@ function registerButton() {
         popup.style.display = "block";
     }
 }
+
