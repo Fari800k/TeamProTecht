@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Messages</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,28 +13,78 @@
             padding: 0;
             background-color: #f2f2f2;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        /* Added CSS for the navbar */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #3f3f3f;
+            padding-top: 20px;
         }
+
+        .brand {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .brand img {
+            width: 80%;
+            height: auto;
+        }
+
+        .side-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .side-menu li {
+            margin-bottom: 10px;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .side-menu a:hover {
+            background-color: #555;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .text {
+            vertical-align: middle;
+        }
+
+       .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 270px; /* Adjusted margin-left to accommodate sidebar width */
+}
+
         h1 {
             text-align: center;
             color: #333;
         }
-        .message {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
+
         form {
             margin-top: 10px;
         }
+
         textarea {
             width: 100%;
             padding: 10px;
@@ -40,6 +92,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         input[type="submit"] {
             background-color: #007bff;
             color: #fff;
@@ -48,13 +101,16 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
         .success {
             color: green;
             font-weight: bold;
         }
+
         .error {
             color: red;
             font-weight: bold;
@@ -62,7 +118,45 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <section id="sidebar">
+        <a href="" class="brand">
+            <span class="icon">
+                <img src="logo.png" alt="teamprotect logo">
+            </span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="stockview.php">
+                    <i class='bx bxl-dropbox'></i>
+                    <span class="text">Stock View</span>
+                </a>
+            </li>
+            <li>
+                <a href="confirm_orders.php">
+                    <i class='bx bx-mail-send'></i>
+                    <span class="text">Confirm Orders</span>
+                </a>
+            </li>
+            <li>
+                <a href="pending_orders.PHP">
+                    <i class='bx bxs-hourglass'></i>
+                    <span class="text">Pending Orders</span>
+                </a>
+            </li>
+            <li>
+                <a href="fulfilled_orders.php">
+                    <i class='bx bxs-package'></i>
+                    <span class="text">Fulfilled Orders</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>    <div class="container">
         <h1>Contact Messages</h1>
 
         <?php
@@ -117,4 +211,3 @@
     </div>
 </body>
 </html>
-
