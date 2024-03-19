@@ -118,22 +118,21 @@
         ?>
 
         <div id="best_sellers_column" class="column">
-            <br><br><br><br><br><hr class="best-sellers">
+            <br><br><br><br><hr class="best-sellers">
             <h1 class="best-sellers">Best Sellers</h1>
             <?php include "featureditem.php"?>
             <div id="rev_col" class="column">
+            <h1 class="rev">What people have said about this product?</h1>
                 <div id="rev_card" class="card">
-                    <h1 class="rev">What people have said about this product?</h1>
-                    <p class="user_exp"></p>
-                    
-                    <ul class="list-inline rating-list">
-                        <li><i id="star" class="fa fa-star"></i></li>
-                        <li><i id="star" class="fa fa-star"></i></li>
-                        <li><i id="star" class="fa fa-star"></i></li>
-                        <li><i id="star" class="fa fa-star"></i></li>
-                    </ul>
-
                     <?php
+                    $user_query = "SELECT User_ID, Username FROM users";
+                    
+
+                    $rev_query = "SELECT User_ID, Item_ID, Rating, Description, Created_at FROM reviews";     
+                    $exct = $pdo->prepare($rev_query);
+                    $exct->execute();
+                    $rev_row = $exct->fetch(PDO::FETCH_ASSOC);
+
                     
                     ?>
                 </div>
