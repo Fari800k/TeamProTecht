@@ -49,6 +49,12 @@ h1 {
     margin-right: auto;  
 }
 
+#middle #signupbtn{
+    position: absolute;
+    left: 50%;
+    top: 35%;
+}
+
 .login-signup {
     float: left;
 }

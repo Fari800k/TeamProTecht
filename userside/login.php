@@ -14,10 +14,11 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     <link rel="stylesheet" type="text/css" href="CSS/login.css">
     <script defer src="JavaScript/script.js"></script>
 </head>
-<body class="loginbody">
+<body>
     <?php include "navbar.php"; ?>
 
-    <h1>Login</h1>
+    <div id="middle">
+        <h1>Login</h1>
     <?php 
     if(isset($error)) {
         echo "<p style='color:red;'>$error</p>";
@@ -25,11 +26,11 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     if(isset($success_message)){
         echo "<p style='color:green;'>$success_message</p>";
     }?>
-    <form class="login" method="post" action="login.php">
-        <input type="text" placeholder="Username" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <button type="submit" name="loginbtn">Login</button>
-    </form>
+        <form class="login" method="post" action="login.php">
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit" name="loginbtn">Login</button>
+        </form>
     <?php
     if(isset($_POST['loginbtn'])) {
         $usernameSubmit = $_POST['username'];
@@ -70,7 +71,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
         }
     }
     ?>
-    <button id="signupbtn" onclick="registerButton()">Sign up</button>
+        <button id="signupbtn" onclick="registerButton()">Sign up</button>
+    </div>
 
     <div id="createUserPopup" class="popup">
         <form method="post" action="registeruser.php">
