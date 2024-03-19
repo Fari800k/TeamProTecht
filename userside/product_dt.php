@@ -132,11 +132,33 @@
                     $exct = $pdo->prepare($rev_query);
                     $exct->execute();
                     $rev_row = $exct->fetch(PDO::FETCH_ASSOC);
-
-                    
                     ?>
-                </div>
 
+                    <div class="row">
+                        <div class="side">
+                            <div>
+                                <?php 
+                                
+                                
+                                echo $rev_row["Description"]
+                                
+                                ?></div>
+                        </div>
+
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar">
+                                </div>
+                            </div>
+
+                            <div class="side right">
+                                <div>150</div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
