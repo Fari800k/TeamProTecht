@@ -1,4 +1,4 @@
-<?php include('../connectdb.php');?>
+<?php include '../userside/SQL/connectdb.php';?>
 
 <!DOCTYPE html>
 <html>
