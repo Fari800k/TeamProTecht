@@ -1,10 +1,18 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../login_system/login.php");
+    exit();
+}
+session_abort();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Messages</title>
-    <link rel="stylesheet" href="employee.css" />
+    <link rel="stylesheet" href="style.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         body {
@@ -156,7 +164,7 @@
     </a>
 </li>
             <li>
-                <a href="#">
+                <a href="logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="text">Logout</span>
                 </a>

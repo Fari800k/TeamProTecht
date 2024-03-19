@@ -1,12 +1,11 @@
-<html>
-    <head>
-            <!---box icons css-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="stocksystem.css">
-</head>
-    
-
-<body>
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../login_system/login.php");
+    exit();
+}
+session_abort();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,23 +46,15 @@
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>   
-              <li>
-    <a href="viewcontact.php">
-        <i class='bx bx-envelope'></i>
-        <span class="text">Contact Form</span>
-    </a>
-</li>
-              <li>
-            <a href="#">
+        </li>            <li>
+            <a href="logout.php">
                 <i class='bx bx-log-out'></i>
                 <span class="text">Logout</span>
             </a>
         </li>
           </ul>
     </section>
-</body>
-</html>
+
 <br>
 
 <section id="table">
@@ -71,7 +62,7 @@
 <form method="post" >
 <label for="orderSelect">Select Order:</label>
 <select id="orderSelect" name="orderSelect">
-    <option value="">Select</option>
+    <option value=""></option>
     <option value="ASC">Ascending</option>
     <option value="DESC">Descending</option>
 </select>
@@ -96,7 +87,8 @@
             <th>Shelf</th>
             <th>Quantity Ordered?</th>
         </tr>
-
+</body>
+</html>
 
     <?php
    $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
@@ -125,23 +117,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Default value when loaded will be ascending
     $order = "ASC";
 }
-$statement = $pdo->prepare("SELECT
-    Orders.Order_ID,
-    Orders.Address_Order AS Order_Address,
-    Item.Item_ID,
-    Item.ItemName,
-    Orders.Order_Status,
-    Orders.Updated_at AS Order_Updated_at,
-    Location.Row,
-    Location.Shelf,
-    BasketItem.Quantity AS Basket_Quantity
-FROM Orders
-JOIN Basket ON Orders.Basket_ID = Basket.Basket_ID
-JOIN BasketItem ON Orders.Basket_ID = BasketItem.Basket_ID
-JOIN Item ON BasketItem.Item_ID = Item.Item_ID
-JOIN Location ON Item.Location_ID = Location.Location_ID
-WHERE Orders.Order_Status = 'Shipped'
-ORDER BY Order_Updated_at $order");
+
+$status = array();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["orderSelect"]) && !empty($_POST["orderSelect"])) {
+    $status[] = $_POST["orderSelect"];
+    // Create a string for the WHERE clause with multiple statuses
+    $status_string = "'" . implode("','", $status) . "'";
+    $statement = $pdo->prepare("SELECT
+        Orders.Order_ID,
+        Orders.Address_Order AS Order_Address,
+        Item.Item_ID,
+        Item.ItemName,
+        Orders.Order_Status,
+        Orders.Updated_at AS Order_Updated_at,
+        Location.Row,
+        Location.Shelf,
+        BasketItem.Quantity AS Basket_Quantity
+    FROM Orders
+    JOIN Basket ON Orders.Basket_ID = Basket.Basket_ID
+    JOIN BasketItem ON Orders.Basket_ID = BasketItem.Basket_ID
+    JOIN Item ON BasketItem.Item_ID = Item.Item_ID
+    JOIN Location ON Item.Location_ID = Location.Location_ID
+    WHERE Orders.Order_Status IN ($status_string)
+    ORDER BY Order_Updated_at $order");
+} else {
+    //Default value when loaded will be ascending and show all statuses
+    $status_string = "'Pending','Processing','Completed'";
+    $statement = $pdo->prepare("SELECT
+        Orders.Order_ID,
+        Orders.Address_Order AS Order_Address,
+        Item.Item_ID,
+        Item.ItemName,
+        Orders.Order_Status,
+        Orders.Updated_at AS Order_Updated_at,
+        Location.Row,
+        Location.Shelf,
+        BasketItem.Quantity AS Basket_Quantity
+    FROM Orders
+    JOIN Basket ON Orders.Basket_ID = Basket.Basket_ID
+    JOIN BasketItem ON Orders.Basket_ID = BasketItem.Basket_ID
+    JOIN Item ON BasketItem.Item_ID = Item.Item_ID
+    JOIN Location ON Item.Location_ID = Location.Location_ID
+    WHERE Orders.Order_Status IN ($status_string)
+    ORDER BY Order_Updated_at $order");
+}
 
 $statement->execute();
 

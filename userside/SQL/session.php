@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
     // check empty fields
     if (empty($emailAddress) || empty($employeePassword)) {
         // redirect and error
-        header("Location: ..\login.php?error=emptyfields");
+        header("Location: ../../../TeamProTect/login_system/login.php?error=emptyfields");
         exit();
     } else {
         // prepare select
@@ -31,16 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
                     $_SESSION['email'] = $emailAddress;
 
                     // redirect to home
-                    header("Location: ..\homepage.php?loginsuccessful");
+                    header("Location: ../../../TeamProTecht/admin panel/pending_orders.php?loginsuccessful");
                     exit();
                 } else {
                     // error for invalid password
-                    header("Location: ..\login.php?error=wrongpassword");
+                    header("Location: ../../../TeamProTecht/login_system/login.php?error=wrongpassword");
                     exit();
                 }
             } else {
                 // error for no user
-                header("Location: ..\login.php?error=nouser");
+                header("Location: ../../../TeamProTecht/login_system/login.php?error=nouser");
                 exit();
             }
         } else {

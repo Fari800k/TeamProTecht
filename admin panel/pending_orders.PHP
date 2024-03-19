@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../login_system/login.php");
+    exit();
+}
+session_abort();
+?>
+
 <html lang="en">
     <head>
     <meta charset="UTF-8">
