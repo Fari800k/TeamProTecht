@@ -31,14 +31,14 @@ footer {
 }
 
 .footer_content h3 {
-    color: black; 
-    font-size: 18px; 
+    color: white; 
 }
 
 .footer_content .social-media h3,
 .footer_content .contact_info h3,
 .footer_content .countries h3 {
-    color: black; 
+    color: white; 
+    font-size: 18px; 
 }
 
 .footer_content .social-icons {
@@ -67,36 +67,15 @@ footer {
     margin-right: 10px; 
 }
 
-.contact_info, .contact_info a {
-    color: black;
-}
-
-.countries, .countries a {
-    color: black; 
-}
-
-.contact_info a, .countries a {
-    text-decoration: none;
-    color: inherit; 
-}
-
-.contact_info a {
-    text-decoration: underline;
-}
-
-.countries a {
-    text-decoration: underline;
-}
-
-.contact_info a {
-    text-decoration-color: black; 
-}
-
-.countries a {
-    text-decoration-color: black; 
-}
-
 .footer_content .copyright {
     margin-top: 20px;
     text-align: center;
+}
+
+footer a {
+    color: white;
+}
+
+footer p{
+    color: white;
 }
