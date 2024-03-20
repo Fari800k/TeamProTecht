@@ -52,7 +52,6 @@
         <div id = "phone_info_column" class="column">
             <p class="price"><b><?php echo "£" . $row["Price"] ?></b></p>
             <hr>
-            <!-- TASK FOR DANIEL: MAKE FORM FOR ADD TO BASKET -->
             <p>
                 <?php
                 /* Get Availability status */
@@ -73,7 +72,7 @@
                     echo "<i id='more_prompt' class='fa fa-exclamation'></i>" ."<strong>" .$more_prompt_msg. "</strong>";
                 } else if ($stock >= 10 and $stock <= 15) {
                     $warning_msg = "Low stock! Only a couple left! Hurry before it's gone";
-                    echo "<i id='warning1' class='fa fa-exclamation'</i>" . "<strong>" .$warning_msg. "</strong<";
+                    echo "<i id='warning1' class='fa fa-exclamation'></i>" . "<strong>" .$warning_msg. "</strong>   ";
                 } else {
                     $normal_msg = "In stock";
                     echo "<i id='tickbox' class='fa fa-check'></i>" . "<strong>" .$normal_msg. "</strong>";
