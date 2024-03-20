@@ -131,7 +131,7 @@
                             <div>
                                 <?php
                                 include "SQL/connectdb.php";
-                                $review_query = "SELECT * FROM reviews";
+                                $review_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
                                 $result_review = mysqli_query($con, $review_query);
                                 
                                 while ($res = mysqli_fetch_array($result_review)) {
