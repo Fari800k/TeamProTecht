@@ -25,7 +25,7 @@ include "navbar.php";
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "stockpage";
+                    $dbname = "cs2tp";
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
