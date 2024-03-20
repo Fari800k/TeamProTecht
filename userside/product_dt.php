@@ -2,9 +2,10 @@
     // connect to database
     include "connectdb.php";
 
-    $item_id = ""; 
+    $item_id = "";
+    $user_id = "";
 
-    if(isset($_GET["Item_ID"])) {
+    if (isset($_GET["Item_ID"])) {
         $item_id = $_GET["Item_ID"];
     } else {
        
@@ -12,7 +13,9 @@
         exit(); 
     }
 
-    
+    if (isset($_GET["User_ID"])) {
+        $user_id = $S_GET["User_ID"];
+    }
     
     $item_query = "SELECT * FROM item WHERE Item_ID = ?";
     $brand_query = "SELECT * FROM brand";
@@ -123,43 +126,59 @@
             <h1 class="best-sellers">Best Sellers</h1>
             <?php include "featureditem.php"?>
             <div id="rev_col" class="column">
+            <hr>
             <h1 class="rev">What people have said about this product?</h1>
                 <div id="rev_card" class="card">
-                    <h1 class="summary">Summary of rating reviews</h1>
+                    <p class="summary"><b>Summary of rating reviews</b></p>
                     <div class="row">
-                        <div class="side">
-                            <div>
-                                <?php
-                                include "SQL/connectdb.php";
-                                $review_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
-                                $result_review = mysqli_query($con, $review_query);
-                                
-                                while ($res = mysqli_fetch_array($result_review)) {
-                                    $desc = $res["Description"];
-                                    
-                                    $num = mysqli_num_rows($result_review);
-                                    
-                                    echo $desc . "<br>";
-                                }
-                                ?>
-                            </div>
-                        </div>
+                        <?php
+                        /* Display all five stars */
+                        for ($num_stars = 1; $num_stars <= 5; $num_stars++) {
+                            echo "<span style='float: left; font-size: 25px;' class='fa fa-star'></span>";  
+                        }
 
-                        <div class="middle">
-                            <div class="bar-container">
-                                <div class="bar-5"></div>
-                            </div>
-                        </div>
+                        echo "<p style = 'transform: translate(15px, 2px)'>Average rating of ". " out of 5 stars</p>";
+                        /* Iterate through scorecard to display it
+                         * Review from user(s) is/are also displayed (icon is also shown)
+                        */
+                        echo "<br>";
+                        for ($num = 1; $num <= 5; $num++) {
+                            echo "<br>";
+                            echo "<div class='side'><p style='text-align: left'>" .$num. " star" . "</p></div>";
+                            echo "<div class='middle'><div class='bar-container' style='background-color: #f1f1f1; width: 5%; text-align: center;'>
+                            <div class='bar-$num' style='height: 18px; background-color: #04AA6D;'></div></div></div>";
+                            echo "<div class='side right'></div>";
+                        }
+                        
+                        ?>
 
-                        <div class="side right">
-                            <div></div>
-                        </div>
+                        <div>
+                        <?php
+                        include "SQL/connectdb.php";
+                        $review_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
+                        $user_query = "SELECT * FROM users ";
+                        $result_review = mysqli_query($con, $review_query);
+                        $result_user = mysqli_query($con, $user_query);
 
+                        echo "<p style='text-align: left; font-size: 24px;'><b>User reviews</b></p>";
 
+                        while ($review_row = mysqli_fetch_array($result_review)) {
+                            $desc = $review_row["Description"];
+                            echo "<br><i style='font-size: 40px; float: left; margin-top: -8px; margin-right: 5px;' class='fa fa-user'>" . "</i>";
+
+                            for ($num_stars = 1; $num_stars <= 5; $num_stars++) {
+                                echo "<span style='float: left; font-size: 25px;' class='fa fa-star'></span>";
+                            }
+
+                            echo "<br><br>";
+                            echo "<p style='text-align: left'>" .$desc . "</p>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

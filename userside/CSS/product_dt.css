@@ -65,6 +65,10 @@ p.price {
     font-size: 36px;
 }
 
+p.summary {
+    font-size: 24px;
+}
+
 #tickbox, #cross, #warning, #warning1, #more_prompt {
     margin-right: 5px;
 }
@@ -186,44 +190,11 @@ hr {
 
 #rev_card {
     transform: translate(1.5%, 0%);
-    width: 30%;
-    height: 40%;
+    width: 80%;
+    height: 100%;
 }
 
-.fa-star:before {
-    content: "\f005";
-}
-
-.rating-list li i.yellow {
-    color: #FFD700;
-}
-
-.rating-list li i.gray {
-    color: #bbb;
-}
-
-.list-inline>li {
-    display: inline-block;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.rating-list li {
-    float: left;
-    color: #ddd;
-    
-}
-
-.rating-list li:hover, .rating-list li:hover ~ li {
-    color: #FFD700;
-}
-
-.fa-star {
-    display: inline-block;
-    text-rendering: auto;
-    transform: translate(-200%,-30%);
-}
-
-#star {
-    font-size: 20px;
+div.bar-container {
+    width: 100%;
+    text-align: center;
 }
