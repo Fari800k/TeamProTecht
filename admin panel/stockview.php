@@ -31,7 +31,7 @@ session_abort();
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="confirm_orders.php">
                     <i class='bx bx-mail-send' ></i>
                     <span class="text">Confirm Orders</span>
                 </a>
@@ -46,7 +46,7 @@ session_abort();
                     <span class="text">contact forms</span>
                 </a>
             </li>            <li>
-                <a href="#">
+                <a href="fulfilled_orders.php">
                     <i class='bx bxs-package' ></i>
                     <span class="text">Fulfilled Orders</span>
                 </a>
@@ -75,17 +75,17 @@ session_abort();
         </tr>
         <?php
            $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-           $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, stock, Created_at, Updated_at  FROM item");
+           $statement = $pdo->query("SELECT Item_ID, ItemName, ItemDesc, Price, Img, Stock, Created_at, Updated_at  FROM item");
 
            foreach ($statement as $rows) {
             print "<td>" . $rows['Item_ID'] . "</td>";
             print "<td>" . $rows['ItemName'] . "</td>";
             print "<td>" . $rows['ItemDesc'] . "</td>";
             print "<td>" . $rows['Price'] . "</td>";
-            $image_url = "img/" . $rows['Img'];
+            $image_url = "../userside/CSS/images/" . $rows['Img'];
             print "<td><div class=product-image'>
-            <img src='$image_url' alt='Product Image' style></div></td>";
-            print "<td>" . $rows['stock'] . "</td>";
+                    <img src='$image_url' alt='Product Image' style></div></td>";
+            print "<td>" . $rows['Stock'] . "</td>";
             print "<td>" . $rows['Created_at'] . "</td>";
             print "<td>" . $rows['Updated_at'] . "</td></tr>";
         }
