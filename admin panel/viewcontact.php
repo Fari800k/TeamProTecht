@@ -19,7 +19,6 @@ session_abort();
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
         }
 
         /* Added CSS for the navbar */
