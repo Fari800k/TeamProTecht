@@ -21,7 +21,7 @@ table{
     padding-left: 220px;
 }
 
-section#table, .container{
+section#table, .container, section#mainsection{
     padding-left: 220px;
     img{
         max-width: 30%;
