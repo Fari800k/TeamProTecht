@@ -47,7 +47,7 @@ session_abort();
                 </a>
             </li>
         </li>            <li>
-            <a href="#">
+            <a href="logout.php">
                 <i class='bx bx-log-out'></i>
                 <span class="text">Logout</span>
             </a>
