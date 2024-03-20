@@ -6,7 +6,6 @@ if(!isset($_SESSION['user_id'])){
 }
 session_abort();
 ?>
-
 <html lang="en">
     <head>
     <meta charset="UTF-8">
@@ -14,7 +13,6 @@ session_abort();
             <!---box icons css-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="employee.css">
-    <title>Pending Orders</title>
 </head>
     
 
@@ -26,7 +24,7 @@ session_abort();
             </span>
           </a>
           <ul class="side-menu top">
-            <li>
+          <li>
                 <a href="stockview.php">
                     <i class='bx bxl-dropbox' ></i>
                     <span class="text">Stock View</span>
@@ -48,13 +46,19 @@ session_abort();
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>            <li>
-            <a href="#">
-                <i class='bx bx-log-out'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-          </ul>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
     </section>
 
 <br>
@@ -86,12 +90,6 @@ session_abort();
 
     <input type="submit" value="Submit">
 </form>
-
-
-
-
-
-
 
 <table>
         <tr>

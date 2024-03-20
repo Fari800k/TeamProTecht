@@ -5,9 +5,7 @@ if(!isset($_SESSION['user_id'])){
     exit();
 }
 session_abort();
-
-?>
-    
+?>   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +24,7 @@ session_abort();
             </span>
           </a>
           <ul class="side-menu top">
-            <li>
+          <li>
                 <a href="stockview.php">
                     <i class='bx bxl-dropbox' ></i>
                     <span class="text">Stock View</span>
@@ -37,27 +35,30 @@ session_abort();
                     <i class='bx bx-mail-send' ></i>
                     <span class="text">Confirm Orders</span>
                 </a>
-            </li >            
-            <li>
-                <a href="pending_orders.PHP">
+            </li>            <li>
+                <a href="pending_orders.php">
                     <i class='bx bxs-hourglass' ></i>
                     <span class="text">Pending Orders</span>
                 </a>
-            </li>           
-             <li>
+            </li>            <li>
                 <a href="fulfilled_orders.php">
                     <i class='bx bxs-package' ></i>
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>            
-        <li>
-            <a href="logout.php">
-                <i class='bx bx-log-out'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-          </ul>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
     </section>
 
 <br>
@@ -77,7 +78,7 @@ session_abort();
 
 <table>
         <tr>
-            <th>Shipping ID</th>
+            <th>Received ID</th>
             <th>Address</th>
             <th>Item ID</th>
             <th>Item Name</th>
@@ -90,13 +91,31 @@ session_abort();
         </body>
 </html>
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
-$order = "ASC"; // Default order
+   $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
+    $statement = $pdo->query("SELECT
+    Orders.Order_ID,
+    Orders.Address_Order AS Order_Address,
+    Item.Item_ID,
+    Item.ItemName,
+    Orders.Order_Status,
+    Orders.Updated_at AS Order_Updated_at,
+    Location.Row,
+    Location.Shelf,
+    BasketItem.Quantity AS Basket_Quantity
+FROM Orders
+JOIN Basket ON Orders.Basket_ID = Basket.Basket_ID
+JOIN BasketItem ON Orders.Basket_ID = BasketItem.Basket_ID
+JOIN Item ON BasketItem.Item_ID = Item.Item_ID
+JOIN Location ON Item.Location_ID = Location.Location_ID;");
 
+$status="";
+$order= "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["orderSelect"] == "DESC" || $_POST["orderSelect"] == "ASC") {
-        $order = $_POST["orderSelect"]; // Use the selected order if it's valid
-    }
+    
+    $order = ($_POST["orderSelect"] == "DESC") ?"DESC" : "ASC";
+}else {
+    //Default value when loaded will be ascending
+    $order = "ASC";
 }
 
 $status = array();
@@ -122,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["orderSelect"]) && !emp
     WHERE Orders.Order_Status IN ($status_string)
     ORDER BY Order_Updated_at $order");
 } else {
-    // Default value when loaded will be ascending and show all statuses
+    //Default value when loaded will be ascending and show all statuses
     $status_string = "'Delivered','Returning','Returned','Shipped'";
     $statement = $pdo->prepare("SELECT
         Orders.Order_ID,
@@ -159,8 +178,8 @@ foreach ($statement as $rows) {
 
 // Close the database connection
 $pdo = null;
-?>
 
+    ?>
 </table>
 </section>
 </body>

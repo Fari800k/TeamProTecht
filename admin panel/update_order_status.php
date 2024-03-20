@@ -1,4 +1,10 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../login_system/login.php");
+    exit();
+}
+session_abort();
 // Connect to database
 $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
 
