@@ -12,21 +12,19 @@
         exit(); 
     }
 
+    
+    
     $item_query = "SELECT * FROM item WHERE Item_ID = ?";
     $brand_query = "SELECT * FROM brand";
-    $review_query = "SELECT * FROM reviews";
 
     $ex_item= $pdo->prepare($item_query);
     $ex_brand = $pdo->prepare($brand_query);
-    $ex_rev = $pdo->prepare($review_query);
     
     $ex_item->execute([$item_id]);
     $ex_brand->execute();
-    $ex_rev->execute();
-
+    
     $item_row = $ex_item->fetch(PDO::FETCH_ASSOC);
     $brand_row = $ex_brand->fetch(PDO::FETCH_ASSOC);
-    $rev_row = $ex_rev->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -127,18 +125,37 @@
             <div id="rev_col" class="column">
             <h1 class="rev">What people have said about this product?</h1>
                 <div id="rev_card" class="card">
-
+                    <h1 class="summary">Summary of rating reviews</h1>
                     <div class="row">
                         <div class="side">
                             <div>
                                 <?php
-                                for () {
+                                include "SQL/connectdb.php";
+                                $review_query = "SELECT * FROM reviews";
+                                $result_review = mysqli_query($con, $review_query);
+                                
+                                while ($res = mysqli_fetch_array($result_review)) {
+                                    $desc = $res["Description"];
                                     
+                                    $num = mysqli_num_rows($result_review);
+                                    
+                                    echo $desc . "<br>";
                                 }
-                                echo $rev_row["Description"]
                                 ?>
                             </div>
                         </div>
+
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-5"></div>
+                            </div>
+                        </div>
+
+                        <div class="side right">
+                            <div></div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

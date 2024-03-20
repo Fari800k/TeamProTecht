@@ -11,7 +11,7 @@ body {
     background-color: #f1f1f1;
 }
 
-h1.item-name, h1.best-sellers, h1.rate-review {
+h1.item-name, h1.best-sellers, h1.rev {
     padding: 16px;
 }
 
@@ -19,7 +19,7 @@ h1.item-name {
     text-align: center;
 }
 
-h1.rev {
+h1.rev, h1.summary {
     text-align: left;
     color: black;
 }
@@ -34,7 +34,6 @@ h1.rev {
     float: left;
     width: 100%;
 }
-
 
 /* Clear floats after the columns*/
 div.row:after {
