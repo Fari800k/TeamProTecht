@@ -61,7 +61,7 @@
                 echo "<li class='accountbutton' id='buttonaccount'><a href='#'><i class='fa fa-user'></i></a></li>
                         <div class='myaccount' id='myaccountdropdown'>
                             <li class='accountcustomer' id='customer'><a href='login.php'>Customer</a></li>
-                            <li class='accountemployee' id='employee'><a href='login_system/login.php'>Employee</a></li>
+                            <li class='accountemployee' id='employee'><a href='../login_system/login.php'>Employee</a></li>
                         </div>";
             }
             ?>
