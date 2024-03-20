@@ -1,4 +1,4 @@
-body{
+body, html{
     background: white;
     display: flex;
     flex-direction: row;
@@ -16,15 +16,20 @@ body{
 
 }
 
-#table{
-    position: fixed;
+table{
     padding-top: 0px;
     padding-left: 220px;
 }
 
-#mainsection{
-    position: fixed;
+section#table, .container{
     padding-left: 220px;
+    img{
+        max-width: 30%;
+    }
+}
+
+body #table, body .container{
+    width: 70%;
 }
 
 form {
@@ -59,9 +64,6 @@ form {
     color: white;
 }
 
-
-
-
 #sidebar .side-menu li:hover .bx{
     color: rgb(131, 66, 139);
 }
@@ -80,7 +82,6 @@ form {
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
 }
 
@@ -102,11 +103,6 @@ tr:nth-child(even) {
 
 #sidebar .side-menu a {
     text-decoration: none;
-}
-
-.product-image img{
-    max-width: 75px;
-    max-height: 50px;
 }
 
 
