@@ -3,7 +3,7 @@ The TeamProTecht main branch is broken down into 3 main folders
 2. "login_system" - holds the admin user login
 3. "admin panel" - holds the admin/employee user pages
 
-The "userside" folder:
+The "userside" folder
 
 The userside folder consists of 3 folders and 19 PHP files:
 1. "CSS" - holds all css files and images
@@ -24,9 +24,17 @@ PHP files:
 10. homepage.php - contains the TeamProTecht home page along with a carousel
 11. login.php - contains the login form and register form popup for the customer user. If the user accesses the page when already logged in, they will be sent to accountpage.php
 12. logout.php - file logs the customer out of the site and returns to the homepage
-13. navbar.php - holds the navigation bar for the customer-side pages that changes depending on whether the user is logged in and if that logged in user has made a new basket
-14. product_dt.php - contains all the specifications for the product, the price, reviews of users who had bought the product and an option to add multiple of the product to your basket
-15. registeruser.php - file that creates a new user account with details given from the registration popup from login.php
-16. reviewitem.php - file that sends a product review from accountpage.php to the database to be seen by all users in product_dt.php
-17. update_details.php - file that updates the database of a logged-in user based on the form in accountpage.php
+14. navbar.php - holds the navigation bar for the customer-side pages that changes depending on whether the user is logged in and if that logged in user has made a new basket
+15. product_dt.php - contains all the specifications for the product, the price, reviews of users who had bought the product and an option to add multiple of the product to your basket
+16. registeruser.php - file that creates a new user account with details given from the registration popup from login.php
+17. reviewitem.php - file that sends a product review from accountpage.php to the database to be seen by all users in product_dt.php
+18. update_details.php - file that updates the database of a logged-in user based on the form in accountpage.php
 
+The "login_system" folder
+
+The login_system folder contains 2 PHP files, 1 CSS file and 2 images:
+1. login.php - The login file that sends the user to the admin panel pages if a log-in is
+               successful
+2. registration.php - The registration file that makes a new employee user with folder details
+                       included in the file
+3. loginstyle.css - CSS details for login.php and registration.php
