@@ -24,7 +24,7 @@ session_abort();
             </span>
           </a>
           <ul class="side-menu top">
-            <li>
+          <li>
                 <a href="stockview.php">
                     <i class='bx bxl-dropbox' ></i>
                     <span class="text">Stock View</span>
@@ -46,13 +46,19 @@ session_abort();
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>            <li>
-            <a href="logout.php">
-                <i class='bx bx-log-out'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-          </ul>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
     </section>
 
 <section id="mainsection">
@@ -152,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepare the statements
         $stmt_location = $pdo->prepare("INSERT INTO location (Shelf, Row) VALUES (?, ?)");
         $stmt_brand = $pdo->prepare("INSERT INTO Brand (BrandName) VALUES (?)");
-        $stmt_item = $pdo->prepare("INSERT INTO Item (ItemName, Quantity, ItemDesc, Price, Img, Location_ID, OperatingSystem, DisplaySize, DisplayResolution, BatteryLife, CameraMegapixels, BiometricAuthentication, Colour, Storage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt_item = $pdo->prepare("INSERT INTO Item (ItemName, Stock, ItemDesc, Price, Img, Location_ID, OperatingSystem, DisplaySize, DisplayResolution, BatteryLife, CameraMegapixels, BiometricAuthentication, Colour, Storage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         // Bind parameters and execute
         $stmt_location->execute([$shelf, $itemrow]);

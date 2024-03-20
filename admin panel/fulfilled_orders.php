@@ -24,7 +24,7 @@ session_abort();
             </span>
           </a>
           <ul class="side-menu top">
-            <li>
+          <li>
                 <a href="stockview.php">
                     <i class='bx bxl-dropbox' ></i>
                     <span class="text">Stock View</span>
@@ -35,27 +35,30 @@ session_abort();
                     <i class='bx bx-mail-send' ></i>
                     <span class="text">Confirm Orders</span>
                 </a>
-            </li >            
-            <li>
-                <a href="pending_orders.PHP">
+            </li>            <li>
+                <a href="pending_orders.php">
                     <i class='bx bxs-hourglass' ></i>
                     <span class="text">Pending Orders</span>
                 </a>
-            </li>           
-             <li>
+            </li>            <li>
                 <a href="fulfilled_orders.php">
                     <i class='bx bxs-package' ></i>
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-        </li>            
-        <li>
-            <a href="logout.php">
-                <i class='bx bx-log-out'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-          </ul>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
     </section>
 
 <br>
