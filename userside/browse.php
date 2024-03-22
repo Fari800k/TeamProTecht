@@ -169,13 +169,15 @@ include "navbar.php";
             }
 
             // Construct the base query
-            $query = "SELECT `Brand`.BrandName, `Item`.Item_ID, `Item`.ItemName, `Item`.Price, `Item`.Img  FROM `Item`
-                    LEFT JOIN `Brand` ON `Item`.Item_ID = `Brand`.Item_ID";
+$query = "SELECT `Brand`.BrandName, `Item`.Item_ID, `Item`.ItemName, `Item`.Price, `Item`.Img  
+          FROM `Item`
+          LEFT JOIN `Brand` ON `Item`.Item_ID = `Brand`.Item_ID";
 
             // Initialize an array to hold conditions
             $conditions = [];
             // Initialize parameters array
             $parameters = [];
+$conditions[] = "`Item`.stock >= 1";
 
             // Check if a search query exists
             if(isset($_POST['searchitem']) && !empty($_POST['searchitem'])) {
