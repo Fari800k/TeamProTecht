@@ -20,13 +20,6 @@ include "connectdb.php";
             
             if(isset($_SESSION['User_ID']) && isset($_SESSION['Basket_ID'])) {
                 $userID = $_SESSION['User_ID'];
-
-                //$sql1 = "SELECT * FROM `basket` WHERE User_ID = :userID ORDER BY `Updated_at` DESC LIMIT 1";
-                //$stmt = $pdo->prepare($sql1);
-                //$stmt->execute([':userID' => $userID]);
-                //$usersBasket = $stmt->fetch();
-{
-                    //$basketID = $usersBasket['Basket_ID'];
                     $basketID = $_SESSION['Basket_ID'];
 
                     //join tables to fetch item details for the basket
@@ -38,12 +31,17 @@ include "connectdb.php";
                     while($basketItem = $stmt->fetch()) {
                         echo "<tr><td><a href='product_dt.php?Item_ID=" . $basketItem['Item_ID'] . "'>".$basketItem['ItemName']."</a></td><td>".$basketItem['Quantity']."</td><td>".($basketItem['Price'] * $basketItem['Quantity'])."</td>";
                         //delete item form
-                        echo "<td><form action='deleteItem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketItem['BasketItem_ID']."'/><button type='submit' name='deleteItem'>Delete</button></form></td></tr>";
+                        echo "<td><form action='deleteitem.php' method='post'><input type='hidden' name='BasketItem_ID' value='".$basketItem['BasketItem_ID']."'/><button type='submit' name='deleteItem'>Delete</button></form></td></tr>";
                     }
                     echo "</table>";
                     //placeholder checkout form
-                    echo "<form action='checkout.php' method='post'><input type='hidden' name='Basket_ID' value='".$basketID."'/><button type='submit' name='checkout'>Checkout</button></form>";
-                }
+                    $sql3 = "SELECT COUNT(*) FROM `basketitem` WHERE Basket_ID = :basketID";
+                    $stmt2 = $pdo->prepare($sql3);
+                    $stmt2->execute([':basketID' => $basketID]);
+                    $count = $stmt2->fetchColumn();
+                    if($count >= 1){
+                        echo "<form action='checkout.php' method='post'><input type='hidden' name='Basket_ID' value='".$basketID."'/><button type='submit' name='checkout'>Checkout</button></form>";
+                    }
             } else {
                 echo "<strong> No new basket, added an item to view here </strong>";
             }
