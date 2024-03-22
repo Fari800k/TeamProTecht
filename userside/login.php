@@ -3,7 +3,22 @@ include('connectdb.php');
 session_start();
 if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
     header("Location: accountpage.php");
-} else{
+    exit();
+}
+
+if(isset($_GET['error'])){
+    // Sanitize the message to prevent XSS
+    $error = htmlspecialchars($_GET['error']);
+    // Display a JavaScript alert with the message
+    echo "<script>alert('$error');</script>";
+}
+
+if(isset($_GET['msg'])){
+    // Sanitize the message to prevent XSS
+    $msg = htmlspecialchars($_GET['msg']);
+    // Display a JavaScript alert with the message
+    echo "<script>alert('$msg');</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,15 +75,22 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
                     if(isset($_SESSION['prev_page'])){
                         $prevpage = $_SESSION['prev_page'];
                         header("Location: $prevpage");
+                        exit();
                     } else{
                         header("Location: accountpage.php");
+                        exit();
                     }
                 } else {
-                    $error = "Incorrect password. Please try again.";
+                    $error = 'Incorrect password. Please try again.';
+                    echo "<script>alert($error);</script>";
+                    header("Location: login.php?error=".$error);
+                    exit();
                 }
             }
         } else {
-            $error = "User not found. Please check your username.";
+            $error = 'User not found. Please check your username.';
+            header("Location: login.php?error=".$error);
+            exit();
         }
     }
     ?>
@@ -91,6 +113,5 @@ if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
 </body>
 <?php 
 include "footer.php";
-} 
 ?>
 </html>

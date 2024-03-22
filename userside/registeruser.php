@@ -14,7 +14,8 @@ include "navbar.php";
     
             if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $new_password)) {
                 $error = "Password must be at least 8 characters long and contain at least one number and one special character.";
-                echo $error;
+                header("Location: login.php?error=".$error);
+                exit();
             } else {
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
@@ -35,14 +36,18 @@ include "navbar.php";
                     $create_stmt->bindParam(':password', $hashed_password);
 
                     if($create_stmt->execute()) {
-                        echo "<script>alert('Registered successfully')</script>";
-                        header("Location: login.php");
+                        $msg = "Registered successfully";
+                        header("Location: login.php?msg=".$msg);
                         exit();
                     } else {
-                        echo "Error creating user. Please try again.";
+                        $error = "Error creating user. Please try again.";
+                        header("Location: login.php?error=".$msg);
+                        exit();
                     }
                 } else {
-                    echo "Username already exists. Please choose a different username.";
+                    $error = "Username already exists. Please choose a different username.";
+                    header("Location: login.php?error=".$error);
+                    exit();
                 }
             }
         }
