@@ -4,6 +4,7 @@
 <head>
     <title>Employee Login</title>
     <link rel="stylesheet" type="text/css" href="loginstyle.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <input id="inPassword" type="password" name="employeePassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
             <br><br>
             <button class="loginbtn" name="loginbtn">Login</button>
-            <p>If you haven't created an account, click on the underlined link below.<br><a href="registration.php">Create an employee account</a></p>
+            <p>Go back to the customer homepage.<br><a href="../userside/homepage.php">Homepage</a></p>
         </form>
     </div>
 </body>

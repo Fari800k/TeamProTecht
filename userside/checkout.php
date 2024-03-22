@@ -78,6 +78,7 @@ if (isset($_POST['placeOrder'])) {
     <meta charset="UTF-8">
     <title>Checkout</title>
     <link rel="stylesheet" href="CSS/checkout.css">
+    <link rel="icon" type="image/x-icon" href="CSS/images/favicon.ico">
     <script>
         function validateCardNumber(input) {
             input.value = input.value.replace(/\D/g, '');

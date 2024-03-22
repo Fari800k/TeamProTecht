@@ -1,29 +1,74 @@
-<?php include '../userside/SQL/connectdb.php';?>
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../login_system/login.php");
+    exit();
+}
+session_abort();
+?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="employee.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
     <title>Employee Registration</title>
-    <!-- Add your CSS link here -->
-    <link rel="stylesheet" type="text/css" href="loginstyle.css">
 </head>
-
 <body>
-    <div class="navbar">
-        <!-- Menu Bar -->
-        <ul>
-          <div class="logo-container1">
-            <img src="cs2tp_logo-removebg-preview (1).png" alt="Logo 1">
-            
-          </div>
-
+<section id="sidebar">
+          <a href="" class="brand">
+            <span class="icon">
+                <img src="logo.png" alt="teamprotect logo">
+            </span>
+          </a>
+          <ul class="side-menu top">
+            <li>
+                <a href="stockview.php">
+                    <i class='bx bxl-dropbox' ></i>
+                    <span class="text">Stock View</span>
+                </a>
+            </li>
+            <li>
+                <a href="confirm_orders.php">
+                    <i class='bx bx-mail-send' ></i>
+                    <span class="text">Confirm Orders</span>
+                </a>
+            </li>            <li>
+                <a href="pending_orders.php">
+                    <i class='bx bxs-hourglass' ></i>
+                    <span class="text">Pending Orders</span>
+                </a>
+            </li>            <li>
+                <a href="fulfilled_orders.php">
+                    <i class='bx bxs-package' ></i>
+                    <span class="text">Fulfilled Orders</span>
+                </a>
+            </li>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="registration.php">
+                    <i class='bx bx-edit'></i>
+                    <span class="text">Register Employee</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
         </ul>
-    </div>
+    </section>
 
-
-
-    <div class="main-content">
+<section id="mainsection">
         <h1>Employee Registration</h1>
         <!-- Form for registration -->
          <p style="color:red">Required fields are marked with an asterisk(*)</p>
@@ -46,21 +91,19 @@
                         <label for="confirm_pass">Confirm Password</label>
                         <input type="password" name="confirm_pass" id="confirmInput" placeholder="*"
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
-                        <input type="checkbox" onclick="showPassword()"> Show Password
+                        <input type="checkbox" onclick="showPassword()"> Show Password </input>
                         <br><br>
                         <button type="reset" class="cancelbtn">Cancel</button>
                         <button class="regbtn" onclick="validateForm()" name="user_register">Register</button>
 </form>
 
+<section>
 
-        
-    </div>
-
-</html>
-
+</body>
 <!--php to post the user data to the db-->
 
 <?php
+include '../userside/SQL/connectdb.php';
 if (isset($_POST['user_register'])){
     //assign them to local variables
     $user_firstname = $_POST['FirstName'];
@@ -96,4 +139,4 @@ if (isset($_POST['user_register'])){
 }
 
 ?>
-
+</html>

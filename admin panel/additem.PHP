@@ -14,6 +14,7 @@ session_abort();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="employee.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
     <title>Product Form</title>
 </head>
 <body>
@@ -24,7 +25,7 @@ session_abort();
             </span>
           </a>
           <ul class="side-menu top">
-          <li>
+            <li>
                 <a href="stockview.php">
                     <i class='bx bxl-dropbox' ></i>
                     <span class="text">Stock View</span>
@@ -50,6 +51,12 @@ session_abort();
                 <a href="viewcontact.php">
                     <i class='bx bx-envelope'></i>
                     <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="registration.php">
+                    <i class='bx bx-edit'></i>
+                    <span class="text">Register Employee</span>
                 </a>
             </li>
             <li>
@@ -117,8 +124,6 @@ session_abort();
 
         <label for="shelf">Shelf:</label><br>
         <input type="text" name="shelf" required><br><br>
-
-
 
         <label for="row">Row:</label><br>
         <input type="text" name="row" required><br><br>

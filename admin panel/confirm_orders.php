@@ -14,6 +14,7 @@ session_abort();
     <!---box icons css-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="employee.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
     <title>Confirmed Orders</title>
 </head>
 <body>
@@ -50,6 +51,12 @@ session_abort();
                 <a href="viewcontact.php">
                     <i class='bx bx-envelope'></i>
                     <span class="text">Contact Forms</span>
+                </a>
+            </li>
+            <li>
+                <a href="registration.php">
+                    <i class='bx bx-edit'></i>
+                    <span class="text">Register Employee</span>
                 </a>
             </li>
             <li>
