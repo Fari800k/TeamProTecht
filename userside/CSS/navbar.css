@@ -139,6 +139,7 @@ nav{
   position: absolute;
   border-width: 2px;
   left: 85%;
+  top: 0%;
   z-index: 1;
   font-family: Arial, Helvetica, sans-serif;
   border-style: solid;
@@ -149,15 +150,10 @@ nav{
   box-sizing: border-box;
 }
 
-.myaccount .accountcustomer {
+.myaccount .accountcustomer,  .myaccount .accountemployee{
   border-bottom: 2px solid black; 
 
 }
-
-/*border-style: solid;
-background-color: #f1f1f1;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
-*/
 
 .myaccount a {
   float: none;
@@ -167,21 +163,7 @@ box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
   display: block;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
-  
-  
 }
-
-/*.myaccount li {
-  float: none;
-  color: black;
-  display: block ;
-  text-decoration: none;
-  padding: 2px 6px;
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
-  
-}
-*/
 
 #accountcontainer:hover .myaccount {
   display: block;
