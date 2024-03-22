@@ -7,6 +7,7 @@
     <title>Employee Registration</title>
     <!-- Add your CSS link here -->
     <link rel="stylesheet" type="text/css" href="loginstyle.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
 </head>
 
 <body>

@@ -4,6 +4,7 @@
 <head>
     <title>Employee Login</title>
     <link rel="stylesheet" type="text/css" href="loginstyle.css">
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
 </head>
 
 <body>

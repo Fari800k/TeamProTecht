@@ -13,6 +13,7 @@ session_abort();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Messages</title>
     <link rel="stylesheet" href="employee.css" />
+    <link rel="icon" type="image/x-icon" href="../userside/CSS/images/favicon.ico">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         body {
