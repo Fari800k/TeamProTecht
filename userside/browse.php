@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Teamprotecht</title>
+    <title>Browse</title>
     <link rel="stylesheet" href="CSS/browse.css">
     <link rel="icon" type="image/x-icon" href="CSS/images/favicon.ico">
     <script defer src="JavaScript/script.js"></script>
