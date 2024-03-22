@@ -86,7 +86,7 @@ if(isset($_GET['error'])){
                 <th>Quantity</th>
                 <th>Created At</th>
                 <th>Updated At</th>
-                <th>Delete Item</th>
+                <th>Delete All Stock</th>
             </tr>
         <?php
            $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
@@ -104,10 +104,10 @@ if(isset($_GET['error'])){
             echo "<td>" . $rows['Created_at'] . "</td>";
             echo "<td>" . $rows['Updated_at'] . "</td>";
             //delete item (Verify by typing delete in text box)
-            echo "<td><form method='post' id='deleteItem' action='deletestock.php'>
-                    <input type='text' name='verify_delete' placeholder='Type delete' value=''>
+            echo "<td><form method='post' id='removeStock' action='deletestock.php'>
+                    <input type='text' name='verify_delete' placeholder='Type remove' value=''>
                     <input type='hidden' name='stocktodelete' value='".$rows['Item_ID']."'>
-                    <button class='delete' name='deletebutton'>Delete item</button></form></td></tr>";
+                    <button class='delete' name='deletebutton'>Remove Stock</button></form></td></tr>";
         }
 ?>
         </table>

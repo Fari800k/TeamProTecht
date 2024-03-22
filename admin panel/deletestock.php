@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $verifyitem = $_POST['verify_delete'];
         $itemid = $_POST['stocktodelete'];
         
-        if(preg_match('/[d|D]elete/', $verifyitem)){
+        if(preg_match('/[r|R]elete/', $verifyitem)){
             // Update order status in the database
             $query = "UPDATE `item` SET Stock=0 WHERE Item_ID=:itemid";
             $stmt = $pdo->prepare($query);
