@@ -48,23 +48,23 @@ PHP files:
 
 The "login_system" folder
 
-The login_system folder contains 2 PHP files, 1 CSS file and 2 images:
+The login_system folder contains 1 PHP file, 1 CSS file and 2 images:
 1. login.php - The login file that sends the user to the admin panel pages if a log-in is
                successful
-2. registration.php - The registration file that makes a new employee user with folder
-                        details included in the file
-3. loginstyle.css - CSS details for login.php and registration.php
+2. loginstyle.css - CSS details for login.php and registration.php
 
 
 The "admin panel" folder
 
-The admin panel folder contains 8 PHP files, 2 CSS files to style them and the TeamProTecht logo:
+The admin panel folder contains 10 PHP files, 2 CSS files to style them and the TeamProTecht logo:
 1. additem.php - page that contains a form to add item details to the database
 2. confirm_orders.php - page that holds all orders that are either "Pending", "Processing", or "Completed"
-3. fulfilled_orders.php - page that holds all orders that are either "Delivered", "Returning", "Returned", or "Shipped"
-4. logout.php - logs the employee user out of the admin panel and sends to the login_system login.php
-5. pending_orders.php - page with a table of all orders that can be simplified by changing the order status
-6. stockview.php - the first page the logged in employee user will go to, holds a table of all the items in the database
-7. update_order_status.php - file that updates the database with a change in order status
-8. viewcontact.php - page that views customer responses sent from the contactus.php in the userside folder, including a textbox to respond to the user
+3. deletestock.php - file accessed from stock view.php that's removes all stock from a given product
+4. fulfilled_orders.php - page that holds all orders that are either "Delivered", "Returning", "Returned", or "Shipped"
+5. logout.php - logs the employee user out of the admin panel and sends to the login_system login.php
+6. pending_orders.php - page with a table of all orders that can be simplified by changing the order status
+7. registration.php - The registration file that makes a new employee user with folder details included in the file
+8. stockview.php - the first page the logged in employee user will go to, holds a table of all the items in the database
+9. update_order_status.php - file that updates the database with a change in order status
+10. viewcontact.php - page that views customer responses sent from the contactus.php in the userside folder, including a textbox to respond to the user
 
