@@ -5,6 +5,12 @@ if(!isset($_SESSION['user_id'])){
     exit();
 }
 session_abort();
+if(isset($_GET['error'])){
+    // Sanitize the message to prevent XSS
+    $error = htmlspecialchars($_GET['error']);
+    // Display a JavaScript alert with the message
+    echo "<script>alert('$error');</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +86,7 @@ session_abort();
                 <th>Quantity</th>
                 <th>Created At</th>
                 <th>Updated At</th>
+                <th>Delete Item</th>
             </tr>
         <?php
            $pdo = new PDO('mysql:host=localhost;dbname=cs2tp', 'root', '');
@@ -95,11 +102,18 @@ session_abort();
                     <img src='$image_url' alt='Product Image'></div></td>";
             echo "<td>" . $rows['Stock'] . "</td>";
             echo "<td>" . $rows['Created_at'] . "</td>";
-            echo "<td>" . $rows['Updated_at'] . "</td></tr>";
+            echo "<td>" . $rows['Updated_at'] . "</td>";
+            //delete item (Verify by typing delete in text box)
+            echo "<td><form method='post' id='deleteItem' action='deletestock.php'>
+                    <input type='text' name='verify_delete' placeholder='Type delete' value=''>
+                    <input type='hidden' name='stocktodelete' value='".$rows['Item_ID']."'>
+                    <button class='delete' name='deletebutton'>Delete item</button></form></td></tr>";
         }
 ?>
         </table>
     </section>
-    
+    <?php
+
+    ?>
 </body>
 </html>
