@@ -1,6 +1,6 @@
 Dummy accounts:
 1. Customer - Username: michael_wilson, Password: PassWord104!
-2. Employee - Email: JoanneDoe@gmail.com, Password: TeamProtecht1
+2. Employee - Email: JoanneDoe@gmail.com, Password: ProTecht1
 
 
 The TeamProTecht main branch is broken down into 3 main folders
