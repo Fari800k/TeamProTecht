@@ -1,7 +1,13 @@
+Dummy accounts:
+1. Customer - Username: michael_wilson, Password: PassWord104!
+2. Employee - Email: JoanneDoe@gmail.com, Password: TeamProtecht1
+
+
 The TeamProTecht main branch is broken down into 3 main folders
 1. "userside" - holds the customer user pages
 2. "login_system" - holds the admin user login
 3. "admin panel" - holds the admin/employee user pages
+
 
 The "userside" folder
 
