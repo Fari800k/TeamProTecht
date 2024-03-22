@@ -22,17 +22,6 @@ session_abort();
             padding: 0;
         }
 
-        /* Added CSS for the navbar */
-        #sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #3f3f3f;
-            padding-top: 20px;
-        }
-
         .brand {
             display: block;
             text-align: center;
@@ -42,28 +31,6 @@ session_abort();
         .brand img {
             width: 80%;
             height: auto;
-        }
-
-        .side-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .side-menu li {
-            margin-bottom: 10px;
-        }
-
-        .side-menu a {
-            display: block;
-            padding: 10px;
-            color: #fff;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .side-menu a:hover {
-            background-color: #555;
         }
 
         .icon {
@@ -157,12 +124,18 @@ session_abort();
                     <span class="text">Fulfilled Orders</span>
                 </a>
             </li>
-<li>
-    <a href="viewcontact.php">
-        <i class='bx bx-envelope'></i>
-        <span class="text">Contact Form</span>
-    </a>
-</li>
+            <li>
+                <a href="viewcontact.php">
+                    <i class='bx bx-envelope'></i>
+                    <span class="text">Contact Form</span>
+                </a>
+            </li>
+            <li>
+                <a href="registration.php">
+                    <i class='bx bx-edit'></i>
+                    <span class="text">Register Employee</span>
+                </a>
+            </li>
             <li>
                 <a href="logout.php">
                     <i class='bx bx-log-out'></i>
@@ -174,7 +147,7 @@ session_abort();
         <h1>Contact Messages</h1>
 
         <?php
-        include('connectdb.php');
+        include('../userside/connectdb.php');
 
         if(isset($_POST['reply_submit'])) {
     // Check if 'contact_id' key exists in $_POST array

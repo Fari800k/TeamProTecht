@@ -54,6 +54,12 @@ session_abort();
                 </a>
             </li>
             <li>
+                <a href="registration.php">
+                    <i class='bx bx-edit'></i>
+                    <span class="text">Register Employee</span>
+                </a>
+            </li>
+            <li>
                 <a href="logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="text">Logout</span>
