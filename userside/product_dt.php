@@ -38,6 +38,7 @@
     <!-- Title of the item -->
     <title><?php echo $brand_row["BrandName"] . " " . $item_row["ItemName"]?></title>
     <link rel="stylesheet" href="CSS/product_dt.css">
+    <link rel="icon" type="image/x-icon" href="CSS/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="JavaScript/script.js"></script>
 </head>

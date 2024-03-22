@@ -4,6 +4,7 @@
         <meta charset="UTF-8"/>
         <title>Teamprotecht</title>
         <link rel="stylesheet" href="CSS/aboutus.css">
+        <link rel="icon" type="image/x-icon" href="CSS/images/favicon.ico">
         <script defer src="JavaScript/script.js"></script>
     </head>
     <body>
