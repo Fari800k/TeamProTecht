@@ -3,7 +3,6 @@
     include "connectdb.php";
 
     $item_id = "";
-    $user_id = "";
 
     if (isset($_GET["Item_ID"])) {
         $item_id = $_GET["Item_ID"];
@@ -11,10 +10,6 @@
        
         echo "Item ID is not set";
         exit(); 
-    }
-
-    if (isset($_GET["User_ID"])) {
-        $user_id = $S_GET["User_ID"];
     }
     
     $item_query = "SELECT * FROM item WHERE Item_ID = ?";
@@ -130,54 +125,44 @@
             <br><br><hr>
             <h1 class="rev">What people have said about this product?</h1>
                 <div id="rev_card" class="card">
-                    <p class="summary"><b>Summary of rating reviews</b></p>
                     <div class="row">
                         <?php
                         include "SQL/connectdb.php";
-
-                        /* Display all five stars */
-                        for ($num_stars = 1; $num_stars <= 5; $num_stars++) {
-                            echo "<span style='float: left; font-size: 25px;' class='fa fa-star'></span>";  
-                        }
-
-                        echo "<p style = 'transform: translate(15px, 2px)'>Average rating of ". " out of 5 stars</p>";
-                        
-                        echo "<br>";
-
-                        /* Iterate through scorecard to display it
-                         * Review from user(s) is/are also displayed (icon is also shown)
-                         * Display the stars with the average rating
+                        /* Retrieve user reviews with the set Item_ID *
+                         * Retrieve ratings and compute average rating
+                         * Retrieve user reviews
                          */
-                        for ($num = 1; $num <= 5; $num++) {
-                            
-                            echo "<div class='side'><p style='text-align: left'>" .$num. " star" . "</p></div>";
-                            echo "<div class='middle'><div class='bar-container' style='background-color: #d1d1d1; width: 95%; text-align: center;'>
-                            <div class='bar-$num' style='height: 18px;'></div></div></div>";
-                            echo "<div class='side right'></div>";
+                        echo "<style>
+                        .checked {
+                            color: orange;
                         }
+                        </style>";
+                        echo "<p style='text-align: left; font-size: 24px;'><b>Summary of ratings and reviews</b></p>";
+                        echo "<hr>";
+                        echo "<i style='float: left; font-size: 25px; padding-right: 2px; transform: translateY(6px);' class='fa fa-star checked'></i>";
 
-                        $review_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
-                        $user_query = "SELECT * FROM users WHERE Username = $username";
-                        $result_review = mysqli_query($con, $review_query);
+                        $rev_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
+                        $rt_query = mysqli_query($con, "SELECT AVG(Rating) AS avg_rating FROM reviews WHERE Item_ID = $item_id");
+                        $rt_row = mysqli_fetch_array($rt_query);
+                        $avg_rating = $rt_row['avg_rating'];
+                        $res_rev = mysqli_query($con, $rev_query);
+                        $usr_query = "SELECT * FROM users";
+                        $res_usr = mysqli_query($con, $usr_query);
+                        $usr_row = mysqli_fetch_array($res_usr);
                         
-                        echo "<br>";
+                        echo "<p style='transform: translate(5px, 2px)'>Average rating: " .round($avg_rating, 1). " out of 5 stars</p>";
+                        echo "<hr>";
                         echo "<p style='text-align: left; font-size: 24px;'><b>User reviews</b></p>";
-                        while ($review_row = mysqli_fetch_array($result_review)) {
-                            $desc = $review_row["Description"];
-                            $rating = array($review_row["Rating"]);
-                            
-                            echo "<br><i style='font-size: 40px; float: left; margin-top: -8px; margin-right: 5px;' class='fa fa-user'></i>";
-                            echo "<br><br>";
-
-                            /* Display the stars with the given user rating*/
-                            for ($num_of_stars = 1; $num_of_stars <= 5; $num_of_stars++) {
-                                echo "<span style='float: left; font-size: 25px;' class='fa fa-star'></span>";
-                            }
-
-                            echo "<br>";
+                        while ($rev_row = mysqli_fetch_array($res_rev)) {
+                            $desc = $rev_row["Description"];
+                            $rating = $rev_row["Rating"];
+                            echo "<i style='font-size: 40px; float: left; margin-top: -8px; margin-right: 5px;' class='fa fa-user'></i>";
+                            echo "<b><p style='transform: translate(6px, 3px)'>" .$usr_row["Username"]. "</p></b>";
+                            echo "<p style='text-align: left; transform: translateY(8px);'><b>Written by: " .$usr_row["Fore_name"]. " ". $usr_row["Second_Name"]. " " .$usr_row["Last_Name"]. "</b></p>";
                             echo "<p style='text-align: left'>" .$desc. "</p>";
-                            echo "<p style='text-align: left'>" .array_sum($rating). "</p>";
                         }
+                        
+                        echo "<hr>";
                         ?>
                 </div>
             </div>

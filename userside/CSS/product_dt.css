@@ -5,23 +5,19 @@
 }
 
 body {
-    
     margin: 0;
     padding: 0;
     background-color: #f1f1f1;
 }
 
-h1.item-name, h1.best-sellers, h1.rev {
+h1.item-name, h1.best-sellers {
     padding: 16px;
-}
-
-h1.item-name {
+    color: black;
     text-align: center;
 }
 
-h1.rev, h1.summary {
-    text-align: left;
-    color: black;
+h1.rev {
+    padding-left: 16px;
 }
 
 /* Float three columns side-by-side */
@@ -192,9 +188,4 @@ hr {
     transform: translate(1.5%, 0%);
     width: 30%;
     height: 100%;
-}
-
-div.bar-container {
-    width: 100%;
-    text-align: center;
 }
