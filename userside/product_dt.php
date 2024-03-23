@@ -128,41 +128,36 @@
                     <div class="row">
                         <?php
                         include "SQL/connectdb.php";
-                        /* Retrieve user reviews with the set Item_ID *
-                         * Retrieve ratings and compute average rating
-                         * Retrieve user reviews
-                         */
+                        /* Get average rating for respective phone */
+                        $avg_rt_query = mysqli_query($con, "SELECT AVG(Rating) AS avg_rating FROM reviews WHERE Item_ID = $item_id");
+                        $rt_row = mysqli_fetch_array($avg_rt_query);
+                        $avg_rt = $rt_row['avg_rating'];
+
+                        // get user with specified item_id
+                        $usr_rev_join_query = "SELECT reviews.Rating, reviews.Description, users.Username FROM reviews 
+                        JOIN users ON users.User_ID = reviews.User_ID WHERE Item_ID = :itemid";
+                        $stmt = $pdo->prepare($usr_rev_join_query);
+                        $stmt->execute([':itemid' => $item_id]);
+
                         echo "<style>
                         .checked {
                             color: orange;
                         }
                         </style>";
                         echo "<p style='text-align: left; font-size: 24px;'><b>Summary of ratings and reviews</b></p>";
-                        echo "<hr>";
-                        echo "<i style='float: left; font-size: 25px; padding-right: 2px; transform: translateY(6px);' class='fa fa-star checked'></i>";
+                        
+                        echo "<i style='float: left; font-size: 25px; padding-right: 2px;' class='fa fa-star checked'></i>";
 
-                        $rev_query = "SELECT * FROM reviews WHERE Item_ID = $item_id";
-                        $rt_query = mysqli_query($con, "SELECT AVG(Rating) AS avg_rating FROM reviews WHERE Item_ID = $item_id");
-                        $rt_row = mysqli_fetch_array($rt_query);
-                        $avg_rating = $rt_row['avg_rating'];
-                        $res_rev = mysqli_query($con, $rev_query);
-                        $usr_query = "SELECT * FROM users";
-                        $res_usr = mysqli_query($con, $usr_query);
-                        $usr_row = mysqli_fetch_array($res_usr);
+                        echo "<p style='float: left; transform: translate(5px, -12px)'><b>Average rating: </b>" .round($avg_rt, 1). " out of 5 stars" ."</p>";
                         
-                        echo "<p style='transform: translate(5px, 2px)'>Average rating: " .round($avg_rating, 1). " out of 5 stars</p>";
-                        echo "<hr>";
-                        echo "<p style='text-align: left; font-size: 24px;'><b>User reviews</b></p>";
-                        while ($rev_row = mysqli_fetch_array($res_rev)) {
-                            $desc = $rev_row["Description"];
-                            $rating = $rev_row["Rating"];
-                            echo "<i style='font-size: 40px; float: left; margin-top: -8px; margin-right: 5px;' class='fa fa-user'></i>";
-                            echo "<b><p style='transform: translate(6px, 3px)'>" .$usr_row["Username"]. "</p></b>";
-                            echo "<p style='text-align: left; transform: translateY(8px);'><b>Written by: " .$usr_row["Fore_name"]. " ". $usr_row["Second_Name"]. " " .$usr_row["Last_Name"]. "</b></p>";
-                            echo "<p style='text-align: left'>" .$desc. "</p>";
+                        echo "<br><br>";
+                        echo "<h1 style='text-align: left; font-size: 24px;'>What did our users say about this phone?</h1>";
+                        while ($itemreview = $stmt->fetch()) {
+                            echo "<i style='float: left; margin-top: -8px; margin-right: 5px; font-size: 40px;' class='fa fa-user'></i>" .$itemreview["Username"] . " gave a rating of " .$itemreview["Rating"]. " out of 5 stars";
+                            
+                            echo "<p style='text-align: left'>" .$itemreview["Description"]. "</p>";
+                            echo "<br>";
                         }
-                        
-                        echo "<hr>";
                         ?>
                 </div>
             </div>
