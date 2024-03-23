@@ -153,7 +153,7 @@
                         echo "<br><br>";
                         echo "<h1 style='text-align: left; font-size: 24px;'>What did our users say about this phone?</h1>";
                         while ($itemreview = $stmt->fetch()) {
-                            echo "<i style='float: left; margin-top: -8px; margin-right: 5px; font-size: 40px;' class='fa fa-user'></i>" .$itemreview["Username"] . " gave a rating of " .$itemreview["Rating"]. " out of 5 stars";
+                            echo "<i style='float: left; margin-top: -8px; margin-right: 5px; font-size: 40px;' class='fa fa-user'></i>" . " " .$itemreview["Username"] . " gave a rating of " .$itemreview["Rating"]. " out of 5 stars";
                             
                             echo "<p style='text-align: left'>" .$itemreview["Description"]. "</p>";
                             echo "<br>";
