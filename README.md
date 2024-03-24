@@ -1,3 +1,5 @@
+This code should be ran and viewed on Apache or similar private servers than can run PHP and SQL files together.
+
 Dummy accounts:
 1. Customer - Username: michael_wilson, Password: PassWord104!
 2. Employee - Email: JoanneDoe@gmail.com, Password: ProTecht1
